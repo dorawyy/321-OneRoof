@@ -1,6 +1,6 @@
 #### CPEN 321 M4: Design
 
-Madeline Ferguson 30986012
+Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
 # One Roof Design
 
@@ -18,7 +18,7 @@ Madeline Ferguson 30986012
       5. **House Overview**: To view your roommates' profiles.
       6. **Add Purchase**: To add purchases.
 
-2. Interfaces
+2. Interfaces (ADD TO THIS)
    1. **Database**
       1. `addPurchase(PurchaseInfo)`
       2. `PurchaseInfo[] getAllPurchases()`
@@ -42,7 +42,7 @@ Madeline Ferguson 30986012
    9. **Add Purchase**
       1. `addPurchase(RoommateId, PurchaseInfo)`
 
-3. Diagram
+3. Diagram (CHANGE THIS)
 
    <img src="component_diagram.png" height="500px" />
 
