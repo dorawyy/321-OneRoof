@@ -22,10 +22,17 @@ Madeline Ferguson 30986012
 
 4. Main components:
 
-   1. Front-end: App that runs on an Android mobile phone
-   2. Back-end: System that runs on a major cloud service
-   3. Calculator: System that calculates how much each roommate is owed/owes
-   4. Database: System that stores group purchase information
+   1. Backend 
+      1. **Database**: To store purchase information such as purchaser, amount and receipt photo.
+      2. **Notification Engine**: To take requests for notifications of owed money and and send them to the correct roommate.
+      3. **Amount Owed Calculator**: To figure out who id owed/owes and how much.
+   2. Frontend 
+      1. **Notifications**: To display notifications.
+      2. **Send Notification**: To send notifications of owed money.
+      3. **Display Amount Owed**: To display who owes whom how much.
+      4. **Roommate Profile**: To edit your profile.
+      5. **House Overview**: To view your roommates' profiles.
+      6. **Add Purchase**: To add purchases.
 
 5. Sequence diagrams:
 

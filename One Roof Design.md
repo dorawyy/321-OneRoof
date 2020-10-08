@@ -61,7 +61,7 @@ Madeline Ferguson 30986012
 We will achieve this by using Google authentication to protect user data.
 
 >  Maximum group size is 10 people: This is a requirement because we don't want
->  groups of more than ten roommates per house.
+>  groups of more than 10 roommates per house.
 
 We will achieve this by returning an error message when a house tries to add an 11th roommate.
 
@@ -71,7 +71,7 @@ We will achieve this by returning an error message when a house tries to add an 
 
 We will achieve this by caching the calculated values on the backend.
 
-7. Complex logic
+7. Complex logic (CHANGE THIS)
    1. No inputs
    2. Outputs a list containing instances of roommates owing other roommates.
       1. Example output: `[ { Owed: Roommate1, Owing: Roommates2, Amount: $20},  { Owed: Roommate2, Owing: Roommates3, Amount: $50 } ]`
