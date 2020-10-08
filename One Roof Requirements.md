@@ -10,7 +10,7 @@ Madeline Ferguson 30986012
 
 2. Use case diagram:
 
-   <img src="C:\Users\madel\AppData\Roaming\Typora\typora-user-images\image-20200928095655523.png" height="500px" />
+   <img src="use_case_diagram.png" height="500px" />
 
    
 
@@ -31,19 +31,19 @@ Madeline Ferguson 30986012
 
    1. Login with Google authentication (external API  call): 
 
-      <img src="C:\Users\madel\AppData\Roaming\Typora\typora-user-images\image-20200928100944267.png" height="500px" />
+      <img src="sequence_diagram1.png" height="500px" />
 
       
 
    2. Calculate how much everyone is owed/owes (non-trivial logic calculation):
 
-      <img src="C:\Users\madel\AppData\Roaming\Typora\typora-user-images\image-20200928101055113.png" height = "500px"/>
+      <img src="sequence_diagram2.png" height = "500px"/>
 
       
 
    3. Send notification to roommates who owe you (live update):
 
-      <img src="C:\Users\madel\AppData\Roaming\Typora\typora-user-images\image-20200928101348764.png" height = "500px" />
+      <img src="sequence_diagram3.png" height = "500px" />
 
 6. App Sketch:
 
