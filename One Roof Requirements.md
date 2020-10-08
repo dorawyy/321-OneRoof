@@ -47,4 +47,4 @@ Madeline Ferguson 30986012
 
 6. App Sketch:
 
-<img src="C:\Users\madel\OneDrive\Desktop\app.png" height = "500px"/>
+<img src="app_sketch.png" height = "500px"/>
