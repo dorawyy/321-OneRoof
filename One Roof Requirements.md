@@ -17,15 +17,15 @@ Madeline Ferguson 30986012
 3. Non-functional requirements:
 
    1. Only authorized sources can view user information: This is a requirement because it's important to the users that their information is safe.
-   2. Maximum group size is 10 people: This is a requirement because we don't want groups of more than ten roommates per house.
+   2. Maximum group size is 10 people: This is a requirement because we don't want groups of more than 10 roommates per house.
    3. Calculating how much every one is owed/owes should take no longer than 1s: This is a requirement because we don't want users to leave the app while it's calculating.
 
 4. Main components:
 
-   1. Front end: app that runs on an Android mobile phone
-   2. Back end: system that runs on a major could service
-   3. Calculator: system that calculates how much each roommate is owed/owes
-   4. Database: system that stores group purchase information
+   1. Front-end: App that runs on an Android mobile phone
+   2. Back-end: System that runs on a major cloud service
+   3. Calculator: System that calculates how much each roommate is owed/owes
+   4. Database: System that stores group purchase information
 
 5. Sequence diagrams:
 
@@ -41,7 +41,7 @@ Madeline Ferguson 30986012
 
       
 
-   3. Send notification to roommates who owe you (live update):
+   3. Send notifications to roommates who owe you (live update):
 
       <img src="sequence_diagram3.png" height = "500px" />
 

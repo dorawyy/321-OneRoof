@@ -38,7 +38,7 @@ Madeline Ferguson 30986012
    7. **Roommate Profile**
       1. `editProfile(RoommateId, RoommateInfo)`
    8. **House Overview** 
-      1. `dispalyRoommates()`
+      1. `displayRoommates()`
    9. **Add Purchase**
       1. `addPurchase(RoommateId, PurchaseInfo)`
 
@@ -47,12 +47,12 @@ Madeline Ferguson 30986012
    <img src="component_diagram.png" height="500px" />
 
 4. Architectural Patterns
-   1. Client-Server: This was a good choice do separate the data storage (stays on the server) and the user interface (stays on the client).
+   1. Client-Server: This was a good choice to separate the data storage (stays on the server) and the user interface (stays on the client).
    2. The server will have RESTFull services because it will store state.
 
 5. Languages and Frameworks
-   1. For the frontend, we will use Android/Java because React-Native is too complicated for an android only app.
-   2. For the backend database, we will use MySQL instead of MongoDB because our data (Roommates and Purchases) can be modeled easily by their relationships. 
+   1. For the front-end, we will use Android/Java because React-Native is too complicated for an Android only app.
+   2. For the back-end database, we will use MySQL instead of MongoDB because our data (Roommates and Purchases) can be modeled easily by their relationships. 
 
 6. Non-functional Requirements
 >  Only authorized sources can view user information: This is a requirement because it's 
@@ -73,6 +73,6 @@ We will achieve this by caching the calculated values on the backend.
 
 7. Complex logic
    1. No inputs
-   2. Outputs a list containing an instance of one roommates owing another roommate
+   2. Outputs a list containing instances of roommates owing other roommates.
       1. Example output: `[ { Owed: Roommate1, Owing: Roommates2, Amount: $20},  { Owed: Roommate2, Owing: Roommates3, Amount: $50 } ]`
-   3. Works by querying the purchase data and calculating the total amount spent on shared items, and then dividing that by the number of roommates and then calculating the difference between that value and what each roommate spend and then calculating how much everyone is owed.
+   3. Works by querying the purchase data and calculating the total amount spent on shared items, dividing that by the number of roommates and then calculating the difference between that value and what each roommate spent and then calculating how much everyone is owed.
