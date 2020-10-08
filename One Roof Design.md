@@ -44,7 +44,7 @@ Madeline Ferguson 30986012
 
 3. Diagram
 
-   ![image-20201005105044995](C:\Users\madel\AppData\Roaming\Typora\typora-user-images\image-20201005105044995.png)
+   <img src="component_diagram.png" height="500px" />
 
 4. Architectural Patterns
    1. Client-Server: This was a good choice do separate the data storage (stays on the server) and the user interface (stays on the client).
