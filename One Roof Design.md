@@ -44,7 +44,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
 3. Diagram (CHANGE THIS)
 
-   <img src="component_diagram.png" height="500px" />
+   <img src="img/component_diagram.png" height="500px" />
 
 4. Architectural Patterns
    1. Client-Server: This was a good choice to separate the data storage (stays on the server) and the user interface (stays on the client).

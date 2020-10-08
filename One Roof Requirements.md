@@ -10,7 +10,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
 2. Use case diagram:
 
-   <img src="use_case_diagram.png" height="500px" />
+   <img src="img/use_case_diagram.png" height="500px" />
 
    
 
@@ -38,20 +38,20 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
    1. Login with Google authentication (external API  call): 
 
-      <img src="sequence_diagram1.png" height="500px" />
+      <img src="img/sequence_diagram1.png" height="500px" />
 
       
 
    2. Calculate how much everyone is owed/owes (non-trivial logic calculation):
 
-      <img src="sequence_diagram2.png" height = "500px"/>
+      <img src="img/sequence_diagram2.png" height = "500px"/>
 
       
 
    3. Send notifications to roommates who owe you (live update):
 
-      <img src="sequence_diagram3.png" height = "500px" />
+      <img src="img/sequence_diagram3.png" height = "500px" />
 
 6. App Sketch:
 
-<img src="app_sketch.png" height = "500px"/>
+<img src="img/app_sketch.png" height = "500px"/>
