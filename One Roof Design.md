@@ -10,6 +10,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
       1. **Database**: To store purchase information such as purchaser, amount and receipt photo.
       2. **Notification Engine**: To take requests for notifications of owed money and and send them to the correct roommate.
       3. **Amount Owed Calculator**: To figure out who id owed/owes and how much.
+      4. **Spending Predictor**: Predicts spending for the current month and compares with previous months.
    2. Frontend 
       1. **Notifications**: To display notifications.
       2. **Send Notification**: To send notifications of owed money.
@@ -18,7 +19,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
       5. **House Overview**: To view your roommates' profiles.
       6. **Add Purchase**: To add purchases.
 
-2. Interfaces (ADD TO THIS)
+2. Interfaces
    1. **Database**
       1. `addPurchase(PurchaseInfo)`
       2. `PurchaseInfo[] getAllPurchases()`
@@ -29,20 +30,22 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
       1. `sendNotification(RoommateId, AmountOwed)`
    3. **Amount Owed Calculator**
       1. `List<RoomatePairOwing> getAmountsOwed()`
-   4. **Notifications**
+   4. **Spending Predictor**
+      1. `Prediction getMonthlySpendingPrediction(Month, Year)`
+   5. **Notifications**
       1. `displayNotifications()`
-   5. **Send Notification**
+   6. **Send Notification**
       1. `sendNotification(RoommateId)`
-   6. **Display Amount Owed**
+   7. **Display Amount Owed**
       1. `displayAmountOwed()`
-   7. **Roommate Profile**
+   8. **Roommate Profile**
       1. `editProfile(RoommateId, RoommateInfo)`
-   8. **House Overview** 
+   9. **House Overview** 
       1. `displayRoommates()`
-   9. **Add Purchase**
+   10. **Add Purchase**
       1. `addPurchase(RoommateId, PurchaseInfo)`
 
-3. Diagram (CHANGE THIS)
+3. Diagram
 
    <img src="img/component_diagram.png" height="500px" />
 
@@ -71,7 +74,7 @@ We will achieve this by returning an error message when a house tries to add an 
 
 We will achieve this by caching the calculated values on the backend.
 
-7. Complex logic (CHANGE THIS)
-   1. No inputs
-   2. Outputs a list of budget predictions for the coming month and comparisons with previous months. Example \[{'category': 'groceries', 'predicted spending': 732, 'percent normal': 1.03}\]
+7. Complex logic
+   1. Inputs: the month (and year) for which we want the prediction for.
+   2. Outputs a list of budget predictions for the requested month and comparisons with previous months. Example \[{'category': 'groceries', 'predicted spending': 732, 'percent normal': 1.03}\]
    3. Queries the database. Sorts purchases into different categories using key words and then in each category, calculates average time frequency of purchases and applies that data to the current month to predict the current months spending in each category.

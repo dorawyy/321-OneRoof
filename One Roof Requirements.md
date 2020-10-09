@@ -26,6 +26,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
       1. **Database**: To store purchase information such as purchaser, amount and receipt photo.
       2. **Notification Engine**: To take requests for notifications of owed money and and send them to the correct roommate.
       3. **Amount Owed Calculator**: To figure out who id owed/owes and how much.
+      4. **Spending Predictor**: Predicts spending for the current month and compares with previous months.
    2. Frontend 
       1. **Notifications**: To display notifications.
       2. **Send Notification**: To send notifications of owed money.
