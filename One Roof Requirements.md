@@ -43,7 +43,7 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
       
 
-   2. Calculate how much everyone is owed/owes (non-trivial logic calculation):
+   2. Predict next month's spending (non-trivial logic calculation):
 
       <img src="img/sequence_diagram2.png" height = "500px"/>
 
