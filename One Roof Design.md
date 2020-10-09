@@ -73,6 +73,5 @@ We will achieve this by caching the calculated values on the backend.
 
 7. Complex logic (CHANGE THIS)
    1. No inputs
-   2. Outputs a list containing instances of roommates owing other roommates.
-      1. Example output: `[ { Owed: Roommate1, Owing: Roommates2, Amount: $20},  { Owed: Roommate2, Owing: Roommates3, Amount: $50 } ]`
-   3. Works by querying the purchase data and calculating the total amount spent on shared items, dividing that by the number of roommates and then calculating the difference between that value and what each roommate spent and then calculating how much everyone is owed.
+   2. Outputs a list of budget predictions for the coming month and comparisons with previous months. Example \[{'category': 'groceries', 'predicted spending': 732, 'percent normal': 1.03}\]
+   3. Queries the database. Sorts purchases into different categories using key words and then in each category, calculates average time frequency of purchases and applies that data to the current month to predict the current months spending in each category.
