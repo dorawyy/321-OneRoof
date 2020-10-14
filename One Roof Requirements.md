@@ -16,8 +16,8 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
 3. Non-functional requirements:
 
-   1. Only authorized sources can view user information: This is a requirement because it's important to the users that their information is safe.
-   2. Maximum group size is 10 people: This is a requirement because we don't want groups of more than 10 roommates per house.
+   1. Only authorized sources can view user information: Only members (or the owner, or a site admin) can request information from a house.  Only the owner, or a site admin can delete a house or change settings on it.
+   2. The backend should be scalable: We should be able to spin up multiple instances of the server to handle more requests.  This implies that all state is stored in the database.
    3. Calculating how much every one is owed/owes should take no longer than 1s: This is a requirement because we don't want users to leave the app while it's calculating.
 
 4. Main components:
