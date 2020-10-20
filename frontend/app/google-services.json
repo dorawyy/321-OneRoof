@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "14836527644",
+    "firebase_url": "https://oneroof-20f41.firebaseio.com",
+    "project_id": "oneroof-20f41",
+    "storage_bucket": "oneroof-20f41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14836527644:android:fe80a79d443007aef0a5d9",
+        "android_client_info": {
+          "package_name": "ca.oneroof.oneroof"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14836527644-fmlkcl1odbadt7u7mjlih9k0673gr6st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA8e1VlHW08Z6oW6BHRuN2KriraCV67gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14836527644-fmlkcl1odbadt7u7mjlih9k0673gr6st.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
