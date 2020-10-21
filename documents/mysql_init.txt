@@ -1,3 +1,4 @@
+DROP DATABASE oneroofdb;
 CREATE DATABASE oneroofdb;
 USE oneroofdb;
 
