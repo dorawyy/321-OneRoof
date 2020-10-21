@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var housesRouter = require('./routes/houses');
 var roommatesRouter = require('./routes/roommates');
 var youowemesRouter = require('./routes/youowemes');
+const { default: knex_file } = require('./knex_init');
 
 var app = express();
 
@@ -26,6 +27,9 @@ app.use('/youowemes', youowemesRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+var knex_init_file = require('./knex_init');
+var knex = require('knex')(knex_init_file.knex_init);
 
 // error handler
 app.use(function(err, req, res, next) {
