@@ -1,0 +1,47 @@
+CREATE DATABASE oneroofdb;
+USE oneroofdb;
+
+
+CREATE TABLE houses (
+    house_id INT AUTO_INCREMENT PRIMARY KEY,
+    house_name VARCHAR(128),
+    house_admin INT
+);
+
+CREATE TABLE roommates (
+    roommate_id INT AUTO_INCREMENT PRIMARY KEY,
+    roommate_name VARCHAR(128),
+    roommate_photo BLOB DEFAULT NULL,
+    roomate_is_site_admin BOOL DEFAULT FALSE,
+    roommate_house INT,
+    FOREIGN KEY (roommate_house) REFERENCES houses(house_id)
+);
+
+ALTER TABLE houses
+ADD FOREIGN KEY (house_admin) REFERENCES roommates(roommate_id); 
+
+CREATE TABLE divisions (
+    division_id INT AUTO_INCREMENT PRIMARY KEY,
+    division_purchase DECIMAL(13,2),
+    division_memo VARCHAR(1024) DEFAULT NULL
+);
+
+CREATE TABLE purchases (
+    purchase_id INT AUTO_INCREMENT PRIMARY KEY,
+    roommate_id INT,
+    FOREIGN KEY (roommate_id) REFERENCES roommates(roommate_id),
+    purchase_amount DECIMAL(13,2),
+    purchase_memo VARCHAR(1024) DEFAULT NULL,
+    purchase_receipt BLOB DEFAULT NULL
+);
+
+CREATE TABLE youoweme (
+    youoweme_id INT AUTO_INCREMENT PRIMARY KEY,
+    youoweme_you INT,
+    youoweme_me INT,
+    FOREIGN KEY (youoweme_you) REFERENCES roommates(roommate_id),
+    FOREIGN KEY (youoweme_me) REFERENCES roommates(roommate_id),
+    youoweme_amount DECIMAL(13,2),
+    youoweme_create_date DATE,
+    youoweme_paid BOOL DEFAULT FALSE
+);
