@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var housesRouter = require('./routes/houses');
 var roommatesRouter = require('./routes/roommates');
 var youowemesRouter = require('./routes/youowemes');
-const { default: knex_file } = require('./knex_init');
+var knex_init_file = require('./knex_init');
 
 var app = express();
 
@@ -30,6 +30,18 @@ app.use(function(req, res, next) {
 
 var knex_init_file = require('./knex_init');
 var knex = require('knex')(knex_init_file.knex_init);
+
+/*
+knex.schema.hasTable('users').then(function(exists){
+  if(!exists){
+    console.log("success");
+  }
+});
+knex.schema.hasTable('houses').then(function(exists){
+  if(exists){
+    console.log("success");
+  }
+});*/
 
 // error handler
 app.use(function(err, req, res, next) {
