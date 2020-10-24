@@ -62,3 +62,5 @@ typings/
 
 # databvase passwords for knex
 knex_init.js
+knexfile.js
+dev.sqlite3
