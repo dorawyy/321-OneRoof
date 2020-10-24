@@ -2,48 +2,43 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db');
 
-router.post('/', function(req, res) {
+router.post('/', async function(req, res) {
     const name = req.body.name;
     const admin = req.body.admin;
 
-    knex('houses')
-        .insert({house_name: name, house_admin: admin}, ['id'])
-        .then(function (returnValue) {
-            res.json({id: returnValue[0]});
-        });
+    var id = await knex('houses')
+        .insert({house_name: name, house_admin: admin}, ['id']);
+    res.json({id: id[0]});
 });
 
-router.delete('/:houseId', function(req, res) {
+router.delete('/:houseId', async function(req, res) {
     const houseId = req.params['houseId'];
 
-    knex('houses')
+    var rowsDeleted = await knex('houses')
         .where('house_id', houseId)
-        .del()
-        .then(function (rowsDeleted) {
-            res.json({'rows deleted': rowsDeleted});
-        });
+        .del();
+        
+    res.json({'rows deleted': rowsDeleted});
 });
 
-router.get('/:houseId', function(req, res) {
+router.get('/:houseId', async function(req, res) {
     const houseId = req.params['houseId'];
     let house = {};
     house['id'] = houseId;
 
-    knex.select('house_name', 'house_admin')
+    var houseAttributes = await knex.select('house_name', 'house_admin')
         .from('houses')
-        .where('house_id', houseId)
-        .then(function (houseAttributes) {
-            house['name'] = houseAttributes[0]['house_name'];
-            house['admin'] = houseAttributes[0]['house_admin'];
+        .where('house_id', houseId);
+
+    house['name'] = houseAttributes[0]['house_name'];
+    house['admin'] = houseAttributes[0]['house_admin'];
     
-            knex.select('roommate_id')
-                .from('roommates')
-                .where('roommate_house', houseId)
-                .then(function (roommates) {
-                    house['roommates'] = roommates;
-                    res.json(house);
-                });
-        });
+    var roommates = await knex.select('roommate_id')
+        .from('roommates')
+        .where('roommate_house', houseId);
+    
+    house['roommates'] = roommates;
+    res.json(house);
 });
 
 router.get('/:houseId/purchases', function(req, res) {
