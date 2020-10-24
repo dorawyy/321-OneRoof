@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OneRoof</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_house">Looks like you don\'t belong to a house yet!  To use OneRoof, have a
+        house leader add you to a house, or create a new house.</string>
 </resources>

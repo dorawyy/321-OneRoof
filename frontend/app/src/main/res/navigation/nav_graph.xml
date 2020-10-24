@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="ca.oneroof.oneroof.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homePgHasHouseFragment"
+            app:destination="@id/homePgHasHouseFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homePgNoHouseFragment"
+            app:destination="@id/homePgNoHouseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePgHasHouseFragment"
+        android:name="ca.oneroof.oneroof.HomePgHasHouseFragment"
+        android:label="fragment_home_pg_has_house"
+        tools:layout="@layout/fragment_home_pg_has_house" >
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_basicProfileFragment"
+            app:destination="@id/basicProfileFragment" />
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_houseLeaderProfileFragment"
+            app:destination="@id/houseLeaderProfileFragment" />
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_debtSummaryFragment"
+            app:destination="@id/debtSummaryFragment" />
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_receiptFragment"
+            app:destination="@id/receiptFragment" />
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_addPurchaseFragment"
+            app:destination="@id/addPurchaseFragment" />
+        <action
+            android:id="@+id/action_homePgHasHouseFragment_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePgNoHouseFragment"
+        android:name="ca.oneroof.oneroof.HomePgNoHouseFragment"
+        android:label="fragment_home_pg_no_house"
+        tools:layout="@layout/fragment_home_pg_no_house" />
+    <fragment
+        android:id="@+id/basicProfileFragment"
+        android:name="ca.oneroof.oneroof.BasicProfileFragment"
+        android:label="fragment_basic_profile"
+        tools:layout="@layout/fragment_basic_profile" />
+    <fragment
+        android:id="@+id/houseLeaderProfileFragment"
+        android:name="ca.oneroof.oneroof.HouseLeaderProfileFragment"
+        android:label="fragment_house_leader_profile"
+        tools:layout="@layout/fragment_house_leader_profile" >
+        <action
+            android:id="@+id/action_houseLeaderProfileFragment_to_houseSettingsFragment"
+            app:destination="@id/houseSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/houseSettingsFragment"
+        android:name="ca.oneroof.oneroof.HouseSettingsFragment"
+        android:label="fragment_house_settings"
+        tools:layout="@layout/fragment_house_settings" />
+    <fragment
+        android:id="@+id/debtSummaryFragment"
+        android:name="ca.oneroof.oneroof.DebtSummaryFragment"
+        android:label="fragment_debt_summary"
+        tools:layout="@layout/fragment_debt_summary" >
+        <action
+            android:id="@+id/action_debtSummaryFragment_to_requestPaymentFragment"
+            app:destination="@id/requestPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestPaymentFragment"
+        android:name="ca.oneroof.oneroof.RequestPaymentFragment"
+        android:label="fragment_request_payment"
+        tools:layout="@layout/fragment_request_payment" />
+    <fragment
+        android:id="@+id/receiptFragment"
+        android:name="ca.oneroof.oneroof.ReceiptFragment"
+        android:label="fragment_receipt"
+        tools:layout="@layout/fragment_receipt" >
+        <action
+            android:id="@+id/action_receiptFragment_to_addPurchaseFragment"
+            app:destination="@id/addPurchaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPurchaseFragment"
+        android:name="ca.oneroof.oneroof.AddPurchaseFragment"
+        android:label="fragment_add_purchase"
+        tools:layout="@layout/fragment_add_purchase" />
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="ca.oneroof.oneroof.PurchaseHistoryFragment"
+        android:label="fragment_purchase_history"
+        tools:layout="@layout/fragment_purchase_history" />
+</navigation>
