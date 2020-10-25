@@ -61,4 +61,11 @@ public class HomePgNoHouseFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_pg_no_house, container, false);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
 }
