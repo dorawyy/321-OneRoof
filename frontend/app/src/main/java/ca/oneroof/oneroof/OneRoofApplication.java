@@ -2,7 +2,8 @@ package ca.oneroof.oneroof;
 
 import android.app.Application;
 
-import ca.oneroof.oneroof.api.OneRoofAPI;
+//import ca.oneroof.oneroof.api.OneRoofAPI;
+import ca.oneroof.oneroof.api.*;
 import retrofit2.Retrofit;
 
 public class OneRoofApplication extends Application {
@@ -13,10 +14,10 @@ public class OneRoofApplication extends Application {
 
     public OneRoofApplication() {
         super();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.api_url))
-                .build();
-        api = retrofit.create(OneRoofAPI.class);
+        //Retrofit retrofit = new Retrofit.Builder()
+         //       .baseUrl(getString(R.string.api_url))
+         //       .build();
+        //api = retrofit.create(OneRoofAPI.class);
     }
 
     public OneRoofAPI getApi() {

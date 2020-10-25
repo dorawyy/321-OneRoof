@@ -7,25 +7,21 @@
     tools:context=".HomePgNoHouseFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is the home page fragment for users that don't belong to a house" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/no_house_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="196dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="200dp"
             android:layout_marginRight="20dp"
             android:gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="@string/no_house"
             android:textColor="#000000"
             android:textSize="24sp"
@@ -38,24 +34,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Add House: note that this doesn't do anything yet"
+            android:backgroundTint="#875DD3"
+            android:text="Add House"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/no_house_header"
             app:layout_constraintVertical_bias="0.225" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/user_id_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show user id here"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="80dp"
+            android:text="User ID:"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_house_btn" />
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="123456"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_id_header" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
