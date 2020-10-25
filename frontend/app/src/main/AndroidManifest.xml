@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".OneRoofApplication">
+        android:name=".OneRoofApplication"
+        android:usesCleartextTraffic="true">
+        <!-- Allow HTTP for debugging with the local server. -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,8 @@
 var express = require('express');
+var auth = require('../auth');
 var router = express.Router();
+
+router.use(auth.authMiddleware);
 
 router.post('/', function(req, res) {
   res.send('Add house');
@@ -10,7 +13,8 @@ router.delete('/', function(req, res) {
 });
 
 router.get('/:houseId', function(req, res) {
-    res.send('Get house ' + req.params['houseId']);
+    // TODO: Remove this short example for testing the app.
+    res.send({ user: res.locals.user.uid, id: req.params['houseId'] });
 });
 
 router.get('/:houseId/purchases', function(req, res) {
