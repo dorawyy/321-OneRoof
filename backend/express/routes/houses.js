@@ -40,8 +40,9 @@ router.get('/:houseId', async function(req, res) {
     var roommates = await knex.select('roommate_id')
         .from('roommates')
         .where('roommate_house', houseId);
-    
-    house['roommates'] = roommates;
+
+    house['roommates'] = roommates.map(r => r.roommate_id);
+    console.log(house);
     res.json(house);
 });
 
