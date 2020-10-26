@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@{viewmodel.house.data.name}"
+                android:text="@{viewmodel.name}"
                 android:textAllCaps="true"
                 android:textColor="#000000"
                 android:textSize="28sp"

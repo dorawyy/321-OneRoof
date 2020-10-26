@@ -2,17 +2,24 @@ package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ReportFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
@@ -23,7 +30,7 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  */
 public class HomePgHasHouseFragment extends Fragment {
     HouseViewModel viewmodel;
-
+    FragmentHomePgHasHouseBinding binding;
     private Button profileBtn;
     private Button debtsBtn;
     private Button scanReceiptBtn;
@@ -44,65 +51,19 @@ public class HomePgHasHouseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentHomePgHasHouseBinding binding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_home_pg_has_house, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_home_pg_has_house, container, false);
         binding.setViewmodel(viewmodel);
-        binding.setLifecycleOwner(getActivity());
+        binding.setLifecycleOwner(this);
 
         View view = binding.getRoot();
-        profileBtn = view.findViewById(R.id.profile_btn);
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // select profile based on account type: basic or house leader
-//                if(isHouseLeader) {
-//                    Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_houseLeaderProfileFragment);
-//                }
-//                else {
-//                    Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_basicProfileFragment);
-//                }
-            }
-        });
-
-        debtsBtn = view.findViewById(R.id.debts_btn);//crashhhhhhhhhhhhhhhhhhhhh
-        debtsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // go to debt summary fragment
-                Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_debtSummaryFragment);
-            }
-        });
-
-        scanReceiptBtn = view.findViewById(R.id.receipt_btn);
-        scanReceiptBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // go to receipt picture fragment
-                Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_receiptFragment);
-            }
-        });
-
-        enterPurchaseBtn = view.findViewById(R.id.enter_purchase_btn);
-        enterPurchaseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // go to manual purchase entry fragment
-                Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_addPurchaseFragment);
-            }
-        });
-
-        viewPurchasesBtn = view.findViewById(R.id.view_purchases_btn);
-        viewPurchasesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // go to past purchases fragment
-                Navigation.findNavController(view).navigate(R.id.action_homePgHasHouseFragment_to_purchaseHistoryFragment);
-            }
-        });
-
-
-
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

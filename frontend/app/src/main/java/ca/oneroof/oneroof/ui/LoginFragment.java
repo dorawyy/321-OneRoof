@@ -29,6 +29,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
@@ -155,14 +157,24 @@ public class LoginFragment extends Fragment {
 
     private void onIdToken(String idToken) {
         OneRoofAPI api = OneRoofAPIBuilder.buildAPI(getString(R.string.api_url), idToken);
-        // TODO: Pass this in
 
         HouseViewModel houseViewModel =
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
                     .get(HouseViewModel.class);
 
-        // Hardcoded house id for now.
+        // TODO: Hardcoded house id for now.
         houseViewModel.houseId.setValue(1);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        houseViewModel.fcmToken.setValue(task.getResult().getToken());
+                    }
+                });
 
         Navigation.findNavController(getView())
                 .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());

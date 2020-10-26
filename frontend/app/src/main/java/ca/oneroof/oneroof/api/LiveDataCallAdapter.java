@@ -1,5 +1,7 @@
 package ca.oneroof.oneroof.api;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import java.lang.reflect.Type;
@@ -39,12 +41,14 @@ public class LiveDataCallAdapter<R> implements CallAdapter<R, LiveData<ApiRespon
                             if (response.isSuccessful()) {
                                 postValue(new ApiResponse<R>(response.body()));
                             } else {
+                                Log.d("OneRoof", "Unsuccessful request: " + response.message());
                                 postValue(new ApiResponse<>(response.message()));
                             }
                         }
 
                         @Override
                         public void onFailure(Call<R> call, Throwable t) {
+                            Log.d("OneRoof", "Failed request: " + t.getLocalizedMessage());
                             postValue(new ApiResponse<>(t.getLocalizedMessage()));
                         }
                     });
