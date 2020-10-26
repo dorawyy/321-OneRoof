@@ -21,7 +21,6 @@ public class HouseViewModel extends ViewModel {
     public MutableLiveData<String> fcmToken = new MutableLiveData<>();
     public LiveData<Integer> roommateId;
     public LiveData<ApiResponse<House>> house;
-    public LiveData<String> name;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
@@ -31,8 +30,5 @@ public class HouseViewModel extends ViewModel {
         roommateId = Transformations.switchMap(fcmToken, fcm ->
                 Transformations.map(api.postLogin(new LoginRequest(fcm)), r -> r.data.id)
         );
-
-        name = Transformations.map(house, h -> h.data == null ? "Loading" : h.data.name);
-        roommateId.observeForever(x -> Log.d("OneRoof", String.valueOf(x)));
     }
 }
