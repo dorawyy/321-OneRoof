@@ -12,12 +12,8 @@ router.patch('/:youowemeId', function(req, res) {
     res.send('Update youoweme ' + req.params['youowemeId']);
 });
 
-router.delete('/:roommateId', function(req, res) {
-    res.send('Delete roommate ' + req.params['roommateId']);
+router.delete('/:youowemeId', function(req, res) {
+    res.send('Delete youoweme ' + req.params['youowemeId']);
 });
-
-router.get(':roommateId/avatar', function(req, res) {
-    res.send('Get avatar for roommate ' + req.params['roommateId']);
-})
 
 module.exports = router;

@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+# databvase passwords for knex
+knex_init.js
+knexfile.js
+dev.sqlite3
