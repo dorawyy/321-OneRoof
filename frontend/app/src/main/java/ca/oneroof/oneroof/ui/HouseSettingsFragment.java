@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ca.oneroof.oneroof.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddPurchaseFragment#newInstance} factory method to
+ * Use the {@link HouseSettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddPurchaseFragment extends Fragment {
+public class HouseSettingsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class AddPurchaseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddPurchaseFragment() {
+    public HouseSettingsFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class AddPurchaseFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddPurchaseFragment.
+     * @return A new instance of fragment HouseSettingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddPurchaseFragment newInstance(String param1, String param2) {
-        AddPurchaseFragment fragment = new AddPurchaseFragment();
+    public static HouseSettingsFragment newInstance(String param1, String param2) {
+        HouseSettingsFragment fragment = new HouseSettingsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class AddPurchaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_purchase, container, false);
+        return inflater.inflate(R.layout.fragment_house_settings, container, false);
     }
 }

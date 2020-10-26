@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ca.oneroof.oneroof.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RequestPaymentFragment#newInstance} factory method to
+ * Use the {@link PurchaseHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RequestPaymentFragment extends Fragment {
+public class PurchaseHistoryFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class RequestPaymentFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public RequestPaymentFragment() {
+    public PurchaseHistoryFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class RequestPaymentFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RequestPaymentFragment.
+     * @return A new instance of fragment PurchaseHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RequestPaymentFragment newInstance(String param1, String param2) {
-        RequestPaymentFragment fragment = new RequestPaymentFragment();
+    public static PurchaseHistoryFragment newInstance(String param1, String param2) {
+        PurchaseHistoryFragment fragment = new PurchaseHistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class RequestPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_request_payment, container, false);
+        return inflater.inflate(R.layout.fragment_purchase_history, container, false);
     }
 }

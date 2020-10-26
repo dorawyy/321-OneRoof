@@ -1,109 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomePgHasHouseFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
+    <data>
+        <import type="ca.oneroof.oneroof.api.ApiResponse" />
+        <variable
+            name="viewmodel"
+            type="ca.oneroof.oneroof.viewmodel.HouseViewModel"/>
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.HomePgHasHouseFragment">
 
-        <TextView
-            android:id="@+id/roommates_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Roommates"
-            android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
+        <!-- TODO: Update blank fragment layout -->
 
-        <TextView
-            android:id="@+id/add_purchase_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="Add Purchase"
-            android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/receipt_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/receipt_btn"
-            android:layout_width="130dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginBottom="70dp"
-            android:backgroundTint="#875DD3"
-            android:text="Scan Receipt"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/roommates_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@{viewmodel.house.data.name}"
+                android:textAllCaps="true"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
 
-        <Button
-            android:id="@+id/enter_purchase_btn"
-            android:layout_width="130dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="70dp"
-            android:backgroundTint="#875DD3"
-            android:text="Enter Manually"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/add_purchase_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Add Purchase"
+                android:textAllCaps="true"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/receipt_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/debts_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#875DD3"
-            android:text="IOU's &amp; UOMe's"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/add_purchase_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/receipt_btn"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="#875DD3"
+                android:text="Scan Receipt"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/profile_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="#875DD3"
-            android:text="Profile"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/enter_purchase_btn"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="#875DD3"
+                android:text="Enter Manually"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/view_purchases_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#875DD3"
-            android:text="View Previous Purchases"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/debts_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="#875DD3"
+                android:text="IOU's &amp; UOMe's"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/add_purchase_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+            <Button
+                android:id="@+id/profile_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="#875DD3"
+                android:text="Profile"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/view_purchases_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#875DD3"
+                android:text="View Previous Purchases"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

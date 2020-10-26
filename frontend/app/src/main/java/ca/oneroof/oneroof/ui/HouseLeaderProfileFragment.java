@@ -1,19 +1,23 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import ca.oneroof.oneroof.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HouseSettingsFragment#newInstance} factory method to
+ * Use the {@link HouseLeaderProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HouseSettingsFragment extends Fragment {
+public class HouseLeaderProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +28,9 @@ public class HouseSettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HouseSettingsFragment() {
+    private Button houseSettingsBtn;
+
+    public HouseLeaderProfileFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +40,11 @@ public class HouseSettingsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HouseSettingsFragment.
+     * @return A new instance of fragment HouseLeaderProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HouseSettingsFragment newInstance(String param1, String param2) {
-        HouseSettingsFragment fragment = new HouseSettingsFragment();
+    public static HouseLeaderProfileFragment newInstance(String param1, String param2) {
+        HouseLeaderProfileFragment fragment = new HouseLeaderProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +65,16 @@ public class HouseSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_house_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_house_leader_profile, container, false);
+
+        houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
+        houseSettingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_houseLeaderProfileFragment_to_houseSettingsFragment);
+            }
+        });
+
+        return view;
     }
 }

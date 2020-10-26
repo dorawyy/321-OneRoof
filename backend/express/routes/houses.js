@@ -14,7 +14,7 @@ router.delete('/', function(req, res) {
 
 router.get('/:houseId', function(req, res) {
     // TODO: Remove this short example for testing the app.
-    res.send({ user: res.locals.user.uid, id: req.params['houseId'] });
+    res.send({ id: req.params['houseId'], name: "Test house" });
 });
 
 router.get('/:houseId/purchases', function(req, res) {

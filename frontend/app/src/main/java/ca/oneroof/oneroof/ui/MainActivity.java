@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import ca.oneroof.oneroof.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override

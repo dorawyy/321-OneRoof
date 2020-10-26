@@ -9,6 +9,7 @@ const AUTH_DISABLED = process.env.AUTH_DISABLED || 0;
 function firebaseAuthMiddleware(req, res, next) {
     var auth = req.header('Authorization');
     if (!auth || !auth.startsWith('Bearer ')) {
+        console.log('Unauthorized: invalid bearer token.');
         res.sendStatus(401);
         return;
     }
@@ -20,6 +21,7 @@ function firebaseAuthMiddleware(req, res, next) {
             next();
         })
         .catch(err => {
+            console.log(`Unauthorized: ${err}`)
             res.sendStatus(401);
         });
 }

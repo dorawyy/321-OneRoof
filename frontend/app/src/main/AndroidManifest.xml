@@ -12,7 +12,7 @@
         android:name=".OneRoofApplication"
         android:usesCleartextTraffic="true">
         <!-- Allow HTTP for debugging with the local server. -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

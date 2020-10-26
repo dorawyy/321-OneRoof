@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -28,12 +30,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIBuilder;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import ca.oneroof.oneroof.viewmodel.HouseViewModel;
+import ca.oneroof.oneroof.viewmodel.HouseViewModelFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -153,7 +156,15 @@ public class LoginFragment extends Fragment {
     private void onIdToken(String idToken) {
         OneRoofAPI api = OneRoofAPIBuilder.buildAPI(getString(R.string.api_url), idToken);
         // TODO: Pass this in
+
+        HouseViewModel houseViewModel =
+                new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
+                    .get(HouseViewModel.class);
+
+        // Hardcoded house id for now.
+        houseViewModel.houseId.setValue(1);
+
         Navigation.findNavController(getView())
-                .navigate(R.id.action_loginFragment_to_homePgNoHouseFragment);
+                .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
     }
 }

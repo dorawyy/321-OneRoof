@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof;
+package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ca.oneroof.oneroof.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomePgNoHouseFragment#newInstance} factory method to
+ * Use the {@link RequestPaymentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomePgNoHouseFragment extends Fragment {
+public class RequestPaymentFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class HomePgNoHouseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomePgNoHouseFragment() {
+    public RequestPaymentFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class HomePgNoHouseFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomePgNoHouseFragment.
+     * @return A new instance of fragment RequestPaymentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomePgNoHouseFragment newInstance(String param1, String param2) {
-        HomePgNoHouseFragment fragment = new HomePgNoHouseFragment();
+    public static RequestPaymentFragment newInstance(String param1, String param2) {
+        RequestPaymentFragment fragment = new RequestPaymentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,13 +61,6 @@ public class HomePgNoHouseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_pg_no_house, container, false);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
+        return inflater.inflate(R.layout.fragment_request_payment, container, false);
     }
 }
