@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db');
+var lodash = require('lodash');
 
 router.post('/', async function(req, res) {
     const name = req.body.name;
@@ -80,21 +81,20 @@ router.get('/:houseId/purchases/:purchaseId', async function(req, res) {
         .join('division_roommate_join', 'division_roommate_join_division', '=', 'division_id')
         .where('division_purchase', purchaseId);
 
-    // var divisionsList = new Array();
-    
-    // divisions.forEach(async (division) => {
-    //     var roommatesList = new Array();
-    //     roommates.forEach(roommate => {
-    //         roommatesList.push(roommate['division_roommate_join_roommate']);
-    //     });
-
-    //     divisionsList.push({amount: division['division_amount'], 
-    //         roommates: roommatesList});
-    // });
+    var groupedDivisions = lodash.groupBy(divisions, 'division_id');
+    console.log(groupedDivisions);
+    var divisionsList = new Array();
+    for (const [_, group] of Object.entries(groupedDivisions)) {
+        var roommates = new Array();
+        group.forEach(roommate => {
+            roommates.push(roommate['division_roommate_join_roommate']);
+        });
+        divisionsList.push({amount: group[0]['division_amount'], memo: group[0]['division_memo'], roommates: roommates});
+    }
 
     res.json({roommate: purchase[0]['purchase_roommate'], 
         amount: purchase[0]['purchase_amount'], 
-        // divisions: divisions, 
+        divisions: divisionsList, 
         memo: purchase[0]['purchase_memo']});
 });
 

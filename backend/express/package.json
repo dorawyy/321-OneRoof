@@ -13,6 +13,7 @@
     "firebase-admin": "^9.2.0",
     "http-errors": "~1.6.3",
     "knex": "^0.21.6",
+    "lodash": "^4.17.20",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "pug": "2.0.0-beta11",
