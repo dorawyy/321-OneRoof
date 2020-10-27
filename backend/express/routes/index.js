@@ -7,7 +7,7 @@ router.use(auth.authMiddleware);
 
 router.post('/login', async function(req, res) {
   console.log('main login');
-  var fcm = req.query.fcm;
+  var fcm = req.body.fcm;
   console.log('fcm');
   console.log(fcm);
   var uid = res.locals.user.uid;
@@ -19,7 +19,7 @@ router.post('/login', async function(req, res) {
   var roommate_id;
   if (roommate.length == 0){
     roommate_id = await knex('roommates')
-        .insert({roommate_uid: uid});
+        .insert({roommate_name: res.locals.user.name, roommate_uid: uid});
   }
   else{
     roommate_id = roommate[0]['roommate_id']
