@@ -68,12 +68,7 @@ router.get('/:houseId/purchases', async function(req, res) {
         };
     });
 
-    var returnPurchases = purchases.map((purchase) => { 
-        return {memo: purchase['purchase_memo'], 
-            purchaser: purchase['purchase_roommate'],
-            amount: purchase['purchase_amount']}});
-
-    res.json(returnPurchases);
+    res.json(purchases);
 });
 
 router.post('/:houseId/purchases', async function(req, res) {
