@@ -1,4 +1,5 @@
 var debtCalculator = require('./debt_calculator');
+var knex = require('./db');
 
 var budgetCalculator = budgetCalculator || {};
 
@@ -138,14 +139,17 @@ console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
 */
 
 
-budgetCalculator.budget_prediction = function budget_prediction(roommate_id){
-    var purchases = debtCalculator.getTotalSpent(roommate_id);
+budgetCalculator.budget_prediction = async function budget_prediction(roommate_id){
+    var purchases = await debtCalculator.getTotalSpent(knex, roommate_id);
 
-    budget = knex.select('budget_goal')
+    budget = await knex.select('budget_goal')
     .from('budgets')
     .where('budget_roommate', roommate_id);
 
-    var limit = budget[0]['budget_goal'];
+    var limit = budget[0];
+    limit = limit ? limit['budget_goal'] : 1000;
+
+    console.log(purchases);
 
     return budget_prediction_from_list(purchases, limit);
 

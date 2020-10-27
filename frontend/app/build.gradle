@@ -29,7 +29,8 @@ android {
         }
 
         debug {
-            resValue("string", "api_url", "http://10.0.2.2:3000")
+//            resValue("string", "api_url", "http://10.0.2.2:3000")
+            resValue("string", "api_url", "https://oneroof-prod.azurewebsites.net/")
         }
     }
 

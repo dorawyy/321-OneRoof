@@ -57,8 +57,15 @@ router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
 
-router.post('/:roommateId/budget', function (req, res) {
+router.post('/:roommateId/budget', async function (req, res) {
     console.log(`Post to budget: ${req.body.limit}`);
+    var roommateId = req.params['roommateId'];
+    var budget = req.body.limit;
+
+    await knex('roommates')
+      .update('budget', budget)
+      .where('roommate_id', roommate_id);
+
     res.sendStatus(200);
 });
 
@@ -73,20 +80,20 @@ router.post('/:roommateId/budget', function (req, res) {
 //     res.json({id: roommate_id, budget: budget});
 // });
 
+// router.get('/:roommateId/budget', async function(req, res) {
+//     var roommateId = req.params['roommateId'];
+
+//     var budget = await knex.select('budget')
+//         .from('roommates')
+//         .where('roommate_id', roommateId);
+
+//     res.json({id: roommate_id, budget: budget});
+// });
+
 router.get('/:roommateId/budget', async function(req, res) {
-    var roommateId = req.params['roommateId'];
-
-    var budget = await knex.select('budget')
-        .from('roommates')
-        .where('roommate_id', roommateId);
-
-    res.json({id: roommate_id, budget: budget});
-});
-
-router.get('/:roommateId/budget_prediction', async function(req, res) {
     var roommate_id = req.params['roommateId'];
 
-    res.json(budgetCalculator.budget_prediction(roommate_id));
+    res.json(await budgetCalculator.budget_prediction(roommate_id));
 });
 
 module.exports = router;

@@ -3,8 +3,11 @@ var router = express.Router();
 const knex = require('../db');
 var auth = require('../auth');
 
-router.use(auth.authMiddleware);
+router.get('/version', function (req, res) {
+    res.send({version: "0.3"});
+});
 
+router.use('/login', auth.authMiddleware);
 router.post('/login', async function(req, res) {
   console.log('main login');
   var fcm = req.body.fcm;
