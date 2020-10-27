@@ -7,4 +7,5 @@ public class House {
     public int id;
     public String name;
     public ArrayList<Integer> roommates;
+    public ArrayList<String> roommate_names;
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="ca.oneroof.oneroof.ui.AddPurchaseFragment"/>
         <variable
             name="viewmodel"
             type="ca.oneroof.oneroof.viewmodel.HouseViewModel" />
@@ -58,6 +59,7 @@
                 android:text="Add Division"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:onClick="@{fragment::clickAddDivision}"
                 app:layout_constraintBottom_toTopOf="@+id/save_purchase_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -72,29 +74,38 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:onClick="@{fragment::clickSavePurchase}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/purchase_total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="33dp"
                 android:layout_marginEnd="30dp"
-                app:hintEnabled="false"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/purchase_total_header"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{AddPurchaseFragment.formatDollars(fragment.totalAmount)}"
+                tools:text="1.23" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enter_purchase_total"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="123.45"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <ListView
+                android:id="@+id/division_list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:divider="@null"
+                app:layout_constraintBottom_toTopOf="@+id/add_division_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divisions_header" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
