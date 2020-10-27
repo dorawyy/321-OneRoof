@@ -1,8 +1,10 @@
 package ca.oneroof.oneroof.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.BudgetStats;
+import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -77,10 +82,22 @@ public class HouseLeaderProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_house_leader_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
+        //viewmodel.roommateId.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {
+        //    @SuppressLint("DefaultLocale")
+        //    @Override
+        //    public void onChanged(ApiResponse<House> houseApiResponse) {
+        //        houseName.setText(houseApiResponse.data.name);
+        //    }
+        //});
+
         houseName = view.findViewById(R.id.house_name);
-        // not going to change, so we don't have to constantly check TODO: change to names instead of IDs
-        //name.setText(viewmodel.roommateId);
-        //houseName.setText(viewmodel.houseId);
+        viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onChanged(ApiResponse<House> houseApiResponse) {
+                houseName.setText(houseApiResponse.data.name);
+            }
+        });
 
         houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
         houseSettingsBtn.setOnClickListener(new View.OnClickListener() {
