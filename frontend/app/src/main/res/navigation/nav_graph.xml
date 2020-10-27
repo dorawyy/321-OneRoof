@@ -49,7 +49,11 @@
         android:id="@+id/basicProfileFragment"
         android:name="ca.oneroof.oneroof.ui.BasicProfileFragment"
         android:label="fragment_basic_profile"
-        tools:layout="@layout/fragment_basic_profile" />
+        tools:layout="@layout/fragment_basic_profile" >
+        <action
+            android:id="@+id/action_basicProfileFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/houseLeaderProfileFragment"
         android:name="ca.oneroof.oneroof.ui.HouseLeaderProfileFragment"
@@ -58,6 +62,9 @@
         <action
             android:id="@+id/action_houseLeaderProfileFragment_to_houseSettingsFragment"
             app:destination="@id/houseSettingsFragment" />
+        <action
+            android:id="@+id/action_houseLeaderProfileFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
     </fragment>
     <fragment
         android:id="@+id/houseSettingsFragment"
@@ -97,4 +104,9 @@
         android:name="ca.oneroof.oneroof.ui.PurchaseHistoryFragment"
         android:label="fragment_purchase_history"
         tools:layout="@layout/fragment_purchase_history" />
+    <fragment
+        android:id="@+id/budgetFragment"
+        android:name="ca.oneroof.oneroof.ui.BudgetFragment"
+        android:label="fragment_budget"
+        tools:layout="@layout/fragment_budget" />
 </navigation>

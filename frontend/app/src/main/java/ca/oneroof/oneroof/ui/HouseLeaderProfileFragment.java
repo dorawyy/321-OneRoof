@@ -29,6 +29,7 @@ public class HouseLeaderProfileFragment extends Fragment {
     private String mParam2;
 
     private Button houseSettingsBtn;
+    private Button budgetBtn;
 
     public HouseLeaderProfileFragment() {
         // Required empty public constructor
@@ -72,6 +73,14 @@ public class HouseLeaderProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_houseLeaderProfileFragment_to_houseSettingsFragment);
+            }
+        });
+
+        budgetBtn = view.findViewById(R.id.budget_btn);
+        budgetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_houseLeaderProfileFragment_to_budgetFragment);
             }
         });
 

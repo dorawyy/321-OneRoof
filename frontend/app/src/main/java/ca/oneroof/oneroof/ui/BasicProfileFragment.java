@@ -3,10 +3,12 @@ package ca.oneroof.oneroof.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import ca.oneroof.oneroof.R;
 
@@ -25,6 +27,8 @@ public class BasicProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Button budgetBtn;
 
     public BasicProfileFragment() {
         // Required empty public constructor
@@ -61,6 +65,16 @@ public class BasicProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basic_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_basic_profile, container, false);
+
+        budgetBtn = view.findViewById(R.id.basic_budget_btn);
+        budgetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_houseLeaderProfileFragment_to_budgetFragment);
+            }
+        });
+
+        return view;
     }
 }
