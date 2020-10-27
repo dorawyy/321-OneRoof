@@ -26,22 +26,22 @@ debtCalculator.getPurchaseInfo = async function (knex, purchase) {
         memo: purchase['purchase_memo']};
 }
 
-// debtCalculator.getAllRoommatePairs = async function (knex, houseId) {
-//     var roommates = await knex.select()
-//         .table('roommates')
-//         .where('roommate_house', houseId);
+debtCalculator.getAllRoommatePairs = async function (knex, houseId) {
+    var roommates = await knex.select()
+        .table('roommates')
+        .where('roommate_house', houseId);
 
-//     var pairs = new Array();
+    var pairs = new Array();
 
-//     for (let i = 0; i < roommates.length; i++) {
-//         for (let j = i + 1; j < roommates.length; j++) {
-//             pairs.push({roommate1: roommates[i]['roommate_id'], 
-//                 roommate2: roommates[j]['roommate_id']});
-//         }
-//     }
+    for (let i = 0; i < roommates.length; i++) {
+        for (let j = i + 1; j < roommates.length; j++) {
+            pairs.push({roommate1: roommates[i]['roommate_id'], 
+                roommate2: roommates[j]['roommate_id']});
+        }
+    }
 
-//     return pairs;
-// }
+    return pairs;
+}
 
 debtCalculator.getAllDebts = async function (knex, houseId) {
     var allPurchases = await knex.select('purchase_id', 'purchase_roommate', 'purchase_amount')
