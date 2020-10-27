@@ -176,7 +176,14 @@ router.get('/:houseId/statistics/:roommateId', async function(req, res) {
 });
 
 router.get('/:houseId/debts/:roommateId', async function(req, res) {
-    res.send('Get all debts for roommate ' + req.params['roommateId'] + 'from house ' + req.params['houseId']);
+    var roommateId = req.params['roommateId'];
+    if (roommateId == 1) {
+        res.json({2: -1250});
+    } else if (roommateId == 2) {
+        res.json({1: 1250});
+    } else {
+        res.json({});
+    }
 });
 
 router.get('/:houseId/debts/:userRoommateId/:otherRoommateId', async function(req, res) {
