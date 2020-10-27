@@ -7,4 +7,9 @@ public class Purchase {
     public int purchaser;
     public String purchaser_name;
     public ArrayList<Division> divisions;
+    int amount;
+
+    public String dollarString() {
+        return String.format("$%d.%d", amount / 100, amount % 100);
+    }
 }

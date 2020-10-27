@@ -31,6 +31,7 @@ public class NetworkLiveData<R> {
     public void refresh() {
         Call<R> call = calls.getValue();
         if (call != null) {
+            call = call.clone();
             call.enqueue(new Callback<R>() {
                 @Override
                 public void onResponse(Call<R> call, Response<R> response) {

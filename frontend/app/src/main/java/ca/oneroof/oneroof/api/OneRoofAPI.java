@@ -2,6 +2,8 @@ package ca.oneroof.oneroof.api;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -15,4 +17,7 @@ public interface OneRoofAPI {
 
     @GET("houses/{house}")
     Call<House> getHouse(@Path("house") int houseId);
+
+    @GET("houses/{house}/purchases")
+    Call<ArrayList<Purchase>> getPurchases(@Path("house") int houseId);
 }
