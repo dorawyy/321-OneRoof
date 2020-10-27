@@ -44,7 +44,7 @@
             android:layout_marginTop="50dp"
             android:text="Monthly Spending:"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistics_header" />
@@ -57,7 +57,7 @@
             android:layout_marginTop="50dp"
             android:text="Average Purchase Price:"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/monthly_spending_header" />
@@ -70,7 +70,7 @@
             android:layout_marginTop="50dp"
             android:text="Number of Purchases:"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avg_purchase_price_header" />
@@ -83,7 +83,7 @@
             android:layout_marginTop="50dp"
             android:text="Most Expensive Purchase:"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/num_purchases_header" />
@@ -96,7 +96,7 @@
             android:layout_marginEnd="30dp"
             android:text="@string/NA"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistics_header" />
@@ -109,7 +109,7 @@
             android:layout_marginEnd="30dp"
             android:text="@string/NA"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/monthly_spending_data" />
@@ -122,7 +122,7 @@
             android:layout_marginEnd="30dp"
             android:text="@string/NA"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avg_purchase_price_data" />
@@ -135,7 +135,7 @@
             android:layout_marginEnd="30dp"
             android:text="@string/NA"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/num_purchases_data" />
@@ -211,5 +211,31 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/curent_monthly_budget"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/likelihood_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:text="Likelihood of Going Over Budget:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/most_expensive_purchase_header" />
+
+        <TextView
+            android:id="@+id/likelihood_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/NA"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/most_expensive_purchase_data" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -75,6 +75,35 @@ debtCalculator.getAllDebts = async function (knex, houseId) {
     return debts;
 }
 
+debtCalculator.getTotalSpent = async function(knex, roommateId) {
+    var allPurchases = await knex.select('purchase_id', 'purchase_roommate', 'purchase_amount')
+        .table('purchases')
+        .join('roommates', 'roommate_id', '=', 'purchase_roommate')
+        .join('houses', 'roommate_house', '=', 'house_id');
+
+    var purchasesInfo = new Array();
+
+    for (purchase of allPurchases) {
+        purchasesInfo.push(await this.getPurchaseInfo(knex, purchase));
+    }
+
+    var purchase_amounts = [];
+
+    for (purchaseInfo of purchasesInfo) {
+        for (division of purchaseInfo['divisions']) {
+            var numRoommates = division['roommates'].length;
+            var amountPerRoommate = division['amount'] / numRoommates;
+            for (roommate of division['roommates']) {
+                if (roommate == roommateId) {
+                    purchase_amounts.push(amountPerRoommate);
+                }
+            }
+        }
+    }
+
+    return purchase_amounts;
+}
+
 module.exports = debtCalculator;
 
 

@@ -180,6 +180,7 @@ public class LoginFragment extends Fragment {
                         if (!task.isSuccessful()) {
                             return;
                         }
+                        Log.d("OneRoof", "FCM token: " + task.getResult().getToken());
                         api.postLogin(new LoginRequest(task.getResult().getToken()))
                                 .enqueue(new Callback<LoginResponse>() {
                                     @Override
@@ -208,7 +209,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginFail() {
-        Snackbar.make(getView(), "Login failed.", Snackbar.LENGTH_SHORT)
-                .show();
+        Log.d("OneRoof", "Failed to log in");
     }
 }

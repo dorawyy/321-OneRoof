@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.BudgetStats;
+import ca.oneroof.oneroof.api.BudgetUpdate;
 import ca.oneroof.oneroof.api.DebtSummary;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.IdResponse;
@@ -66,6 +67,20 @@ public class HouseViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<IdResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void postBudget(BudgetUpdate update) {
+        api.postBudget(roommateId.getValue(), update).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                budgetStats.refresh();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
 
             }
         });
