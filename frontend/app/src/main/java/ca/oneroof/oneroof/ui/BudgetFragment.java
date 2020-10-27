@@ -113,7 +113,7 @@ public class BudgetFragment extends Fragment {
                 monthlySpending.setText(String.format("$%d.%d", monthlySpendingCents / 100, monthlySpendingCents % 100));
                 int avgPriceCents = (int) Math.round(budgetStatsApiResponse.data.mean_purchase);
                 avgPurchasePrice.setText(String.format("$%d.%d", avgPriceCents / 100, avgPriceCents % 100));
-                numPurchases.setText(budgetStatsApiResponse.data.number_of_purchases);
+                numPurchases.setText(String.valueOf(budgetStatsApiResponse.data.number_of_purchases));
                 int mostExpensivePurchaseCents = budgetStatsApiResponse.data.most_expensive_purchase;
                 mostExpensivePurchase.setText(String.format("$%d.%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
             }
