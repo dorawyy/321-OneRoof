@@ -1,3 +1,7 @@
+var debtCalculator = require('./debt_calculator');
+
+var budgetCalculator = budgetCalculator || {};
+
 function t_dist_cdf(t, v){
     if(t < 0){
         return 1 - t_dist_cdf(-1*t, v);
@@ -133,16 +137,18 @@ console.log(budget_prediction_from_list([4000, 2000, 3000, 1000], 10000));
 console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
 */
 
-/*
-function budget_prediction(roommate_id){
-    divisions = knex.select('division_roommate_join_division')
-    .from('division_roommate_join')
-    .where('division_roommate_join_roommate', roommate_id);
 
-    var i;
-    for(i = 0; i < divisions.length; i++){
+budgetCalculator.budget_prediction = function budget_prediction(roommate_id){
+    var purchases = debtCalculator.getTotalSpent(roommate_id);
 
-    }
+    budget = knex.select('budget_goal')
+    .from('budgets')
+    .where('budget_roommate', roommate_id);
+
+    var limit = budget[0]['budget_goal'];
+
+    return budget_prediction_from_list(purchases, limit);
 
 }
-*/
+
+module.exports = budgetCalculator;
