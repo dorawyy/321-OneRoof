@@ -53,19 +53,42 @@ router.get('/:houseId/purchases', async function(req, res) {
         .join('houses', 'house_id', '=', 'roommate_house')
         .where('house_id', houseId);
 
-    res.json(purchases);
+    var returnPurchases = purchases.map((purchase) => { 
+        return {memo: purchase['purchase_memo'], 
+            purchaser: purchase['purchase_roommate'],
+            amount: purchase['purchase_amount']}});
+
+    res.json(returnPurchases);
 });
 
 router.post('/:houseId/purchases', async function(req, res) {
     var roommate = req.body.roommate;
     var amount = req.body.amount;
     var memo = req.body.memo;
+    var divisions = req.body.divisions;
 
-    var id = await knex('purchases')
+    var purchaseId = await knex('purchases')
         .insert({purchase_roommate: roommate, purchase_amount: amount, 
         purchase_memo: memo});
 
-    res.json({id: id[0]});
+    for (division of divisions) {
+        var divisionAmount = division['amount'];
+        var divisionMemo = division['memo'];
+        var roommates = division['roommates'];
+
+        var divisionId = await knex('divisions')
+            .insert({division_purchase: purchaseId, 
+                division_amount: divisionAmount,
+                division_memo: divisionMemo});
+
+        for (roommateId of roommates) {
+            await knex('division_roommate_join')
+                .insert({division_roommate_join_division: divisionId[0],
+                division_roommate_join_roommate: roommateId});
+        }
+    }
+
+    res.json({id: purchaseId[0]});
 });
 
 router.get('/:houseId/purchases/:purchaseId', async function(req, res) {
