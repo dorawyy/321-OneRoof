@@ -43,4 +43,12 @@ router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
 
+router.get('/:roommateId/budget', async function(req, res) {
+    var roommateId = req.params['roommateId'];
+
+    // get last 30 days from purchases db
+
+    // send back budget json onbject
+});
+
 module.exports = router;
