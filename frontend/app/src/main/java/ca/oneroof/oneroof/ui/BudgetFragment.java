@@ -109,7 +109,7 @@ public class BudgetFragment extends Fragment {
             @SuppressLint("DefaultLocale")
             @Override
             public void onChanged(ApiResponse<BudgetStats> budgetStatsApiResponse) {
-                int monthlySpendingCents = budgetStatsApiResponse.data.monthly_spending;
+                int monthlySpendingCents = budgetStatsApiResponse.data.month_spending;
                 monthlySpending.setText(String.format("$%d.%d", monthlySpendingCents / 100, monthlySpendingCents % 100));
                 int avgPriceCents = (int) Math.round(budgetStatsApiResponse.data.mean_purchase);
                 avgPurchasePrice.setText(String.format("$%d.%d", avgPriceCents / 100, avgPriceCents % 100));
