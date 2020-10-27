@@ -1,5 +1,6 @@
 package ca.oneroof.oneroof.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -55,6 +57,11 @@ public class BudgetFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
+    private TextView monthlySpending;
+    private TextView avgPurchasePrice;
+    private TextView numPurchases;
+    private TextView mostExpensivePurchase;
+
     public BudgetFragment() {
         // Required empty public constructor
     }
@@ -93,15 +100,28 @@ public class BudgetFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_budget, container, false);
 
-        monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
-        monthlyBudgetInput = view.findViewById(R.id.monthly_budget);
+        monthlySpending = view.findViewById(R.id.monthly_spending_data);
+        avgPurchasePrice = view.findViewById(R.id.avg_purchase_price_data);
+        numPurchases = view.findViewById(R.id.num_purchases_data);
+        mostExpensivePurchase = view.findViewById(R.id.most_expensive_purchase_data);;
 
         viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<BudgetStats>>() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onChanged(ApiResponse<BudgetStats> budgetStatsApiResponse) {
-                //udgetStatsApiResponse.data.
+                int monthlySpendingCents = budgetStatsApiResponse.data.monthly_spending;
+                monthlySpending.setText(String.format("$%d.%d", monthlySpendingCents / 100, monthlySpendingCents % 100));
+                int avgPriceCents = (int) Math.round(budgetStatsApiResponse.data.mean_purchase);
+                avgPurchasePrice.setText(String.format("$%d.%d", avgPriceCents / 100, avgPriceCents % 100));
+                numPurchases.setText(budgetStatsApiResponse.data.number_of_purchases);
+                int mostExpensivePurchaseCents = budgetStatsApiResponse.data.most_expensive_purchase;
+                mostExpensivePurchase.setText(String.format("$%d.%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
             }
         });
+
+        // for new budget input
+        monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
+        monthlyBudgetInput = view.findViewById(R.id.monthly_budget);
 
         monthlyBudgetText.addTextChangedListener(new TextWatcher() {
             @Override

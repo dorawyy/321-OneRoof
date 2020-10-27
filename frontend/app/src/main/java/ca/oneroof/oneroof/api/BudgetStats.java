@@ -6,4 +6,5 @@ public class BudgetStats {
     public int number_of_purchases;
     public int most_expensive_purchase; // in cents
     public int monthly_spending; // in cents
+    // TODO: add budget in once endpoint is updated
 }
