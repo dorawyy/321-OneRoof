@@ -133,16 +133,18 @@ console.log(budget_prediction_from_list([4000, 2000, 3000, 1000], 10000));
 console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
 */
 
-/*
+
 function budget_prediction(roommate_id){
-    divisions = knex.select('division_roommate_join_division')
-    .from('division_roommate_join')
-    .where('division_roommate_join_roommate', roommate_id);
+    var purchases = [];
 
-    var i;
-    for(i = 0; i < divisions.length; i++){
+    // TODO insert Maddie's code here
 
-    }
+    budget = knex.select('budget_goal')
+    .from('budgets')
+    .where('budget_roommate', roommate_id);
+
+    var limit = budget[0]['budget_goal'];
+
+    return budget_prediction_from_list(purchases, limit);
 
 }
-*/

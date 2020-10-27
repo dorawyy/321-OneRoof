@@ -39,6 +39,7 @@ router.delete('/:roommateId', async function(req, res) {
     res.json({'rows deleted': rowsDeleted});
 });
 
+/*
 router.get('/:roommateId/budget', async function (req, res) {
     res.json({
         likelihood: 0.5,
@@ -48,6 +49,7 @@ router.get('/:roommateId/budget', async function (req, res) {
         month_spending: 1000,
     });
 });
+*/
 
 router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
@@ -74,12 +76,10 @@ router.get('/:roommateId/budget', async function(req, res) {
     res.json({id: roommate_id, budget: budget});
 });
 
-router.get('/:roommateId/budget', async function(req, res) {
+router.get('/:roommateId/budget_prediction', async function(req, res) {
     var roommateId = req.params['roommateId'];
 
-    // get last 30 days from purchases db
-
-    // send back budget json onbject
+    res.json(budget_prediction(roommate_id));
 });
 
 module.exports = router;
