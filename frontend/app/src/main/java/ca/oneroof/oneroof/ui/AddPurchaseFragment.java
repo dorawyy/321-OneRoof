@@ -91,7 +91,7 @@ public class AddPurchaseFragment extends Fragment {
                 viewmodel.house.data.getValue().data.roommate_names,
                 viewmodel.house.data.getValue().data.roommates));
     }
-a
+
     public void clickSavePurchase(View v) {
         Purchase purchase = new Purchase();
         purchase.memo = memoText.getText().toString();

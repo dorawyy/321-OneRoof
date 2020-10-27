@@ -209,7 +209,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginFail() {
-        Snackbar.make(getView(), "Login failed.", Snackbar.LENGTH_SHORT)
-                .show();
+        Log.d("OneRoof", "Failed to log in");
     }
 }
