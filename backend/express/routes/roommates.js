@@ -53,6 +53,27 @@ router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
 
+router.post('/:roommateId/budget', async function(req, res) {
+    var roommateId = req.params['roommateId'];
+    var budget = req.body.limit;
+
+    await knex('roommates')
+      .update('budget', budget)
+      .where('roommate_id', roommate_id)
+
+    res.json({id: roommate_id, budget: budget});
+});
+
+router.get('/:roommateId/budget', async function(req, res) {
+    var roommateId = req.params['roommateId'];
+
+    var budget = await knex.select('budget')
+        .from('roommates')
+        .where('roommate_id', roommateId);
+
+    res.json({id: roommate_id, budget: budget});
+});
+
 router.get('/:roommateId/budget', async function(req, res) {
     var roommateId = req.params['roommateId'];
 
