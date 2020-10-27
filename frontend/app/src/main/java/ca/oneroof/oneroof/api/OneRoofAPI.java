@@ -24,6 +24,9 @@ public interface OneRoofAPI {
     @POST("houses/{house}/purchases")
     Call<IdResponse> postPurchase(@Path("house") int houseId, @Body Purchase purchase);
 
+    @GET("houses/{house}/statistics/{roommate}")
+    Call<DebtSummary> getDebtSummary(@Path("house") int houseId, @Path("roommate") int roommateId);
+
     @POST("roommates/{roommate}/budget")
     Call postBudget(@Path("roommate") int roommateId);
 

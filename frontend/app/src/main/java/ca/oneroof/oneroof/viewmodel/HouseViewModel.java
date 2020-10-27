@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.BudgetStats;
+import ca.oneroof.oneroof.api.DebtSummary;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.api.LoginRequest;
@@ -32,6 +33,7 @@ public class HouseViewModel extends ViewModel {
     public NetworkLiveData<ArrayList<Purchase>> purchases;
     public String permissions; // TODO: change this and the hardcoding below
     public NetworkLiveData<BudgetStats> budgetStats;
+    public NetworkLiveData<DebtSummary> debtStats;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
@@ -46,6 +48,10 @@ public class HouseViewModel extends ViewModel {
 
         budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
             return api.getBudgetStats(id);
+        }));
+
+        debtStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
+            return api.getDebtSummary(houseId.getValue(), id);
         }));
 
         permissions = "owner";

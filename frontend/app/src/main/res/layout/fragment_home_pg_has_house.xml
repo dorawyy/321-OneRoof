@@ -85,10 +85,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="#875DD3"
+                android:onClick="@{fragment.clickIOUS}"
                 android:text="IOU's &amp; UOMe's"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:onClick="@{fragment.clickIOUS}"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/add_purchase_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

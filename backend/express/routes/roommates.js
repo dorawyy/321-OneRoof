@@ -39,6 +39,16 @@ router.delete('/:roommateId', async function(req, res) {
     res.json({'rows deleted': rowsDeleted});
 });
 
+router.get('/:roommateId/budget', async function (req, res) {
+    res.json({
+        likelihood: 0.5,
+        mean_purchase: 100,
+        number_of_purchases: 10,
+        most_expensive_purchase: 1000,
+        month_spending: 1000,
+    });
+});
+
 router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
