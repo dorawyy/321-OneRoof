@@ -46,6 +46,7 @@ router.get('/:roommateId/budget', async function (req, res) {
         number_of_purchases: 10,
         most_expensive_purchase: 1000,
         month_spending: 1000,
+        budget: 20000,
     });
 });
 
@@ -53,16 +54,16 @@ router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
 
-router.post('/:roommateId/budget', async function(req, res) {
-    var roommateId = req.params['roommateId'];
-    var budget = req.body.limit;
+// router.post('/:roommateId/budget', async function(req, res) {
+//     var roommateId = req.params['roommateId'];
+//     var budget = req.body.limit;
 
-    await knex('roommates')
-      .update('budget', budget)
-      .where('roommate_id', roommate_id)
+//     await knex('roommates')
+//       .update('budget', budget)
+//       .where('roommate_id', roommate_id)
 
-    res.json({id: roommate_id, budget: budget});
-});
+//     res.json({id: roommate_id, budget: budget});
+// });
 
 router.get('/:roommateId/budget', async function(req, res) {
     var roommateId = req.params['roommateId'];
