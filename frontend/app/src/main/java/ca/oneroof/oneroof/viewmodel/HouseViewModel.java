@@ -13,10 +13,14 @@ import java.util.ArrayList;
 
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.House;
+import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.api.LoginRequest;
 import ca.oneroof.oneroof.api.NetworkLiveData;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.Purchase;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HouseViewModel extends ViewModel {
     private final OneRoofAPI api;
@@ -36,5 +40,19 @@ public class HouseViewModel extends ViewModel {
         purchases = new NetworkLiveData<>(Transformations.map(houseId, id -> {
             return api.getPurchases(id);
         }));
+    }
+
+    public void postPurchase(Purchase purchase) {
+        api.postPurchase(houseId.getValue(), purchase).enqueue(new Callback<IdResponse>() {
+            @Override
+            public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
+                purchases.refresh();
+            }
+
+            @Override
+            public void onFailure(Call<IdResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

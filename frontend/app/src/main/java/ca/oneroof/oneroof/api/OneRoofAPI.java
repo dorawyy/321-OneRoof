@@ -20,4 +20,7 @@ public interface OneRoofAPI {
 
     @GET("houses/{house}/purchases")
     Call<ArrayList<Purchase>> getPurchases(@Path("house") int houseId);
+
+    @POST("houses/{house}/purchases")
+    Call<IdResponse> postPurchase(@Path("house") int houseId, @Body Purchase purchase);
 }

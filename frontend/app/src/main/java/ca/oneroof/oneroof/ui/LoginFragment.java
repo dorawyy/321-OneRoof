@@ -185,6 +185,7 @@ public class LoginFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         if (response.isSuccessful()) {
+                                            Log.d("OneRoof", "Roommate id: " + response.body().id);
                                             houseViewModel.roommateId.setValue(response.body().id);
                                         } else {
                                             Log.d("OneRoof",

@@ -78,9 +78,11 @@ router.post('/:houseId/purchases', async function(req, res) {
     var memo = req.body.memo;
     var divisions = req.body.divisions;
 
+    console.log(req.body)
+
     var purchaseId = await knex('purchases')
         .insert({purchase_roommate: roommate, purchase_amount: amount, 
-        purchase_memo: memo});
+        purchase_memo: memo, purchase_roommate: req.body.purchaser});
 
     for (division of divisions) {
         var divisionAmount = division['amount'];
