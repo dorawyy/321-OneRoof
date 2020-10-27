@@ -180,6 +180,7 @@ public class LoginFragment extends Fragment {
                         if (!task.isSuccessful()) {
                             return;
                         }
+                        Log.d("OneRoof", "FCM token: " + task.getResult().getToken());
                         api.postLogin(new LoginRequest(task.getResult().getToken()))
                                 .enqueue(new Callback<LoginResponse>() {
                                     @Override

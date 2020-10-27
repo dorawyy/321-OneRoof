@@ -11,6 +11,13 @@
         android:theme="@style/AppTheme"
         android:name=".OneRoofApplication"
         android:usesCleartextTraffic="true">
+
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <!-- Allow HTTP for debugging with the local server. -->
         <activity android:name=".ui.MainActivity">
             <intent-filter>
@@ -22,11 +29,16 @@
 
         <service
             android:name=".OneRoofFirebaseMessagingService"
-            android:exported="false">
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="youoweme" />
     </application>
 
 </manifest>

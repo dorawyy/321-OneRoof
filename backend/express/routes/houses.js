@@ -4,6 +4,7 @@ var router = express.Router();
 var knex = require('../db');
 var lodash = require('lodash');
 var debtCalculator = require('../debt_calculator');
+var admin = require('firebase-admin');
 
 router.use(auth.authMiddleware);
 
@@ -73,7 +74,7 @@ router.get('/:houseId/purchases', async function(req, res) {
 });
 
 router.post('/:houseId/purchases', async function(req, res) {
-    var roommate = req.body.roommate;
+    var purchaser = req.body.purchaser;
     var amount = req.body.amount;
     var memo = req.body.memo;
     var divisions = req.body.divisions;
@@ -81,13 +82,17 @@ router.post('/:houseId/purchases', async function(req, res) {
     console.log(req.body)
 
     var purchaseId = await knex('purchases')
-        .insert({purchase_roommate: roommate, purchase_amount: amount, 
-        purchase_memo: memo, purchase_roommate: req.body.purchaser});
+        .insert({purchase_amount: amount, 
+        purchase_memo: memo, purchase_roommate: purchaser});
 
+    var allRoommates = new Set();
     for (division of divisions) {
         var divisionAmount = division['amount'];
         var divisionMemo = division['memo'];
         var roommates = division['roommates'];
+
+        console.log(roommates);
+        roommates.forEach(r => allRoommates.add(r));
 
         var divisionId = await knex('divisions')
             .insert({division_purchase: purchaseId, 
@@ -100,6 +105,32 @@ router.post('/:houseId/purchases', async function(req, res) {
                 division_roommate_join_roommate: roommateId});
         }
     }
+
+    var purchaserName = await knex('roommates')
+        .where('roommate_id', purchaser)
+        .first();
+
+    var tokens = [];
+    for (mentioned of allRoommates) {
+        var fcmToken = await knex.select('token')
+            .from('tokens')
+            .where('roommate_id', mentioned);
+            console.log(fcmToken);
+        for (token of fcmToken) {
+            tokens.push(token.token);
+        }
+    }
+
+    const message = {
+        notification: {
+            title: `Purchase by ${purchaserName.roommate_name} ($${Math.floor(amount / 100)}.${amount % 100})`,
+            body: `You share the cost of this purchase: ${memo}`
+        },
+        tokens: tokens,
+      };
+    
+    let result = await admin.messaging().sendMulticast(message);
+    console.log(message, result);    
 
     res.json({id: purchaseId[0]});
 });

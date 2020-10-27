@@ -87,9 +87,11 @@ public class AddPurchaseFragment extends Fragment {
     }
 
     public void clickAddDivision(View v) {
-        divisionEditAdapter.add(new DivisionEdit(viewmodel.house.data.getValue().data.roommate_names));
+        divisionEditAdapter.add(new DivisionEdit(
+                viewmodel.house.data.getValue().data.roommate_names,
+                viewmodel.house.data.getValue().data.roommates));
     }
-
+a
     public void clickSavePurchase(View v) {
         Purchase purchase = new Purchase();
         purchase.memo = memoText.getText().toString();
@@ -103,9 +105,10 @@ public class AddPurchaseFragment extends Fragment {
             division.roommates = new ArrayList<>();
             for (int i = 0; i < edit.roommateEnables.size(); i++) {
                 if (edit.roommateEnables.get(i)) {
-                    division.roommates.add(i);
+                    division.roommates.add(edit.roommates.get(i));
                 }
             }
+            purchase.divisions.add(division);
         }
 
         viewmodel.postPurchase(purchase);
