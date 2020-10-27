@@ -55,15 +55,15 @@ public class HomePgHasHouseFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_home_pg_has_house, container, false);
         binding.setViewmodel(viewmodel);
+        binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
         View view = binding.getRoot();
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void clickViewPurchases(View v) {
+        Navigation.findNavController(v)
+                .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToPurchaseHistoryFragment());
     }
 }

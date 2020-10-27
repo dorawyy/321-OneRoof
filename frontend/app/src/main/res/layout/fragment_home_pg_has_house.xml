@@ -5,10 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="ca.oneroof.oneroof.api.ApiResponse" />
         <variable
             name="viewmodel"
             type="ca.oneroof.oneroof.viewmodel.HouseViewModel"/>
+        <variable
+            name="fragment"
+            type="ca.oneroof.oneroof.ui.HomePgHasHouseFragment"/>
     </data>
 
     <FrameLayout
@@ -111,6 +113,7 @@
                 android:text="View Previous Purchases"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:onClick="@{fragment :: clickViewPurchases}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
