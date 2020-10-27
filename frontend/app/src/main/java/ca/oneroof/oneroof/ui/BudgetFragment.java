@@ -63,6 +63,7 @@ public class BudgetFragment extends Fragment {
     private TextView numPurchases;
     private TextView mostExpensivePurchase;
     private TextView monthlyBudgetDisplay;
+    private TextView likelihoodText;
 
     public BudgetFragment() {
         // Required empty public constructor
@@ -105,7 +106,8 @@ public class BudgetFragment extends Fragment {
         monthlySpending = view.findViewById(R.id.monthly_spending_data);
         avgPurchasePrice = view.findViewById(R.id.avg_purchase_price_data);
         numPurchases = view.findViewById(R.id.num_purchases_data);
-        mostExpensivePurchase = view.findViewById(R.id.most_expensive_purchase_data);;
+        mostExpensivePurchase = view.findViewById(R.id.most_expensive_purchase_data);
+        likelihoodText = view.findViewById(R.id.likelihood_data);
 
         // for new budget input
         monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
@@ -124,6 +126,7 @@ public class BudgetFragment extends Fragment {
                 int mostExpensivePurchaseCents = budgetStatsApiResponse.data.most_expensive_purchase;
                 mostExpensivePurchase.setText(String.format("$%d.02%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
                 monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsApiResponse.data.budget / 100, budgetStatsApiResponse.data.budget % 100));
+                likelihoodText.setText(String.format("%%%.0f", budgetStatsApiResponse.data.likelihood * 100.0));
             }
         });
 
