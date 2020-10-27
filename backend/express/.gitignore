@@ -64,3 +64,4 @@ typings/
 knex_init.js
 knexfile.js
 dev.sqlite3
+secrets/
