@@ -3,14 +3,17 @@ package ca.oneroof.oneroof.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +21,10 @@ import ca.oneroof.oneroof.R;
  * create an instance of this fragment.
  */
 public class BasicProfileFragment extends Fragment {
+    private TextView name;
+    private TextView houseName;
+
+    private HouseViewModel viewmodel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +66,7 @@ public class BasicProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
     }
 
     @Override
@@ -66,6 +74,12 @@ public class BasicProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_basic_profile, container, false);
+
+        name = view.findViewById(R.id.basic_user_name);
+        houseName = view.findViewById(R.id.basic_house_name);
+        // not going to change, so we don't have to constantly check TODO: change to names instead of IDs
+        //name.setText((CharSequence) viewmodel.roommateId);
+        //houseName.setText((CharSequence) viewmodel.houseId);
 
         budgetBtn = view.findViewById(R.id.basic_budget_btn);
         budgetBtn.setOnClickListener(new View.OnClickListener() {

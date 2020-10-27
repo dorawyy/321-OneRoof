@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
 import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.LoginRequest;
 import ca.oneroof.oneroof.api.NetworkLiveData;
@@ -25,6 +26,8 @@ public class HouseViewModel extends ViewModel {
     public MutableLiveData<Integer> roommateId = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
+    public String permissions; // TODO: change this and the hardcoding below
+    public NetworkLiveData<BudgetStats> budgetStats;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
@@ -36,5 +39,11 @@ public class HouseViewModel extends ViewModel {
         purchases = new NetworkLiveData<>(Transformations.map(houseId, id -> {
             return api.getPurchases(id);
         }));
+
+        budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
+            return api.getBudgetStats(id);
+        }));
+
+        permissions = "owner";
     }
 }

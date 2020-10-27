@@ -3,6 +3,8 @@ package ca.oneroof.oneroof.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
@@ -19,7 +21,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.BudgetStats;
+import ca.oneroof.oneroof.api.Purchase;
+import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +52,8 @@ public class BudgetFragment extends Fragment {
     // get the purchase total input by the user
     TextInputLayout monthlyBudgetInput;
     TextInputEditText monthlyBudgetText;
+
+    private HouseViewModel viewmodel;
 
     public BudgetFragment() {
         // Required empty public constructor
@@ -74,6 +84,7 @@ public class BudgetFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
     }
 
     @Override
@@ -84,6 +95,13 @@ public class BudgetFragment extends Fragment {
 
         monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
         monthlyBudgetInput = view.findViewById(R.id.monthly_budget);
+
+        viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<BudgetStats>>() {
+            @Override
+            public void onChanged(ApiResponse<BudgetStats> budgetStatsApiResponse) {
+                //udgetStatsApiResponse.data.
+            }
+        });
 
         monthlyBudgetText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -132,9 +150,6 @@ public class BudgetFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                // TODO: update hint to reflect budget change
-
             }
         });
 

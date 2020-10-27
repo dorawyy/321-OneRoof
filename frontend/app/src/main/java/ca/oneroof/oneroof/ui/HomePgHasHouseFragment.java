@@ -68,8 +68,14 @@ public class HomePgHasHouseFragment extends Fragment {
     }
 
     public void clickProfile(View v) {
-        Navigation.findNavController(v)
-                .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
+        if(viewmodel.permissions == "owner") {
+            Navigation.findNavController(v)
+                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
+        }
+        else {
+            Navigation.findNavController(v)
+                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
+        }
     }
 
     public void clickAddPurchase(View v) {
