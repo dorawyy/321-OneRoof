@@ -119,8 +119,12 @@ public class LoginFragment extends Fragment {
     }
 
     private void trySignIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        if (auth.getCurrentUser() == null) {
+            Intent signInIntent = googleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        } else {
+            onLogggedIn();
+        }
     }
 
     private void clickLogin(View view) {
