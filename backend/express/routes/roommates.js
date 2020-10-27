@@ -54,6 +54,11 @@ router.get(':roommateId/avatar', async function(req, res) {
     res.send('Get avatar for roommate ' + req.params['roommateId']);
 })
 
+router.post('/:roommateId/budget', function (req, res) {
+    console.log(`Post to budget: ${req.body.limit}`);
+    res.sendStatus(200);
+});
+
 // router.post('/:roommateId/budget', async function(req, res) {
 //     var roommateId = req.params['roommateId'];
 //     var budget = req.body.limit;

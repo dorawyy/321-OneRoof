@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.BudgetStats;
+import ca.oneroof.oneroof.api.BudgetUpdate;
 import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
@@ -166,13 +167,10 @@ public class BudgetFragment extends Fragment {
                     return;
                 }
 
-                // create JSON object
-                JSONObject jsonBudget = new JSONObject();
-                try {
-                    jsonBudget.put("limit", monthlyBudgetCents);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                BudgetUpdate update = new BudgetUpdate();
+                update.limit = monthlyBudgetCents;
+
+                viewmodel.postBudget(update);
             }
         });
 
