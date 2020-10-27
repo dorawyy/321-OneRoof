@@ -1,5 +1,4 @@
 var express = require('express');
-// const { insert } = require('../db');
 const knex = require('../db');
 var router = express.Router();
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db');
 var lodash = require('lodash');
+var debtCalculator = require('../debt_calculator');
 
 router.post('/', async function(req, res) {
     const name = req.body.name;
@@ -117,7 +118,22 @@ router.post('/:houseId/purchases/:purchaseId/receipt', function(req, res) {
 });
 
 router.get('/:houseId/statistics/:roommateId', async function(req, res) {
-    res.send('Get statistics for roommate ' + req.params['roommateId'] + ' in house ' + req.params['houseId']);
+    var houseId = req.params['houseId'];
+    var roommateId = req.params['roommateId'];
+
+    var allDebts = await debtCalculator.getAllDebts(knex, houseId);
+    var you_owe = 0;
+    var you_are_owed = 0;
+
+    for (debt of allDebts) {
+        if (debt['payer'] == roommateId) {
+            you_owe += debt['amount'];
+        } else if (debt['payee'] == roommateId) {
+            you_are_owed += debt['amount'];
+        }
+    }
+
+    res.json({you_owe: you_owe, you_are_owed: you_are_owed});
 });
 
 router.get('/:houseId/debts/:roommateId', async function(req, res) {
