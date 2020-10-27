@@ -50,12 +50,23 @@ router.get('/:houseId', async function(req, res) {
 router.get('/:houseId/purchases', async function(req, res) {
     var houseId = req.params['houseId'];
 
-    var purchases = await knex.select('purchase_roommate', 
-        'purchase_amount', 'purchase_memo')
-        .from('purchases')
+    var purchases = await knex('purchases')
         .join('roommates', 'roommate_id', '=', 'purchase_roommate')
         .join('houses', 'house_id', '=', 'roommate_house')
-        .where('house_id', houseId);
+        .where('house_id', houseId)
+        .select('purchase_id', 'purchase_roommate', 
+                'purchase_amount', 'purchase_memo',
+                'roommate_name');
+
+    purchases = purchases.map(p => {
+        return {
+            id: p.purchase_id,
+            purchaser: p.purchase_roommate,
+            purchaser_name: p.roommate_name,
+            amount: p.purchase_amount,
+            memo: p.purchase_memo,
+        };
+    });
 
     res.json(purchases);
 });
@@ -76,14 +87,18 @@ router.get('/:houseId/purchases/:purchaseId', async function(req, res) {
     var purchaseId = req.params['purchaseId'];
 
     var purchase = await knex.select('purchase_roommate', 
-        'purchase_amount', 'purchase_memo')
+        'purchase_amount', 'purchase_memo',
+        'roommate_name')
         .from('purchases')
+        .join('roommates', 'purchase_roommate', '=', 'roommate_id')
         .where('purchase_id', purchaseId);
 
     var divisions = await knex.select('division_id', 'division_amount', 
-        'division_memo', 'division_roommate_join_roommate')
+        'division_memo', 'division_roommate_join_roommate',
+        'roommate_name')
         .from('divisions')
         .join('division_roommate_join', 'division_roommate_join_division', '=', 'division_id')
+        .join('roommates', 'division_roommate_join_roommate', '=', 'roommate_id')
         .where('division_purchase', purchaseId);
 
     var groupedDivisions = lodash.groupBy(divisions, 'division_id');
@@ -94,10 +109,12 @@ router.get('/:houseId/purchases/:purchaseId', async function(req, res) {
         group.forEach(roommate => {
             roommates.push(roommate['division_roommate_join_roommate']);
         });
-        divisionsList.push({amount: group[0]['division_amount'], memo: group[0]['division_memo'], roommates: roommates});
+        var roommate_names = group.map(d => d.roommate_name);
+        divisionsList.push({amount: group[0]['division_amount'], memo: group[0]['division_memo'], roommates: roommates, roommate_names});
     }
 
     res.json({roommate: purchase[0]['purchase_roommate'], 
+        roommate_name: purchase[0]['roommate_name'],
         amount: purchase[0]['purchase_amount'], 
         divisions: divisionsList, 
         memo: purchase[0]['purchase_memo']});
