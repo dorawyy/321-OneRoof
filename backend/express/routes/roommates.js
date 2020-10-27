@@ -2,6 +2,7 @@ var express = require('express');
 var auth = require('../auth');
 const knex = require('../db');
 var router = express.Router();
+var budgetCalculator = require('../budget')
 
 router.use(auth.authMiddleware);
 
@@ -83,9 +84,9 @@ router.get('/:roommateId/budget', async function(req, res) {
 });
 
 router.get('/:roommateId/budget_prediction', async function(req, res) {
-    var roommateId = req.params['roommateId'];
+    var roommate_id = req.params['roommateId'];
 
-    res.json(budget_prediction(roommate_id));
+    res.json(budgetCalculator.budget_prediction(roommate_id));
 });
 
 module.exports = router;

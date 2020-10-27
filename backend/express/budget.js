@@ -1,3 +1,7 @@
+var debtCalculator = require('./debt_calculator');
+
+var budgetCalculator = budgetCalculator || {};
+
 function t_dist_cdf(t, v){
     if(t < 0){
         return 1 - t_dist_cdf(-1*t, v);
@@ -134,10 +138,8 @@ console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
 */
 
 
-function budget_prediction(roommate_id){
-    var purchases = [];
-
-    // TODO insert Maddie's code here
+budgetCalculator.budget_prediction = function budget_prediction(roommate_id){
+    var purchases = debtCalculator.getTotalSpent(roommate_id);
 
     budget = knex.select('budget_goal')
     .from('budgets')
@@ -148,3 +150,5 @@ function budget_prediction(roommate_id){
     return budget_prediction_from_list(purchases, limit);
 
 }
+
+module.exports = budgetCalculator;
