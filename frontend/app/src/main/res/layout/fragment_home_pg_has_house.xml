@@ -75,6 +75,7 @@
                 android:text="Enter Manually"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:onClick="@{fragment.clickAddPurchase}"
                 app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -87,6 +88,7 @@
                 android:text="IOU's &amp; UOMe's"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:onClick="@{fragment.clickIOUS}"
                 app:layout_constraintBottom_toTopOf="@+id/add_purchase_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -101,6 +103,7 @@
                 android:text="Profile"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:onClick="@{fragment.clickProfile}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +116,7 @@
                 android:text="View Previous Purchases"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:onClick="@{fragment :: clickViewPurchases}"
+                android:onClick="@{fragment.clickViewPurchases}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
