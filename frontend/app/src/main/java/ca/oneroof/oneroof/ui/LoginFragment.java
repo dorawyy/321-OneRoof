@@ -35,10 +35,15 @@ import com.google.firebase.iid.InstanceIdResult;
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.House;
+import ca.oneroof.oneroof.api.LoginRequest;
+import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIBuilder;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import ca.oneroof.oneroof.viewmodel.HouseViewModelFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -147,9 +152,8 @@ public class LoginFragment extends Fragment {
                             String idToken = task.getResult().getToken();
                             onIdToken(idToken);
                         } else {
-                            Snackbar.make(getView(), "Login failed.", Snackbar.LENGTH_SHORT)
-                                    .show();
                             Log.d("OneRoof", task.getException().getMessage());
+                            loginFail();
                         }
                     }
                 });
@@ -172,11 +176,34 @@ public class LoginFragment extends Fragment {
                         if (!task.isSuccessful()) {
                             return;
                         }
-                        houseViewModel.fcmToken.setValue(task.getResult().getToken());
+                        api.postLogin(new LoginRequest(task.getResult().getToken()))
+                                .enqueue(new Callback<LoginResponse>() {
+                                    @Override
+                                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            houseViewModel.roommateId.setValue(response.body().id);
+                                        } else {
+                                            Log.d("OneRoof",
+                                                    "Failure to receive roommate id: " + response.message());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                        Log.d("OneRoof", "Failure to post FCM token: "
+                                                + t.getLocalizedMessage());
+                                        loginFail();
+                                    }
+                                });
                     }
                 });
 
         Navigation.findNavController(getView())
                 .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+    }
+
+    private void loginFail() {
+        Snackbar.make(getView(), "Login failed.", Snackbar.LENGTH_SHORT)
+                .show();
     }
 }

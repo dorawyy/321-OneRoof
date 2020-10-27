@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface OneRoofAPI {
     @POST("login")
-    LiveData<ApiResponse<LoginResponse>> postLogin(@Body LoginRequest body);
+    Call<LoginResponse> postLogin(@Body LoginRequest body);
 
     @GET("houses/{house}")
     LiveData<ApiResponse<House>> getHouse(@Path("house") int houseId);

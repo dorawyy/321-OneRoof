@@ -18,17 +18,12 @@ public class HouseViewModel extends ViewModel {
     private final OneRoofAPI api;
 
     public MutableLiveData<Integer> houseId = new MutableLiveData<>();
-    public MutableLiveData<String> fcmToken = new MutableLiveData<>();
-    public LiveData<Integer> roommateId;
+    public MutableLiveData<Integer> roommateId = new MutableLiveData<>();
     public LiveData<ApiResponse<House>> house;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
 
         house = Transformations.switchMap(houseId, api::getHouse);
-
-        roommateId = Transformations.switchMap(fcmToken, fcm ->
-                Transformations.map(api.postLogin(new LoginRequest(fcm)), r -> r.data.id)
-        );
     }
 }
