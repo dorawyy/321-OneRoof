@@ -66,4 +66,25 @@ public class HomePgHasHouseFragment extends Fragment {
         Navigation.findNavController(v)
                 .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToPurchaseHistoryFragment());
     }
+
+    public void clickProfile(View v) {
+        if(viewmodel.permissions == "owner") {
+            Navigation.findNavController(v)
+                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
+        }
+        else {
+            Navigation.findNavController(v)
+                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
+        }
+    }
+
+    public void clickAddPurchase(View v) {
+        Navigation.findNavController(v)
+                .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToAddPurchaseFragment());
+    }
+
+    public void clickIOUS(View v) {
+        Navigation.findNavController(v)
+                .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToDebtSummaryFragment());
+    }
 }

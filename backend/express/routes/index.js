@@ -19,7 +19,7 @@ router.post('/login', async function(req, res) {
   var roommate_id;
   if (roommate.length == 0){
     roommate_id = await knex('roommates')
-        .insert({roommate_name: res.locals.user.name, roommate_uid: uid});
+        .insert({roommate_name: res.locals.user.name, roommate_uid: uid, roommate_house: 1});
   }
   else{
     roommate_id = roommate[0]['roommate_id']
@@ -27,7 +27,7 @@ router.post('/login', async function(req, res) {
   await knex('tokens')
         .insert({token: fcm, roommate_id: roommate_id});
 
-  res.json({roommate_id});
+  res.json({id: roommate_id});
 });
 
 router.get('/', function(req, res, next) {

@@ -38,11 +38,12 @@ router.get('/:houseId', async function(req, res) {
     house['name'] = houseAttributes[0]['house_name'];
     house['admin'] = houseAttributes[0]['house_admin'];
     
-    var roommates = await knex.select('roommate_id')
+    var roommates = await knex.select('roommate_id', 'roommate_name')
         .from('roommates')
         .where('roommate_house', houseId);
 
     house['roommates'] = roommates.map(r => r.roommate_id);
+    house['roommate_names'] = roommates.map(r => r.roommate_name);
     console.log(house);
     res.json(house);
 });
@@ -77,9 +78,11 @@ router.post('/:houseId/purchases', async function(req, res) {
     var memo = req.body.memo;
     var divisions = req.body.divisions;
 
+    console.log(req.body)
+
     var purchaseId = await knex('purchases')
         .insert({purchase_roommate: roommate, purchase_amount: amount, 
-        purchase_memo: memo});
+        purchase_memo: memo, purchase_roommate: req.body.purchaser});
 
     for (division of divisions) {
         var divisionAmount = division['amount'];
