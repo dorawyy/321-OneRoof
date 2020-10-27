@@ -14,5 +14,5 @@ public interface OneRoofAPI {
     Call<LoginResponse> postLogin(@Body LoginRequest body);
 
     @GET("houses/{house}")
-    LiveData<ApiResponse<House>> getHouse(@Path("house") int houseId);
+    Call<House> getHouse(@Path("house") int houseId);
 }

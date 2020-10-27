@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.LoginRequest;
+import ca.oneroof.oneroof.api.NetworkLiveData;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 
 public class HouseViewModel extends ViewModel {
@@ -19,11 +20,13 @@ public class HouseViewModel extends ViewModel {
 
     public MutableLiveData<Integer> houseId = new MutableLiveData<>();
     public MutableLiveData<Integer> roommateId = new MutableLiveData<>();
-    public LiveData<ApiResponse<House>> house;
+    public NetworkLiveData<House> house;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
 
-        house = Transformations.switchMap(houseId, api::getHouse);
+        house = new NetworkLiveData<>(Transformations.map(houseId, id -> {
+            return api.getHouse(id);
+        }));
     }
 }

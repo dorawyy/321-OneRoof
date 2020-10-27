@@ -13,7 +13,7 @@ public class OneRoofAPIBuilder {
                 .client(client)
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+//                .addCallAdapterFactory(new NetworkLiveDataCallAdapterFactory())
                 .build();
         return retrofit.create(OneRoofAPI.class);
     }
