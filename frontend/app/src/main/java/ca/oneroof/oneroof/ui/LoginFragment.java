@@ -97,9 +97,9 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (auth.getCurrentUser() != null) {
-            onLogggedIn();
-        }
+//        if (auth.getCurrentUser() != null) {
+//            onLogggedIn();
+//        }
     }
 
     @Override
