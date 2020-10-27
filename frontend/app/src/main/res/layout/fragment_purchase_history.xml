@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.PurchaseHistoryFragment">
 
-    <ScrollView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="ca.oneroof.oneroof.viewmodel.HouseViewModel" />
+        <variable
+            name="fragment"
+            type="ca.oneroof.oneroof.ui.PurchaseHistoryFragment" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.PurchaseHistoryFragment">
 
-        <LinearLayout
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:adapter="@{fragment.adapter}"
+            android:divider="@null"
+            android:dividerHeight="4dp" />
+    </FrameLayout>
+
+</layout>

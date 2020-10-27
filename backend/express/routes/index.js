@@ -1,5 +1,34 @@
 var express = require('express');
 var router = express.Router();
+const knex = require('../db');
+var auth = require('../auth');
+
+router.use(auth.authMiddleware);
+
+router.post('/login', async function(req, res) {
+  console.log('main login');
+  var fcm = req.body.fcm;
+  console.log('fcm');
+  console.log(fcm);
+  var uid = res.locals.user.uid;
+
+  var roommate = await knex.select('roommate_id')
+        .from('roommates')
+        .where('roommate_uid', uid);
+
+  var roommate_id;
+  if (roommate.length == 0){
+    roommate_id = await knex('roommates')
+        .insert({roommate_name: res.locals.user.name, roommate_uid: uid});
+  }
+  else{
+    roommate_id = roommate[0]['roommate_id']
+  }
+  await knex('tokens')
+        .insert({token: fcm, roommate_id: roommate_id});
+
+  res.json({roommate_id});
+});
 
 router.get('/', function(req, res, next) {
   res.send('Welcome to the One Roof API!');
