@@ -4,7 +4,7 @@ const knex = require('../db');
 var auth = require('../auth');
 
 router.get('/version', function (req, res) {
-    res.send({version: "0.3"});
+    res.send({version: "0.3.1"});
 });
 
 router.use('/login', auth.authMiddleware);
@@ -22,7 +22,9 @@ router.post('/login', async function(req, res) {
   var roommate_id;
   if (roommate.length == 0){
     roommate_id = await knex('roommates')
-        .insert({roommate_name: res.locals.user.name, roommate_uid: uid, roommate_house: 1});
+        .insert({roommate_name: res.locals.user.name, roommate_uid: uid, roommate_house: 1, roommate_budget: 10000});
+    await knex('budgets')
+      .insert({budget_roommate: roommate_id, budget_goal: 1000});
   }
   else{
     roommate_id = roommate[0]['roommate_id']

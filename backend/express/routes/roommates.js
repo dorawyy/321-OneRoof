@@ -62,9 +62,9 @@ router.post('/:roommateId/budget', async function (req, res) {
     var roommateId = req.params['roommateId'];
     var budget = req.body.limit;
 
-    await knex('roommates')
-      .update('budget', budget)
-      .where('roommate_id', roommate_id);
+    await knex('budgets')
+      .update('budget_goal', budget)
+      .where('budget_roommate', roommateId);
 
     res.sendStatus(200);
 });
@@ -92,8 +92,10 @@ router.post('/:roommateId/budget', async function (req, res) {
 
 router.get('/:roommateId/budget', async function(req, res) {
     var roommate_id = req.params['roommateId'];
+    var result = await budgetCalculator.budget_prediction(roommate_id);
+    console.log(result);
 
-    res.json(await budgetCalculator.budget_prediction(roommate_id));
+    res.json(result);
 });
 
 module.exports = router;

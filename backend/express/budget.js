@@ -122,7 +122,7 @@ function budget_prediction_from_list(purchases, limit){
     var probability = t_dist_cdf(test_statistic, purchases.length - 1);
 
     return {
-        'monthly_budget': limit,
+        'budget': limit,
         'likelihood': probability,
         'mean_purchase': mean,
         'number_of_purchases': purchases.length,
@@ -145,6 +145,7 @@ budgetCalculator.budget_prediction = async function budget_prediction(roommate_i
     budget = await knex.select('budget_goal')
     .from('budgets')
     .where('budget_roommate', roommate_id);
+    console.log('foo', budget);
 
     var limit = budget[0];
     limit = limit ? limit['budget_goal'] : 1000;

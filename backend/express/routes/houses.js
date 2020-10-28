@@ -129,9 +129,11 @@ router.post('/:houseId/purchases', async function(req, res) {
         tokens: tokens,
       };
     
-    let result = await admin.messaging().sendMulticast(message);
-    console.log(message, result);    
-
+    if (tokens.length > 0) {
+        let result = await admin.messaging().sendMulticast(message);
+        console.log(result);
+    }
+    
     res.json({id: purchaseId[0]});
 });
 
