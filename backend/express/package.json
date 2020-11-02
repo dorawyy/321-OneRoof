@@ -18,5 +18,8 @@
     "mysql": "^2.18.1",
     "pug": "2.0.0-beta11",
     "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.2"
   }
 }
