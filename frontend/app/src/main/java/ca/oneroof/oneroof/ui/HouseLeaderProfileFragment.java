@@ -18,6 +18,7 @@ import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.House;
+import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -82,13 +83,7 @@ public class HouseLeaderProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_house_leader_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
-        //viewmodel.roommateId.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {
-        //    @SuppressLint("DefaultLocale")
-        //    @Override
-        //    public void onChanged(ApiResponse<House> houseApiResponse) {
-        //        houseName.setText(houseApiResponse.data.name);
-        //    }
-        //});
+        //name.setText(viewmodel.roommateId.getValue());
 
         houseName = view.findViewById(R.id.house_name);
         viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {

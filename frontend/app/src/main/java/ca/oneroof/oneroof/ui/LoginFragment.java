@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment {
         super.onStart();
 
 //        if (auth.getCurrentUser() != null) {
-//            onLogggedIn();
+//            onLoggedIn();
 //        }
     }
 
@@ -123,7 +123,7 @@ public class LoginFragment extends Fragment {
             Intent signInIntent = googleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
-            onLogggedIn();
+            onLoggedIn();
         }
     }
 
@@ -138,7 +138,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            onLogggedIn();
+                            onLoggedIn();
                         } else {
                             Snackbar.make(getView(), "Login failed.", Snackbar.LENGTH_SHORT)
                                     .show();
@@ -147,7 +147,7 @@ public class LoginFragment extends Fragment {
                 });
     }
 
-    private void onLogggedIn() {
+    private void onLoggedIn() {
         auth.getCurrentUser().getIdToken(false)
                 .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                     @Override
@@ -212,3 +212,4 @@ public class LoginFragment extends Fragment {
         Log.d("OneRoof", "Failed to log in");
     }
 }
+ 
