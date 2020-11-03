@@ -6,6 +6,6 @@ node_js:
 before_deploy:
   - cd backend/express
 install:
-  - npm install
+  - cd backend/express && npm install && cd ..
 script:
-  - npm test
+  - cd backend/express && npm test
