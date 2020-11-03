@@ -4,4 +4,7 @@ node_js:
 - node
 - 'lts/*'
 
+before_deploy:
+  - cd backend/express
+
 cache: npm
