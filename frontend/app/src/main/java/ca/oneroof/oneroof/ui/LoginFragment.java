@@ -212,4 +212,3 @@ public class LoginFragment extends Fragment {
         Log.d("OneRoof", "Failed to log in");
     }
 }
- 
