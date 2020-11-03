@@ -57,6 +57,9 @@ public class LoginFragment extends Fragment {
 
     private Button loginButton;
 
+    public String authTestUser = "foo";
+    public boolean authDisabled = false;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -68,6 +71,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", false);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -94,14 +99,6 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    public void onStart() {
-        super.onStart();
-
-//        if (auth.getCurrentUser() != null) {
-//            onLoggedIn();
-//        }
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -119,7 +116,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void trySignIn() {
-        if (auth.getCurrentUser() == null) {
+        if (auth.getCurrentUser() == null && !authDisabled) {
             Intent signInIntent = googleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         } else {
@@ -148,6 +145,11 @@ public class LoginFragment extends Fragment {
     }
 
     private void onLoggedIn() {
+        if (authDisabled) {
+            onIdToken(authTestUser);
+            return;
+        }
+
         auth.getCurrentUser().getIdToken(false)
                 .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                     @Override

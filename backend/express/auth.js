@@ -27,7 +27,8 @@ function firebaseAuthMiddleware(req, res, next) {
 }
 
 function noAuthMiddleware(req, res, next) {
-    const uid = req.headers.authorization || 'foo';
+    var uid = req.headers.authorization || 'Bearer foo';
+    uid = uid.slice(7, uid.length);
     res.locals.user = { uid: uid, email: 'no email' };
     console.log(`Doing fake login for uid: ${uid}`);
     next();
