@@ -1,14 +1,9 @@
 package ca.oneroof.oneroof.api;
 
-import android.net.Network;
 import android.util.Log;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import retrofit2.Call;
 import retrofit2.Callback;

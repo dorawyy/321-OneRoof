@@ -2,23 +2,20 @@ package ca.oneroof.oneroof.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
-import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.House;
-import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -83,7 +80,7 @@ public class HouseLeaderProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_house_leader_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
-        //name.setText(viewmodel.roommateId.getValue());
+        name.setText(viewmodel.roommateId.getValue());
 
         houseName = view.findViewById(R.id.house_name);
         viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {

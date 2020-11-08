@@ -1,7 +1,5 @@
 package ca.oneroof.oneroof.api;
 
-import retrofit2.Call;
-
 public class ApiResponse<T> {
     public final T data;
     public final String message;

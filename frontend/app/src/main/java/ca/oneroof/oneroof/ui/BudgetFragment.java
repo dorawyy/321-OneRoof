@@ -2,12 +2,6 @@ package ca.oneroof.oneroof.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,20 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.BudgetUpdate;
-import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**

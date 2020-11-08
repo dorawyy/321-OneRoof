@@ -1,19 +1,16 @@
 package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.databinding.FragmentAddPurchaseBinding;
 import ca.oneroof.oneroof.databinding.FragmentDebtSummaryBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 

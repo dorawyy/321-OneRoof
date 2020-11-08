@@ -1,25 +1,17 @@
 package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ReportFragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.ApiResponse;
-import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
