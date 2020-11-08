@@ -29,7 +29,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  * create an instance of this fragment.
  */
 public class BudgetFragment extends Fragment {
-    private Button updateBudgetBtn;
 
     private int monthlyBudgetCents = -1; // indicator val
 
@@ -59,7 +58,6 @@ public class BudgetFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static BudgetFragment newInstance() {
         BudgetFragment fragment = new BudgetFragment();
-        Bundle args = new Bundle();
         return fragment;
     }
 
@@ -128,7 +126,7 @@ public class BudgetFragment extends Fragment {
             }
         });
 
-        updateBudgetBtn = view.findViewById(R.id.update_budget_btn);
+        Button updateBudgetBtn = view.findViewById(R.id.update_budget_btn);
         updateBudgetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

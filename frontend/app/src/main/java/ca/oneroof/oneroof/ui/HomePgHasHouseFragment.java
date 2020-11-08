@@ -54,7 +54,7 @@ public class HomePgHasHouseFragment extends Fragment {
     }
 
     public void clickProfile(View v) {
-        if(viewmodel.permissions == "owner") {
+        if(viewmodel.permissions.equals("owner")) {
             Navigation.findNavController(v)
                     .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
         }

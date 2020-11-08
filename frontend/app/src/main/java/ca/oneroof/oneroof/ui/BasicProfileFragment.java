@@ -29,8 +29,6 @@ public class BasicProfileFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
-    private Button budgetBtn;
-
     public BasicProfileFragment() {
         // Required empty public constructor
     }
@@ -70,7 +68,7 @@ public class BasicProfileFragment extends Fragment {
             }
         });
 
-        budgetBtn = view.findViewById(R.id.basic_budget_btn);
+        Button budgetBtn = view.findViewById(R.id.basic_budget_btn);
         budgetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -29,9 +29,6 @@ public class HouseLeaderProfileFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
-    private Button houseSettingsBtn;
-    private Button budgetBtn;
-
     public HouseLeaderProfileFragment() {
         // Required empty public constructor
     }
@@ -72,7 +69,7 @@ public class HouseLeaderProfileFragment extends Fragment {
             }
         });
 
-        houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
+        Button houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
         houseSettingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +77,7 @@ public class HouseLeaderProfileFragment extends Fragment {
             }
         });
 
-        budgetBtn = view.findViewById(R.id.budget_btn);
+        Button budgetBtn = view.findViewById(R.id.budget_btn);
         budgetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

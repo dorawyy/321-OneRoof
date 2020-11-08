@@ -18,9 +18,6 @@ import ca.oneroof.oneroof.R;
  */
 public class ReceiptFragment extends Fragment {
 
-    private Button confirmTotalBtn;
-    private Button wrongTotalBtn;
-
     public ReceiptFragment() {
         // Required empty public constructor
     }
@@ -48,7 +45,7 @@ public class ReceiptFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_receipt, container, false);
 
-        confirmTotalBtn = view.findViewById(R.id.confirm_total_btn);
+        Button confirmTotalBtn = view.findViewById(R.id.confirm_total_btn);
         confirmTotalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +54,7 @@ public class ReceiptFragment extends Fragment {
             }
         });
 
-        wrongTotalBtn = view.findViewById(R.id.wrong_total_btn);
+        Button wrongTotalBtn = view.findViewById(R.id.wrong_total_btn);
         wrongTotalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

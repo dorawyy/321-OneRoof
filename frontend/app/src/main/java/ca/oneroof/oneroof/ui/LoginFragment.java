@@ -51,8 +51,6 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
 
-    private Button loginButton;
-
     public String authTestUser = "foo";
     public boolean authDisabled = false;
 
@@ -83,8 +81,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        loginButton = view.findViewById(R.id.login_button);
+        Button loginButton = view.findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
