@@ -1,5 +1,5 @@
-var debtCalculator = require('./debt_calculator');
-var knex = require('./db');
+var debtCalculator = require("./debt_calculator");
+var knex = require("./db");
 
 var budgetCalculator = budgetCalculator || {};
 
@@ -65,12 +65,12 @@ function budget_prediction_from_list(purchases, limit){
     if(purchases.length < 2){
         if (purchases.length == 0){
             return {
-                'monthly_budget': limit,
-                'likelihood': 0,
-                'mean_purchase': 0,
-                'number_of_purchases': 0,
-                'most_expensive_purchase': 0,
-                'monthly_spending': 0
+                "monthly_budget": limit,
+                "likelihood": 0,
+                "mean_purchase": 0,
+                "number_of_purchases": 0,
+                "most_expensive_purchase": 0,
+                "monthly_spending": 0
               };
         }
         else{
@@ -85,12 +85,12 @@ function budget_prediction_from_list(purchases, limit){
                 probability = 0;
             }
             return  {
-                'monthly_budget': limit,
-                'likelihood': probability,
-                'mean_purchase': purchases[0],
-                'number_of_purchases': purchases.length,
-                'most_expensive_purchase': purchases[0],
-                'monthly_spending': purchases[0]
+                "monthly_budget": limit,
+                "likelihood": probability,
+                "mean_purchase": purchases[0],
+                "number_of_purchases": purchases.length,
+                "most_expensive_purchase": purchases[0],
+                "monthly_spending": purchases[0]
               };
         }
     }
@@ -122,12 +122,12 @@ function budget_prediction_from_list(purchases, limit){
     var probability = t_dist_cdf(test_statistic, purchases.length - 1);
 
     return {
-        'budget': limit,
-        'likelihood': probability,
-        'mean_purchase': mean,
-        'number_of_purchases': purchases.length,
-        'most_expensive_purchase': max,
-        'monthly_spending': sum
+        "budget": limit,
+        "likelihood": probability,
+        "mean_purchase": mean,
+        "number_of_purchases": purchases.length,
+        "most_expensive_purchase": max,
+        "monthly_spending": sum
       };
 }
 
@@ -142,13 +142,13 @@ console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
 budgetCalculator.budget_prediction = async function budget_prediction(roommate_id){
     var purchases = await debtCalculator.getTotalSpent(knex, roommate_id);
 
-    budget = await knex.select('budget_goal')
-    .from('budgets')
-    .where('budget_roommate', roommate_id);
-    console.log('foo', budget);
+    budget = await knex.select("budget_goal")
+    .from("budgets")
+    .where("budget_roommate", roommate_id);
+    console.log("foo", budget);
 
     var limit = budget[0];
-    limit = limit ? limit['budget_goal'] : 1000;
+    limit = limit ? limit["budget_goal"] : 1000;
 
     console.log(purchases);
 

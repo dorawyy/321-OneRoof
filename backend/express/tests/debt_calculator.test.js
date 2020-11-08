@@ -1,10 +1,10 @@
-const debtCalculator = require('../debt_calculator');
+const debtCalculator = require("../debt_calculator");
 
-jest.mock('../debt_calculator');
+jest.mock("../debt_calculator");
 
-test('purcahse info', async () => {
+test("purcahse info", async () => {
     const divisions = [{amount: 500, roommates: [1, 2]}, {amount: 1000, roommates: [1]}];
-    const purchase = {roommate: 1, amount: 1500, divisions: divisions, memo: 'test purchase'};
+    const purchase = {roommate: 1, amount: 1500, divisions: divisions, memo: "test purchase"};
     debtCalculator.getPurchaseInfo.mockResolvedValue(purchase);
   
     const testPurchase = await debtCalculator.getPurchaseInfo(null, null);
