@@ -23,11 +23,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 public class HomePgHasHouseFragment extends Fragment {
     HouseViewModel viewmodel;
     FragmentHomePgHasHouseBinding binding;
-    private Button profileBtn;
-    private Button debtsBtn;
-    private Button scanReceiptBtn;
-    private Button enterPurchaseBtn;
-    private Button viewPurchasesBtn;
 
     public HomePgHasHouseFragment() {
         // Required empty public constructor
@@ -36,7 +31,6 @@ public class HomePgHasHouseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
     }
 

@@ -29,15 +29,6 @@ public class BasicProfileFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private Button budgetBtn;
 
     public BasicProfileFragment() {
@@ -48,27 +39,17 @@ public class BasicProfileFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment BasicProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BasicProfileFragment newInstance(String param1, String param2) {
+    public static BasicProfileFragment newInstance() {
         BasicProfileFragment fragment = new BasicProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
     }
 
@@ -79,13 +60,6 @@ public class BasicProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_basic_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
-        //viewmodel.roommateId.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {
-        //    @SuppressLint("DefaultLocale")
-        //    @Override
-        //    public void onChanged(ApiResponse<House> houseApiResponse) {
-        //        houseName.setText(houseApiResponse.data.name);
-        //    }
-        //});
 
         houseName = view.findViewById(R.id.house_name);
         viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {

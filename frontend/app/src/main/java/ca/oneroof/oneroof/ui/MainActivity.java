@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // note: automatically loads start destination (login page)
 
         FirebaseMessaging.getInstance().subscribeToTopic("youoweme")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
