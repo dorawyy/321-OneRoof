@@ -1,8 +1,7 @@
-// eslint-disable-next-line no-console
 var debtCalculator = require("./debt_calculator");
 var knex = require("./db");
 
-var budgetCalculator = budgetCalculator || {};
+var budgetCalculator;
 
 function doubleFactorial(n){
     var retval;
@@ -140,12 +139,12 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     budget = await knex.select("budget_goal")
     .from("budgets")
     .where("budget_roommate", roommateID);
-    console.log("foo", budget);
+    console.log("foo", budget); // eslint-disable-line no-console
 
     var limit = budget[0];
     limit = limit ? limit["budget_goal"] : 1000;
 
-    console.log(purchases);
+    console.log(purchases); // eslint-disable-line no-console
 
     return budgetPredictionFromList(purchases, limit);
 };
