@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-console
 var debtCalculator = require("./debt_calculator");
 var knex = require("./db");
 
@@ -147,7 +148,5 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     console.log(purchases);
 
     return budgetPredictionFromList(purchases, limit);
-
-}
-
+};
 module.exports = budgetCalculator;

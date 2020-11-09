@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-console
 var admin = require("firebase-admin");
 
 admin.initializeApp({
@@ -21,7 +22,7 @@ function firebaseAuthMiddleware(req, res, next) {
             next();
         })
         .catch(err => {
-            console.log(`Unauthorized: ${err}`)
+            console.log(`Unauthorized: ${err}`);
             res.sendStatus(401);
         });
 }
@@ -34,7 +35,7 @@ function noAuthMiddleware(req, res, next) {
     next();
 }
 
-const authMiddleware = AUTH_DISABLED == 1 ? noAuthMiddleware : firebaseAuthMiddleware;
+const authMiddleware = AUTH_DISABLED === 1 ? noAuthMiddleware : firebaseAuthMiddleware;
 
 module.exports = {
     AUTH_DISABLED, 

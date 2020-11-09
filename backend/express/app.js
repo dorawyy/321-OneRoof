@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-console
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -43,7 +44,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({ error: err })
+  res.json({ error: err });
 });
 
 module.exports = app;
