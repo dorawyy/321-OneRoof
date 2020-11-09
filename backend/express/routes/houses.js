@@ -213,9 +213,9 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
 
 router.get("/:houseId/debts/:roommateId", async function(req, res) {
     var roommateId = req.params["roommateId"];
-    if (roommateId == 1) {
+    if (roommateId === 1) {
         res.json({2: -1250});
-    } else if (roommateId == 2) {
+    } else if (roommateId === 2) {
         res.json({1: 1250});
     } else {
         res.json({});
