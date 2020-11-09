@@ -9,30 +9,27 @@ router.get("/version", function (req, res) {
 
 router.use("/login", auth.authMiddleware);
 router.post("/login", async function(req, res) {
-  console.log("main login");
   var fcm = req.body.fcm;
-  console.log("fcm");
-  console.log(fcm);
   var uid = res.locals.user.uid;
 
   var roommate = await knex.select("roommate_id")
         .from("roommates")
         .where("roommate_uid", uid);
 
-  var roommate_id;
-  if (roommate.length == 0){
-    roommate_id = await knex("roommates")
-        .insert({roommate_name: res.locals.user.name, roommate_uid: uid, roommate_house: 1, roommate_budget: 10000});
+  var roommateID;
+  if (roommate.length === 0){
+    roommateID = await knex("roommates")
+        .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": 1, "roommate_budget": 10000});
     await knex("budgets")
-      .insert({budget_roommate: roommate_id, budget_goal: 1000});
+      .insert({budget_roommate: roommateID, budget_goal: 1000});
   }
   else{
-    roommate_id = roommate[0]["roommate_id"]
+    roommateID = roommate[0]["roommate_id"]
   }
   await knex("tokens")
-        .insert({token: fcm, roommate_id: roommate_id});
+        .insert({"token": fcm, "roommate_id": roommateID});
 
-  res.json({id: roommate_id});
+  res.json({id: roommateID});
 });
 
 router.get("/", function(req, res, next) {

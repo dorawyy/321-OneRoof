@@ -92,7 +92,7 @@ router.post("/:roommateId/budget", async function (req, res) {
 
 router.get("/:roommateId/budget", async function(req, res) {
     var roommate_id = req.params["roommateId"];
-    var result = await budgetCalculator.budget_prediction(roommate_id);
+    var result = await budgetCalculator.budgetPrediction(roommate_id);
     console.log(result);
 
     res.json(result);
