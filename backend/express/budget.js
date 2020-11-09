@@ -3,13 +3,13 @@ var knex = require("./db");
 
 var budgetCalculator = budgetCalculator || {};
 
-function double_factorial(n){
+function doubleFactorial(n){
     var retval;
     if(n < 2){
         retval = 1;
     }
     else{
-        retval =  n * double_factorial(n - 2);
+        retval =  n * doubleFactorial(n - 2);
     }
     return retval;
 }
@@ -48,7 +48,7 @@ function gamma(n){
     }
     else{
         var m = Math.round(n * 2);
-        retval =  1.7724538*double_factorial(m - 2)/(2**((m-1)/2));
+        retval =  1.7724538*doubleFactorial(m - 2)/(2**((m-1)/2));
     }
     return retval;
 }
@@ -62,7 +62,7 @@ function tDistCDF(t, v){
 }
 
 
-function budget_prediction_from_list(purchases, limit){
+function budgetPredictionFromList(purchases, limit){
     var probability;
     if(purchases.length < 2){
         if (purchases.length === 0){
@@ -107,20 +107,20 @@ function budget_prediction_from_list(purchases, limit){
     }
 
     var mean = sum/purchases.length;
-    var sum_sq = 0;
+    var sumSq = 0;
 
     for(purchase of purchases){
-        sum_sq  += (purchase - mean) ** 2;
+        sumSq  += (purchase - mean) ** 2;
     }
 
     var perPurchase = limit/purchases.length;
 
-    var variance = sum_sq / (purchases.length - 1);
+    var variance = sumSq / (purchases.length - 1);
     var sigma = Math.sqrt(variance);
 
-    var test_statistic = (mean - perPurchase) * Math.sqrt(purchases.length) / sigma;
+    var testStatistic = (mean - perPurchase) * Math.sqrt(purchases.length) / sigma;
 
-    probability = tDistCDF(test_statistic, purchases.length - 1);
+    probability = tDistCDF(testStatistic, purchases.length - 1);
 
     return {
         "budget": limit,
@@ -132,20 +132,13 @@ function budget_prediction_from_list(purchases, limit){
       };
 }
 
-/*
-console.log(t_dist_cdf(-2.74, 10));
-console.log(budget_prediction_from_list([], 10));
-console.log(budget_prediction_from_list([4000, 2000, 3000, 1000], 10000));
-console.log(budget_prediction_from_list([4000, 2000, 3000, 3000], 10000));
-*/
 
-
-budgetCalculator.budget_prediction = async function budget_prediction(roommate_id){
-    var purchases = await debtCalculator.getTotalSpent(knex, roommate_id);
+budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
+    var purchases = await debtCalculator.getTotalSpent(knex, roommateID);
 
     budget = await knex.select("budget_goal")
     .from("budgets")
-    .where("budget_roommate", roommate_id);
+    .where("budget_roommate", roommateID);
     console.log("foo", budget);
 
     var limit = budget[0];
@@ -153,7 +146,7 @@ budgetCalculator.budget_prediction = async function budget_prediction(roommate_i
 
     console.log(purchases);
 
-    return budget_prediction_from_list(purchases, limit);
+    return budgetPredictionFromList(purchases, limit);
 
 }
 
