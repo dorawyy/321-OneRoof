@@ -21,15 +21,15 @@ router.post("/login", async function(req, res) {
     roommateID = await knex("roommates")
         .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": 1, "roommate_budget": 10000});
     await knex("budgets")
-      .insert({budget_roommate: roommateID, budget_goal: 1000});
+      .insert({"budget_roommate": roommateID, "budget_goal": 1000});
   }
   else{
-    roommateID = roommate[0]["roommate_id"]
+    roommateID = roommate[0]["roommate_id"];
   }
   await knex("tokens")
         .insert({"token": fcm, "roommate_id": roommateID});
 
-  res.json({id: roommateID});
+  res.json({"id": roommateID});
 });
 
 router.get("/", function(req, res, next) {
