@@ -3,26 +3,6 @@ var knex = require("./db");
 
 var budgetCalculator = budgetCalculator || {};
 
-function t_dist_cdf(t, v){
-    if(t < 0){
-        return 1 - t_dist_cdf(-1*t, v);
-    }
-    var F12 = hypergeom(1/2, 1/2*(v+1), 3/2, -1 * (t**2)/v);
-    return 1/2 + t * gamma(1/2*(v + 1)) * F12 / (Math.sqrt(v * 3.1415926) * gamma(v/2));
-}
-
-function gamma(n){
-    var retval;
-    if(Math.abs(n - Math.round(n)) < 0.01){
-        retval =  factorial(n - 1);
-    }
-    else{
-        var m = Math.round(n * 2);
-        retval =  1.7724538*double_factorial(m - 2)/(2**((m-1)/2));
-    }
-    return retval;
-}
-
 function double_factorial(n){
     var retval;
     if(n < 2){
@@ -61,9 +41,31 @@ function hypergeom(a, b, c, z){
     return sum;
 }
 
+function gamma(n){
+    var retval;
+    if(Math.abs(n - Math.round(n)) < 0.01){
+        retval =  factorial(n - 1);
+    }
+    else{
+        var m = Math.round(n * 2);
+        retval =  1.7724538*double_factorial(m - 2)/(2**((m-1)/2));
+    }
+    return retval;
+}
+
+function tDistCDF(t, v){
+    if(t < 0){
+        return 1 - tDistCDF(-1*t, v);
+    }
+    var F12 = hypergeom(1/2, 1/2*(v+1), 3/2, -1 * (t**2)/v);
+    return 1/2 + t * gamma(1/2*(v + 1)) * F12 / (Math.sqrt(v * 3.1415926) * gamma(v/2));
+}
+
+
 function budget_prediction_from_list(purchases, limit){
+    var probability;
     if(purchases.length < 2){
-        if (purchases.length == 0){
+        if (purchases.length === 0){
             return {
                 "monthly_budget": limit,
                 "likelihood": 0,
@@ -74,11 +76,10 @@ function budget_prediction_from_list(purchases, limit){
               };
         }
         else{
-            var probability;
             if(purchases[0] > limit){
                 probability = 1;
             }
-            else if(purchases[0] == limit){
+            else if(purchases[0] === limit){
                 probability = 0.5;
             }
             else{
@@ -112,14 +113,14 @@ function budget_prediction_from_list(purchases, limit){
         sum_sq  += (purchase - mean) ** 2;
     }
 
-    var per_purchase = limit/purchases.length;
+    var perPurchase = limit/purchases.length;
 
     var variance = sum_sq / (purchases.length - 1);
-    var std_dev = Math.sqrt(variance);
+    var sigma = Math.sqrt(variance);
 
-    var test_statistic = (mean - per_purchase) * Math.sqrt(purchases.length) / std_dev;
+    var test_statistic = (mean - perPurchase) * Math.sqrt(purchases.length) / sigma;
 
-    var probability = t_dist_cdf(test_statistic, purchases.length - 1);
+    probability = tDistCDF(test_statistic, purchases.length - 1);
 
     return {
         "budget": limit,
