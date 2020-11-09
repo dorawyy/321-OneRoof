@@ -139,7 +139,6 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     budget = await knex.select("budget_goal")
     .from("budgets")
     .where("budget_roommate", roommateID);
-    console.log("foo", budget); // eslint-disable-line no-console
 
     var limit = budget[0];
     limit = limit ? limit["budget_goal"] : 1000;
