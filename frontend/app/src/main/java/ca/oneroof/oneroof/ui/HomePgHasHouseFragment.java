@@ -21,7 +21,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  */
 public class HomePgHasHouseFragment extends Fragment {
     private HouseViewModel viewmodel;
-    private FragmentHomePgHasHouseBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class HomePgHasHouseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        binding = DataBindingUtil.inflate(inflater,
+        ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_home_pg_has_house, container, false);
         binding.setViewmodel(viewmodel);
         binding.setFragment(this);
