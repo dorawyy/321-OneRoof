@@ -6,48 +6,62 @@ Madeline Ferguson, Alyssa da Costa, Jackson Dagger, Sam Schweigel
 
 ## Modules
 
-1.  Backend 
-      1.  **Database**: To store purchase information such as purchaser, amount and receipt photo.
-      2.  **Notification Engine**: To take requests for notifications of owed money and and send them to the correct roommate.
-      3.  **Amount Owed Calculator**: To figure out who id owed/owes and how much.
-      4.  **Spending Predictor**: Predicts spending for the current month and compares with previous months.
-2.  Frontend 
-      1.  **Notifications**: To display notifications.
-      2.  **Send Notification**: To send notifications of owed money.
-      3.  **Display Amount Owed**: To display who owes whom how much.
-      4.  **Roommate Profile**: To edit your profile.
-      5.  **House Overview**: To view your roommates' profiles.
-      6.  **Add Purchase**: To add purchases.
+### Backend 
+
+1.  **Database**: To store purchase information such as purchaser, amount and receipt photo.
+2.  **Notification Engine**: To take requests for notifications of owed money and and send them to the correct roommate.
+3.  **Amount Owed Calculator**: To figure out who id owed/owes and how much.
+4.  **Spending Predictor**: Predicts spending for the current month and compares with previous months.
+   
+### Frontend 
+
+1.  **Notifications**: To display notifications.
+2.  **Send Notification**: To send notifications of owed money.
+3.  **Display Amount Owed**: To display who owes whom how much.
+4.  **Roommate Profile**: To edit your profile.
+5.  **House Overview**: To view your roommates' profiles.
+6.  **Add Purchase**: To add purchases.
 
 ## Interfaces
-1.  **Database**
-      1.  `addPurchase(PurchaseInfo)`
-      2.  `PurchaseInfo[] getAllPurchases()`
-      3.  `addRoommate(RoommateInfo)`
-      4.  `modifyRoommate(RoommateId, RoommateInfo)`
-      5.  `removeRoommate(RoommateId)`
-2.  **Notification Engine**
-      1.  `sendNotification(RoommateId, AmountOwed)`
-3.  **Amount Owed Calculator**
-      1.  `List<RoomatePairOwing> getAmountsOwed()`
-4.  **Spending Predictor**
-      1.  `Prediction getMonthlySpendingPrediction(Month, Year)`
-5.  **Notifications**
-      1.  `displayNotifications()`
-6.  **Send Notification**
-      1.  `sendNotification(RoommateId)`
-7.  **Display Amount Owed**
-      1.  `displayAmountOwed()`
-8.  **Roommate Profile**
-      1.  `editProfile(RoommateId, RoommateInfo)`
-9.  **House Overview** 
-      1.  `displayRoommates()`
-10. **Add Purchase**
-      1.  `addPurchase(RoommateId, PurchaseInfo)`
+
+### **Database**
+1.  `addPurchase(PurchaseInfo)`
+2.  `PurchaseInfo[] getAllPurchases()`
+3.  `addRoommate(RoommateInfo)`
+4.  `modifyRoommate(RoommateId, RoommateInfo)`
+5.  `removeRoommate(RoommateId)`
+   
+### **Notification Engine**
+1.  `sendNotification(RoommateId, AmountOwed)`
+   
+### **Amount Owed Calculator**
+1.  `List<RoomatePairOwing> getAmountsOwed()`
+
+### **Spending Predictor**
+1.  `Prediction getMonthlySpendingPrediction(Month, Year)`
+
+### **Notifications**
+
+1.  `displayNotifications()`
+
+### **Send Notification**
+1.  `sendNotification(RoommateId)`
+
+### **Display Amount Owed**
+1.  `displayAmountOwed()`
+
+### **Roommate Profile**
+1.  `editProfile(RoommateId, RoommateInfo)`
+
+### **House Overview** 
+1.  `displayRoommates()`
+
+### **Add Purchase**
+1.  `addPurchase(RoommateId, PurchaseInfo)`
 
 ## Diagram
 
-   <img src="img/component_diagram.png" height="500px" />
+<img src="img/component_diagram.png" height="500px" />
 
 ## Architectural Patterns
 -   Client-Server: This was a good choice to separate the data storage (stays on the server) and the user interface (stays on the client).
@@ -75,6 +89,7 @@ We will achieve this by returning an error message when a house tries to add an 
 We will achieve this by caching the calculated values on the backend.
 
 ## Complex logic
+
 1.  Inputs: the month (and year) for which we want the prediction for.
 2.  Outputs a list of budget predictions for the requested month and comparisons with previous months.  Example \[{'category': 'groceries', 'predicted spending': 732, 'percent normal': 1.03}\]
 3.  Queries the database. Sorts purchases into different categories using key words and then in each category, calculates average time frequency of purchases and applies that data to the current month to predict the current months spending in each category.
