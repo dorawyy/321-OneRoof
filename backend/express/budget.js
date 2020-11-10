@@ -118,14 +118,14 @@ function budgetPredictionFromList(purchases, limit){
         sumSq  += (purchase - mean) ** 2;
     }
 
-    var perPurchase = limit/purchases.length;
+    var perPurchase = limit/validPurchasesCount;
 
-    var variance = sumSq / (purchases.length - 1);
+    var variance = sumSq / (validPurchasesCount - 1);
     var sigma = Math.sqrt(variance);
 
-    var testStatistic = (mean - perPurchase) * Math.sqrt(purchases.length) / sigma;
+    var testStatistic = (mean - perPurchase) * Math.sqrt(validPurchasesCount) / sigma;
 
-    probability = tDistCDF(testStatistic, purchases.length - 1);
+    probability = tDistCDF(testStatistic, validPurchasesCount - 1);
 
     return {
         "budget": limit,
