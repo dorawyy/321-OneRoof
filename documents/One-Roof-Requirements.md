@@ -12,7 +12,6 @@ As students living in an expensive city, we face the problem ofinflated living e
 
    <img src="img/use_case_diagram.png" height="500px" />
 
-
 ## Non-functional requirements
 
 1.  Only authorized sources can view user information: Only members (or the owner, or a site admin) can request information from a house.  Only the owner, or a site admin can delete a house or change settings on it.
@@ -36,7 +35,7 @@ As students living in an expensive city, we face the problem ofinflated living e
 5.  **House Overview**: To view your roommates' profiles.
 6.  **Add Purchase**: To add purchases.
 
-## Sequence diagrams:
+## Sequence diagrams
 
 1.  Login with Google authentication (external API  call): 
 
@@ -50,6 +49,6 @@ As students living in an expensive city, we face the problem ofinflated living e
 
 <img src="img/sequence_diagram3.png" height = "500px" />
 
-## App Sketch:
+## App Sketch
 
 <img src="img/app_sketch.png" height = "500px"/>
