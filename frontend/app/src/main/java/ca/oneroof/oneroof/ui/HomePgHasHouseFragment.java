@@ -20,12 +20,8 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  * create an instance of this fragment.
  */
 public class HomePgHasHouseFragment extends Fragment {
-    HouseViewModel viewmodel;
-    FragmentHomePgHasHouseBinding binding;
-
-    public HomePgHasHouseFragment() {
-        // Required empty public constructor
-    }
+    private HouseViewModel viewmodel;
+    private FragmentHomePgHasHouseBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

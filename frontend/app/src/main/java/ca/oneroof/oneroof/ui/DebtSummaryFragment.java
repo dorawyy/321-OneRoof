@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -21,10 +20,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  */
 public class DebtSummaryFragment extends Fragment {
     private HouseViewModel viewmodel;
-
-    public DebtSummaryFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

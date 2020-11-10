@@ -32,8 +32,6 @@ public class BudgetFragment extends Fragment {
 
     private int monthlyBudgetCents = -1; // indicator val
 
-    // get the purchase total input by the user
-    private TextInputLayout monthlyBudgetInput;
     private TextInputEditText monthlyBudgetText;
 
     private HouseViewModel viewmodel;
@@ -77,7 +75,7 @@ public class BudgetFragment extends Fragment {
 
         // for new budget input
         monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
-        monthlyBudgetInput = view.findViewById(R.id.monthly_budget);
+        // get the purchase total input by the user
         monthlyBudgetDisplay = view.findViewById(R.id.curent_monthly_budget);
 
         viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<BudgetStats>>() {

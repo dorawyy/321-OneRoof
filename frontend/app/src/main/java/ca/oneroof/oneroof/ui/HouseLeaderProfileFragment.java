@@ -29,10 +29,6 @@ public class HouseLeaderProfileFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
-    public HouseLeaderProfileFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -58,7 +54,7 @@ public class HouseLeaderProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_house_leader_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
-        name.setText(viewmodel.roommateId.getValue());
+        name.setText(String.valueOf(viewmodel.roommateId.getValue()));
 
         houseName = view.findViewById(R.id.house_name);
         viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<House>>() {

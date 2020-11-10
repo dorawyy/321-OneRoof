@@ -54,10 +54,6 @@ public class LoginFragment extends Fragment {
     public String authTestUser = "foo";
     public boolean authDisabled = false;
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
-
     public static LoginFragment newInstance() {
         return new LoginFragment();
     }
@@ -115,10 +111,6 @@ public class LoginFragment extends Fragment {
         } else {
             onLoggedIn();
         }
-    }
-
-    private void clickLogin() {
-        trySignIn();
     }
 
     private void firebaseAuthWithGoogle(String idToken) {

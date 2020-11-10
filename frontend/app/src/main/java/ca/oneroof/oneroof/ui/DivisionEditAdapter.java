@@ -25,8 +25,8 @@ import ca.oneroof.oneroof.databinding.ItemDivisionEditBinding;
 // danger: superfund cleanup site
 
 public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
-    int resource;
-    List<DivisionEdit> list;
+    private int resource;
+    private List<DivisionEdit> list;
     private Context context;
     private MutableLiveData<Integer> total;
 
@@ -42,8 +42,8 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        convertView = inflater.inflate(resource, null, false);
-        ItemDivisionEditBinding binding = DataBindingUtil.bind(convertView);
+        View view = inflater.inflate(resource, null, false);
+        ItemDivisionEditBinding binding = DataBindingUtil.bind(view);
 
         DivisionEdit divisionEdit = list.get(position);
 
@@ -114,7 +114,7 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
             roommateLayout.addView(child);
         }
 
-        convertView.setTag(binding);
+        view.setTag(binding);
         binding.setDivisionEdit(list.get(position));
         return binding.getRoot();
     }

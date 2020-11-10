@@ -29,10 +29,6 @@ public class BasicProfileFragment extends Fragment {
 
     private HouseViewModel viewmodel;
 
-    public BasicProfileFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

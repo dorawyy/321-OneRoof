@@ -1,7 +1,7 @@
 var debtCalculator = require("./debt_calculator");
 var knex = require("./db");
 
-var budgetCalculator;
+var budgetCalculator = {};
 
 function doubleFactorial(n){
     var retval;

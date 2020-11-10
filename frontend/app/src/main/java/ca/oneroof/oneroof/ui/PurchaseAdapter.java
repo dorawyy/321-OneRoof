@@ -17,7 +17,7 @@ import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.databinding.ItemPurchaseBinding;
 
 public class PurchaseAdapter extends ArrayAdapter<Purchase> {
-    int resource;
+    private int resource;
     private List<Purchase> list;
     private Context context;
 
@@ -32,9 +32,9 @@ public class PurchaseAdapter extends ArrayAdapter<Purchase> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        convertView = inflater.inflate(resource, null, false);
-        ItemPurchaseBinding binding = DataBindingUtil.bind(convertView);
-        convertView.setTag(binding);
+        View view = inflater.inflate(resource, null, false);
+        ItemPurchaseBinding binding = DataBindingUtil.bind(view);
+        view.setTag(binding);
         binding.setPurchase(list.get(position));
         return binding.getRoot();
     }

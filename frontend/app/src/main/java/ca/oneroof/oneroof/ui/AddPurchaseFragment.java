@@ -33,15 +33,10 @@ public class AddPurchaseFragment extends Fragment {
 
     public MutableLiveData<Integer> totalAmount = new MutableLiveData<>(0);
     private ArrayList<DivisionEdit> divisions = new ArrayList<>();
-    private ListView divisionList;
     private DivisionEditAdapter divisionEditAdapter;
 
     public static String formatDollars(int cents) {
         return String.format("%d.%02d", cents / 100, cents % 100);
-    }
-
-    public AddPurchaseFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -65,7 +60,7 @@ public class AddPurchaseFragment extends Fragment {
 
         memoText = view.findViewById(R.id.memo_text);
 
-        divisionList = view.findViewById(R.id.division_list);
+        ListView divisionList = view.findViewById(R.id.division_list);
         divisionEditAdapter = new DivisionEditAdapter(getContext(), R.layout.item_division_edit, divisions, totalAmount);
         divisionList.setAdapter(divisionEditAdapter);
 

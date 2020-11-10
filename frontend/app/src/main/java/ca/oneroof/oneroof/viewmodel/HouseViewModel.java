@@ -74,7 +74,7 @@ public class HouseViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call call, Throwable t) {
-
+                // Empty
             }
         });
     }
