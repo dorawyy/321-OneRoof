@@ -48,7 +48,7 @@ function gamma(n){
     }
     else{
         var m = Math.round(n * 2);
-        retval =  1.7724538*doubleFactorial(m - 2)/(2**((m-1)/2));
+        retval =  Math.sqrt(Math.PI)*doubleFactorial(m - 2)/(2**((m-1)/2));
     }
     return retval;
 }
@@ -64,7 +64,22 @@ function tDistCDF(t, v){
 
 function budgetPredictionFromList(purchases, limit){
     var probability;
-    if(purchases.length < 2){
+    var purchase;
+    var sum = 0;
+    var max = 0;
+    var validPurchasesCount = 0;
+
+    for(purchase of purchases){
+        if (purchase != null && purchase > 0){
+            validPurchasesCount += 1;
+            sum += purchase;
+        }
+        if (purchase > max){
+            max = purchase;
+        }
+    }
+
+    if(validPurchasesCount < 2){
         if (purchases.length === 0){
             return {
                 "monthly_budget": limit,
@@ -95,16 +110,6 @@ function budgetPredictionFromList(purchases, limit){
               };
         }
     }
-    var purchase;
-    var sum = 0;
-    var max = 0;
-
-    for(purchase of purchases){
-        sum += purchase;
-        if (purchase > max){
-            max = purchase;
-        }
-    }
 
     var mean = sum/purchases.length;
     var sumSq = 0;
@@ -113,14 +118,14 @@ function budgetPredictionFromList(purchases, limit){
         sumSq  += (purchase - mean) ** 2;
     }
 
-    var perPurchase = limit/purchases.length;
+    var perPurchase = limit/validPurchasesCount;
 
-    var variance = sumSq / (purchases.length - 1);
+    var variance = sumSq / (validPurchasesCount - 1);
     var sigma = Math.sqrt(variance);
 
-    var testStatistic = (mean - perPurchase) * Math.sqrt(purchases.length) / sigma;
+    var testStatistic = (mean - perPurchase) * Math.sqrt(validPurchasesCount) / sigma;
 
-    probability = tDistCDF(testStatistic, purchases.length - 1);
+    probability = tDistCDF(testStatistic, validPurchasesCount - 1);
 
     return {
         "budget": limit,
