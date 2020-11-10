@@ -64,7 +64,22 @@ function tDistCDF(t, v){
 
 function budgetPredictionFromList(purchases, limit){
     var probability;
-    if(purchases.length < 2){
+    var purchase;
+    var sum = 0;
+    var max = 0;
+    var validPurchasesCount = 0;
+
+    for(purchase of purchases){
+        if (purchase != null && purchase > 0){
+            validPurchasesCount += 1;
+            sum += purchase;
+        }
+        if (purchase > max){
+            max = purchase;
+        }
+    }
+
+    if(validPurchasesCount < 2){
         if (purchases.length === 0){
             return {
                 "monthly_budget": limit,
@@ -93,18 +108,6 @@ function budgetPredictionFromList(purchases, limit){
                 "most_expensive_purchase": purchases[0],
                 "monthly_spending": purchases[0]
               };
-        }
-    }
-    var purchase;
-    var sum = 0;
-    var max = 0;
-
-    for(purchase of purchases){
-        if (purchase != null && purchase > 0) {
-            sum += purchase;
-        }
-        if (purchase > max){
-            max = purchase;
         }
     }
 
