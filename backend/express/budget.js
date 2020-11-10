@@ -100,7 +100,9 @@ function budgetPredictionFromList(purchases, limit){
     var max = 0;
 
     for(purchase of purchases){
-        sum += purchase;
+        if (purchase != null && purchase > 0) {
+            sum += purchase;
+        }
         if (purchase > max){
             max = purchase;
         }
