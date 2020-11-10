@@ -3,10 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="android.view.View" />
-        <import type="ca.oneroof.oneroof.api.ApiResponse" />
+        <import type="ca.oneroof.oneroof.api.Resource" />
 
-        <variable name="response" type="ApiResponse"/>
+        <variable name="response" type="ca.oneroof.oneroof.api.Resource"/>
     </data>
 
     <LinearLayout

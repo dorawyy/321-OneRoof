@@ -10,12 +10,11 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.Resource;
 import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.databinding.FragmentPurchaseHistoryBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
@@ -51,10 +50,10 @@ public class PurchaseHistoryFragment extends Fragment {
 
         adapter = new PurchaseAdapter(getContext(), R.layout.item_purchase, new ArrayList<>());
 
-        viewmodel.purchases.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<ArrayList<Purchase>>>() {
+        viewmodel.purchases.data.observe(getViewLifecycleOwner(), new Observer<Resource<ArrayList<Purchase>>>() {
             @Override
-            public void onChanged(ApiResponse<ArrayList<Purchase>> arrayListApiResponse) {
-                adapter.setList(arrayListApiResponse.data);
+            public void onChanged(Resource<ArrayList<Purchase>> arrayListResource) {
+                adapter.setList(arrayListResource.data);
             }
         });
 

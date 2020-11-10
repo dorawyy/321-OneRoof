@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,17 +18,10 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.ApiResponse;
+import ca.oneroof.oneroof.api.Resource;
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.BudgetUpdate;
-import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -114,19 +106,19 @@ public class BudgetFragment extends Fragment {
         monthlyBudgetInput = view.findViewById(R.id.monthly_budget);
         monthlyBudgetDisplay = view.findViewById(R.id.curent_monthly_budget);
 
-        viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<BudgetStats>>() {
+        viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<Resource<BudgetStats>>() {
             @SuppressLint("DefaultLocale")
             @Override
-            public void onChanged(ApiResponse<BudgetStats> budgetStatsApiResponse) {
-                int monthlySpendingCents = budgetStatsApiResponse.data.month_spending;
+            public void onChanged(Resource<BudgetStats> budgetStatsResource) {
+                int monthlySpendingCents = budgetStatsResource.data.month_spending;
                 monthlySpending.setText(String.format("$%d.%02d", monthlySpendingCents / 100, monthlySpendingCents % 100));
-                int avgPriceCents = (int) Math.round(budgetStatsApiResponse.data.mean_purchase);
+                int avgPriceCents = (int) Math.round(budgetStatsResource.data.mean_purchase);
                 avgPurchasePrice.setText(String.format("$%d.%02d", avgPriceCents / 100, avgPriceCents % 100));
-                numPurchases.setText(String.valueOf(budgetStatsApiResponse.data.number_of_purchases));
-                int mostExpensivePurchaseCents = budgetStatsApiResponse.data.most_expensive_purchase;
+                numPurchases.setText(String.valueOf(budgetStatsResource.data.number_of_purchases));
+                int mostExpensivePurchaseCents = budgetStatsResource.data.most_expensive_purchase;
                 mostExpensivePurchase.setText(String.format("$%d.02%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
-                monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsApiResponse.data.budget / 100, budgetStatsApiResponse.data.budget % 100));
-                likelihoodText.setText(String.format("%%%.0f", budgetStatsApiResponse.data.likelihood * 100.0));
+                monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsResource.data.budget / 100, budgetStatsResource.data.budget % 100));
+                likelihoodText.setText(String.format("%%%.0f", budgetStatsResource.data.likelihood * 100.0));
             }
         });
 

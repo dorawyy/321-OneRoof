@@ -2,16 +2,16 @@ package ca.oneroof.oneroof.api;
 
 import retrofit2.Call;
 
-public class ApiResponse<T> {
+public class Resource<T> {
     public final T data;
     public final String message;
 
-    public ApiResponse(T data) {
+    public Resource(T data) {
         this.data = data;
         this.message = null;
     }
 
-    public ApiResponse(String message) {
+    public Resource(String message) {
         this.data = null;
         this.message = message;
     }

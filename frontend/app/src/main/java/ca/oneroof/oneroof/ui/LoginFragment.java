@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -33,8 +32,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.ApiResponse;
-import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.LoginRequest;
 import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.OneRoofAPI;
