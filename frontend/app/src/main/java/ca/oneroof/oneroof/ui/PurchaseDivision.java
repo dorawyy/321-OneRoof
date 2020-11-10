@@ -4,18 +4,14 @@ import java.util.ArrayList;
 
 public class PurchaseDivision {
 
-    int amount;
-    ArrayList<Integer> roommates;
-    String memo;
+    private int amount;
+    private ArrayList<Integer> roommates;
+    private String memo;
 
 
     public PurchaseDivision(int amount, ArrayList<Integer> roommates, String memo) {
         this.amount = amount;
-
-        for(int i = 0; i < roommates.size(); i++) {
-            this.roommates.add(roommates.get(i));
-        }
-
+        this.roommates.addAll(roommates);
         this.memo = memo;
     }
 }

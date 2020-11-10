@@ -28,7 +28,7 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
     int resource;
     List<DivisionEdit> list;
     private Context context;
-    MutableLiveData<Integer> total;
+    private MutableLiveData<Integer> total;
 
     public DivisionEditAdapter(Context context, int resource, List<DivisionEdit> list, MutableLiveData<Integer> total) {
         super(context, resource, list);
@@ -52,10 +52,14 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
         amount.setText(AddPurchaseFragment.formatDollars(divisionEdit.amount));
         amount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Empty
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Empty
+            }
 
             @Override
             public void afterTextChanged(Editable s) {

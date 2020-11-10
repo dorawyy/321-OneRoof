@@ -30,7 +30,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 public class LoginTests {
-    static Intent intent;
+    private static Intent intent;
     static {
         intent = new Intent(ApplicationProvider.getApplicationContext(), MainActivity.class);
         intent.putExtra("authDisabled", true);

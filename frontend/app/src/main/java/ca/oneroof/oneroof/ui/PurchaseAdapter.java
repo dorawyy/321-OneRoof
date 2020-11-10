@@ -18,7 +18,7 @@ import ca.oneroof.oneroof.databinding.ItemPurchaseBinding;
 
 public class PurchaseAdapter extends ArrayAdapter<Purchase> {
     int resource;
-    List<Purchase> list;
+    private List<Purchase> list;
     private Context context;
 
     public PurchaseAdapter(Context context, int resource, List<Purchase> list) {

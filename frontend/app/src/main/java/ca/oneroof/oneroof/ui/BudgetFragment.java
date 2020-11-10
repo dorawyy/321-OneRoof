@@ -33,8 +33,8 @@ public class BudgetFragment extends Fragment {
     private int monthlyBudgetCents = -1; // indicator val
 
     // get the purchase total input by the user
-    TextInputLayout monthlyBudgetInput;
-    TextInputEditText monthlyBudgetText;
+    private TextInputLayout monthlyBudgetInput;
+    private TextInputEditText monthlyBudgetText;
 
     private HouseViewModel viewmodel;
 
@@ -44,10 +44,6 @@ public class BudgetFragment extends Fragment {
     private TextView mostExpensivePurchase;
     private TextView monthlyBudgetDisplay;
     private TextView likelihoodText;
-
-    public BudgetFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -102,10 +98,14 @@ public class BudgetFragment extends Fragment {
 
         monthlyBudgetText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Empty
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Empty
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {

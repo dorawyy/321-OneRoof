@@ -16,10 +16,6 @@ import ca.oneroof.oneroof.R;
  */
 public class HouseSettingsFragment extends Fragment {
 
-    public HouseSettingsFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

@@ -27,10 +27,6 @@ public class PurchaseHistoryFragment extends Fragment {
     private HouseViewModel viewmodel;
     public PurchaseAdapter adapter;
 
-    public PurchaseHistoryFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

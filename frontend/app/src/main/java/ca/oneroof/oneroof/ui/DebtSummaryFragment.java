@@ -20,7 +20,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  * create an instance of this fragment.
  */
 public class DebtSummaryFragment extends Fragment {
-    private Button requestPaymentBtn;
     private HouseViewModel viewmodel;
 
     public DebtSummaryFragment() {

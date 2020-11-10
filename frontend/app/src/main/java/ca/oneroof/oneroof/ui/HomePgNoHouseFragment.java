@@ -15,11 +15,6 @@ import ca.oneroof.oneroof.R;
  * create an instance of this fragment.
  */
 public class HomePgNoHouseFragment extends Fragment {
-
-    public HomePgNoHouseFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

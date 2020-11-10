@@ -34,7 +34,7 @@ import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.LoginRequest;
 import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.OneRoofAPI;
-import ca.oneroof.oneroof.api.OneRoofAPIBuilder;
+import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import ca.oneroof.oneroof.viewmodel.HouseViewModelFactory;
 import retrofit2.Call;
@@ -117,7 +117,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void clickLogin(View view) {
+    private void clickLogin() {
         trySignIn();
     }
 
@@ -159,7 +159,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void onIdToken(String idToken) {
-        OneRoofAPI api = OneRoofAPIBuilder.buildAPI(getString(R.string.api_url), idToken);
+        OneRoofAPI api = OneRoofAPIUtils.buildAPI(getString(R.string.api_url), idToken);
 
         HouseViewModel houseViewModel =
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
