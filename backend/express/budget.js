@@ -48,7 +48,7 @@ function gamma(n){
     }
     else{
         var m = Math.round(n * 2);
-        retval =  1.7724538*doubleFactorial(m - 2)/(2**((m-1)/2));
+        retval =  Math.sqrt(Math.PI)*doubleFactorial(m - 2)/(2**((m-1)/2));
     }
     return retval;
 }
