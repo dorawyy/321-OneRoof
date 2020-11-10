@@ -15,7 +15,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.ApiResponse;
@@ -31,8 +30,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 public class BudgetFragment extends Fragment {
 
     private int monthlyBudgetCents = -1; // indicator val
-
-    private TextInputEditText monthlyBudgetText;
 
     private HouseViewModel viewmodel;
 
@@ -74,7 +71,7 @@ public class BudgetFragment extends Fragment {
         likelihoodText = view.findViewById(R.id.likelihood_data);
 
         // for new budget input
-        monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
+        TextInputEditText monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
         // get the purchase total input by the user
         monthlyBudgetDisplay = view.findViewById(R.id.curent_monthly_budget);
 
