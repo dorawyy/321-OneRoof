@@ -3,7 +3,6 @@ package ca.oneroof.oneroof.ui;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,29 +11,24 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.Division;
-import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.databinding.ItemDivisionEditBinding;
-import ca.oneroof.oneroof.databinding.ItemPurchaseBinding;
 
 // danger: superfund cleanup site
 
 public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
-    int resource;
-    List<DivisionEdit> list;
+    private int resource;
+    private List<DivisionEdit> list;
     private Context context;
-    MutableLiveData<Integer> total;
+    private MutableLiveData<Integer> total;
 
     public DivisionEditAdapter(Context context, int resource, List<DivisionEdit> list, MutableLiveData<Integer> total) {
         super(context, resource, list);
@@ -48,8 +42,8 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        convertView = inflater.inflate(resource, null, false);
-        ItemDivisionEditBinding binding = DataBindingUtil.bind(convertView);
+        View view = inflater.inflate(resource, null, false);
+        ItemDivisionEditBinding binding = DataBindingUtil.bind(view);
 
         DivisionEdit divisionEdit = list.get(position);
 
@@ -58,10 +52,14 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
         amount.setText(AddPurchaseFragment.formatDollars(divisionEdit.amount));
         amount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Empty
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Empty
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -116,7 +114,7 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
             roommateLayout.addView(child);
         }
 
-        convertView.setTag(binding);
+        view.setTag(binding);
         binding.setDivisionEdit(list.get(position));
         return binding.getRoot();
     }

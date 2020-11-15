@@ -1,16 +1,14 @@
 package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
@@ -22,22 +20,11 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
  * create an instance of this fragment.
  */
 public class HomePgHasHouseFragment extends Fragment {
-    HouseViewModel viewmodel;
-    FragmentHomePgHasHouseBinding binding;
-    private Button profileBtn;
-    private Button debtsBtn;
-    private Button scanReceiptBtn;
-    private Button enterPurchaseBtn;
-    private Button viewPurchasesBtn;
-
-    public HomePgHasHouseFragment() {
-        // Required empty public constructor
-    }
+    private HouseViewModel viewmodel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
     }
 
@@ -45,7 +32,7 @@ public class HomePgHasHouseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        binding = DataBindingUtil.inflate(inflater,
+        FragmentHomePgHasHouseBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_home_pg_has_house, container, false);
         binding.setViewmodel(viewmodel);
         binding.setFragment(this);
@@ -61,7 +48,7 @@ public class HomePgHasHouseFragment extends Fragment {
     }
 
     public void clickProfile(View v) {
-        if(viewmodel.permissions == "owner") {
+        if(viewmodel.permissions.equals("owner")) {
             Navigation.findNavController(v)
                     .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
         }

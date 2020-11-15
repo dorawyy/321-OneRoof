@@ -1,9 +1,5 @@
 package ca.oneroof.oneroof.api;
 
-import android.net.Network;
-
-import androidx.lifecycle.LiveData;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

@@ -1,15 +1,14 @@
 package ca.oneroof.oneroof.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -27,10 +26,6 @@ import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 public class PurchaseHistoryFragment extends Fragment {
     private HouseViewModel viewmodel;
     public PurchaseAdapter adapter;
-
-    public PurchaseHistoryFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

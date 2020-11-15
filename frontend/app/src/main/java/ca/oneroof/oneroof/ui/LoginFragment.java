@@ -2,18 +2,17 @@ package ca.oneroof.oneroof.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,7 +34,7 @@ import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.LoginRequest;
 import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.OneRoofAPI;
-import ca.oneroof.oneroof.api.OneRoofAPIBuilder;
+import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import ca.oneroof.oneroof.viewmodel.HouseViewModelFactory;
 import retrofit2.Call;
@@ -52,14 +51,8 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
 
-    private Button loginButton;
-
     public String authTestUser = "foo";
     public boolean authDisabled = false;
-
-    public LoginFragment() {
-        // Required empty public constructor
-    }
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -84,8 +77,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        loginButton = view.findViewById(R.id.login_button);
+        Button loginButton = view.findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,10 +111,6 @@ public class LoginFragment extends Fragment {
         } else {
             onLoggedIn();
         }
-    }
-
-    private void clickLogin(View view) {
-        trySignIn();
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
@@ -163,7 +151,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void onIdToken(String idToken) {
-        OneRoofAPI api = OneRoofAPIBuilder.buildAPI(getString(R.string.api_url), idToken);
+        OneRoofAPI api = OneRoofAPIUtils.buildAPI(getString(R.string.api_url), idToken);
 
         HouseViewModel houseViewModel =
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
