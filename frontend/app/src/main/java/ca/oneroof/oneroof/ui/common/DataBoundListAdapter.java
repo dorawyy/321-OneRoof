@@ -4,11 +4,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import ca.oneroof.oneroof.api.Purchase;
+import ca.oneroof.oneroof.api.Resource;
 
 /**
  * Translation of the suggested class found in the Android Architecture Components samples.
@@ -32,9 +38,22 @@ public abstract class DataBoundListAdapter<T, V extends ViewDataBinding>
         holder.binding.executePendingBindings();
     }
 
+    @Override
+    public int getItemCount() {
+        return items == null ? 0 : items.size();
+    }
+
     public void replace(List<T> update) {
         items = update;
         notifyDataSetChanged();
+    }
+
+    public void observe(LifecycleOwner owner, LiveData<Resource<ArrayList<T>>> data) {
+        data.observe(owner, d -> {
+            if (d.isSuccess()) {
+                replace(d.data);
+            }
+        });
     }
 
     protected abstract V createBinding(ViewGroup parent);

@@ -1,5 +1,7 @@
 package ca.oneroof.oneroof.api;
 
+import android.util.Log;
+
 /**
  * A holder type for responses from the OneRoof API.  It can be in one of two states:
  * - a successful response from the API, holding a T (the type of the result of the particular API
@@ -21,13 +23,33 @@ public class Resource<T> {
     public final T data;
     public final String message;
 
+    /** Success */
     public Resource(T data) {
         this.data = data;
         this.message = null;
     }
 
+    /** Failure */
     public Resource(String message) {
         this.data = null;
         this.message = message;
+    }
+
+    /** Loading */
+    public Resource() {
+        this.data = null;
+        this.message = null;
+    }
+
+    public boolean isLoading() {
+        return this.data == null && this.message == null;
+    }
+
+    public boolean isError() {
+        return this.message != null;
+    }
+
+    public boolean isSuccess() {
+        return this.data != null;
     }
 }

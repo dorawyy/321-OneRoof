@@ -2,6 +2,7 @@ package ca.oneroof.oneroof.api;
 
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -24,6 +25,7 @@ public class NetworkLiveData<R> {
     }
 
     public void refresh() {
+        data_.setValue(new Resource<>());
         Call<R> call = calls.getValue();
         if (call != null) {
             call = call.clone();

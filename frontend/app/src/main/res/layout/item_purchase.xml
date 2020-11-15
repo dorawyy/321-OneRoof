@@ -13,20 +13,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="712dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:contentPadding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/purchase_memo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -34,22 +29,22 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/purchase_amount"
                 tools:text="Memo" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/purchase_purchaser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:text="@{purchase.purchaser_name}"
                 android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@+id/purchase_amount"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Purchaser" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/purchase_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{purchase.dollarString()}"

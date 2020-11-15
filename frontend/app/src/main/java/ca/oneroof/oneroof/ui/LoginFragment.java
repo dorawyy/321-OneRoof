@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -84,6 +85,8 @@ public class LoginFragment extends Fragment {
                 trySignIn();
             }
         });
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         return view;
     }

@@ -5,13 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
+import ca.oneroof.oneroof.ui.house.PurchaseListAdapter;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -38,21 +42,27 @@ public class HomePgHasHouseFragment extends Fragment {
         binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
+        PurchaseListAdapter purchaseListAdapter = new PurchaseListAdapter();
+        RecyclerView purchaseRecycler = (RecyclerView) binding.getRoot().findViewById(R.id.house_purchases);
+        purchaseRecycler.setAdapter(purchaseListAdapter);
+        purchaseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        purchaseListAdapter.observe(getViewLifecycleOwner(), viewmodel.purchases.data);
+
+        viewmodel.house.data.observe(getViewLifecycleOwner(), r -> {
+            if (r.data != null) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(r.data.name);
+            }
+        });
+
         View view = binding.getRoot();
         return view;
     }
 
-    public void clickViewPurchases(View v) {
-        Navigation.findNavController(v)
-                .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToPurchaseHistoryFragment());
-    }
-
     public void clickProfile(View v) {
-        if(viewmodel.permissions.equals("owner")) {
+        if (viewmodel.permissions.equals("owner")) {
             Navigation.findNavController(v)
                     .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
-        }
-        else {
+        } else {
             Navigation.findNavController(v)
                     .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
         }
