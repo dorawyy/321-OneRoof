@@ -5,16 +5,19 @@ var knex = require("../db");
 var lodash = require("lodash");
 var debtCalculator = require("../debt_calculator");
 var admin = require("firebase-admin");
+var houses = require("../modules/houses");
+var roommates = require("../modules/roommates");
 
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
-    const name = req.body.name;
-    const admin = req.body.admin;
-
-    var id = await knex("houses")
-        .insert({house_name: name, house_admin: admin}, ["id"]);
-    res.json({id: id[0]});
+    try {
+        const id = await houses.addHouse(req.body.name, res.locals.user.uid);
+        res.json({id: id});
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error.message);
+    }
 });
 
 router.delete("/:houseId", async function(req, res) {
