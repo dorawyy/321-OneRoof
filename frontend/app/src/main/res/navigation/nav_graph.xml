@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/homePgNoHouseFragment"
-        android:name="ca.oneroof.oneroof.ui.HomePgNoHouseFragment"
+        android:name="ca.oneroof.oneroof.ui.nohouse.HomePgNoHouseFragment"
         android:label="fragment_home_pg_no_house"
         tools:layout="@layout/fragment_home_pg_no_house" />
     <fragment

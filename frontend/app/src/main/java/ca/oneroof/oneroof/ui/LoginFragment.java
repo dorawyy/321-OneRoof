@@ -49,11 +49,10 @@ import retrofit2.Response;
  */
 public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 1;
-    private FirebaseAuth auth;
-    private GoogleSignInClient googleSignInClient;
-
     public String authTestUser = "foo";
     public boolean authDisabled = false;
+    private FirebaseAuth auth;
+    private GoogleSignInClient googleSignInClient;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -158,7 +157,7 @@ public class LoginFragment extends Fragment {
 
         HouseViewModel houseViewModel =
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
-                    .get(HouseViewModel.class);
+                        .get(HouseViewModel.class);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -173,8 +172,16 @@ public class LoginFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         if (response.isSuccessful()) {
-                                            Log.d("OneRoof", "Roommate id: " + response.body().id);
-                                            houseViewModel.roommateId.setValue(response.body().id);
+                                            Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
+                                            houseViewModel.roommateId.setValue(response.body().roommate_id);
+                                            if (response.body().house_id == null) {
+                                                Navigation.findNavController(getView())
+                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgNoHouseFragment());
+                                            } else {
+                                                houseViewModel.houseId.setValue(response.body().house_id);
+                                                Navigation.findNavController(getView())
+                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+                                            }
                                         } else {
                                             Log.d("OneRoof",
                                                     "Failure to receive roommate id: " + response.message());
@@ -190,9 +197,6 @@ public class LoginFragment extends Fragment {
                                 });
                     }
                 });
-
-        Navigation.findNavController(getView())
-                .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
     }
 
     private void loginFail() {
