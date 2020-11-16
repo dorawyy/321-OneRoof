@@ -6,7 +6,6 @@ var lodash = require("lodash");
 var debtCalculator = require("../debt_calculator");
 var admin = require("firebase-admin");
 var houses = require("../modules/houses");
-var roommates = require("../modules/roommates");
 
 router.use(auth.authMiddleware);
 
