@@ -46,7 +46,8 @@ debtCalculator.getAllRoommatePairs = async function (knex, houseId) {
 }
 
 debtCalculator.getAllDebts = async function (knex, houseId) {
-    var allPurchases = await knex.select("purchase_id", "purchase_roommate", "purchase_amount")
+    var allPurchases = await knex.select("purchase_id", "purchase_roommate", 
+        "purchase_amount")
         .table("purchases")
         .join("roommates", "roommate_id", "=", "purchase_roommate")
         .join("houses", "roommate_house", "=", "house_id")
@@ -68,10 +69,24 @@ debtCalculator.getAllDebts = async function (knex, houseId) {
             var amountPerRoommate = division["amount"] / numRoommates;
             for (roommate of division["roommates"]) {
                 if (roommate != purchaser) {
-                    debts.push({payee: purchaser, payer: roommate, amount: amountPerRoommate});
+                    debts.push({payee: purchaser, payer: roommate, 
+                        amount: amountPerRoommate});
                 }
             }
         }
+    }
+
+    var allYouowemes = await knex.select("youoweme_you", "youoweme_me", 
+        "youoweme_amount")
+        .table("youowemes")
+        .join("roommates", "roommate_id", "=", "youoweme_you")
+        .join("houses", "roommate_house", "=", "house_id")
+        .where("youoweme_payed", true)
+        .andWhere("house_id" , houseId);
+
+    for (youoweme of allYouowemes) {
+        debts.push({payee: youoweme.youoweme_me, payer: youoweme_you, 
+            amount: youoweme.youoweme_amount});
     }
 
     return debts;

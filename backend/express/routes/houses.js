@@ -6,7 +6,6 @@ var lodash = require("lodash");
 var debtCalculator = require("../debt_calculator");
 var admin = require("firebase-admin");
 var houses = require("../modules/houses");
-
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
@@ -15,18 +14,19 @@ router.post("/", async function(req, res) {
         res.json({id: id});
     } catch (error) {
         console.log(error);
-        res.status(400).send(error.message);
+        res.status(error.status || 500).send(error.message);
     }
 });
 
 router.delete("/:houseId", async function(req, res) {
-    const houseId = req.params["houseId"];
-
-    var rowsDeleted = await knex("houses")
-        .where("house_id", houseId)
-        .del();
-        
-    res.json({"rows deleted": rowsDeleted});
+    try {
+        var rowsDeleted = await houses.deleteHouse(req.params["houseId"],
+            res.locals.user.uid);
+        res.json({"rows deleted": rowsDeleted});
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.get("/:houseId", async function(req, res) {
@@ -214,14 +214,33 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
 });
 
 router.get("/:houseId/debts/:roommateId", async function(req, res) {
+    var houseId = req.params["houseId"];
     var roommateId = req.params["roommateId"];
-    if (roommateId === 1) {
-        res.json({2: -1250});
-    } else if (roommateId === 2) {
-        res.json({1: 1250});
-    } else {
-        res.json({});
+
+    var allDebts = await debtCalculator.getAllDebts(knex, houseId);
+    var house = await houses.getHouse(houseId);
+
+    var debts = {};
+
+    for (roommate of house.roommates) {
+        if (roommate != roommateId) {
+            debts[roommate] = 0;
+        }
     }
+
+    for (debt of allDebts) {
+        var amount = debt["amount"];
+
+        if (debt["payer"] == roommateId) {
+            var roommate = debt["payee"].toString();
+            debts[roommate] -= amount;
+        } else if (debt["payee"] == roommateId) {
+            var roommate = debt["payer"].toString();
+            debts[roommate] += amount;
+        }
+    }
+
+    res.json(debts);
 });
 
 router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(req, res) {
