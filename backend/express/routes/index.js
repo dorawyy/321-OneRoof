@@ -12,24 +12,30 @@ router.post("/login", async function(req, res) {
   var fcm = req.body.fcm;
   var uid = res.locals.user.uid;
 
-  var roommate = await knex.select("roommate_id")
+  var roommate = await knex.select("roommate_id", "roommate_name")
         .from("roommates")
         .where("roommate_uid", uid);
 
   var roommateID;
+  var roommateName;
+
   if (roommate.length === 0){
     roommateID = await knex("roommates")
         .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": 1, "roommate_budget": 10000});
+    roommateName = res.locals.user.name;
     await knex("budgets")
       .insert({"budget_roommate": roommateID, "budget_goal": 1000});
   }
-  else{
+  else {
     roommateID = roommate[0]["roommate_id"];
+    roommateName = roommate[0]["roommate_name"];
   }
   await knex("tokens")
         .insert({"token": fcm, "roommate_id": roommateID});
 
-  res.json({roommate_id: roommateID});
+  console.log("Name: " + roommateName);
+
+  res.json({"id": roommateID, "name": roommateName, "invite_code": roommateID});
 });
 
 router.get("/", function(req, res, next) {
