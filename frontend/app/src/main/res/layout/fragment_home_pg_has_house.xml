@@ -10,17 +10,18 @@
             type="ca.oneroof.oneroof.viewmodel.HouseViewModel"/>
         <variable
             name="fragment"
-            type="ca.oneroof.oneroof.ui.HomePgHasHouseFragment"/>
+            type="ca.oneroof.oneroof.ui.house.HomePgHasHouseFragment"/>
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomePgHasHouseFragment">
+        tools:context=".ui.house.HomePgHasHouseFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_purchase_button"

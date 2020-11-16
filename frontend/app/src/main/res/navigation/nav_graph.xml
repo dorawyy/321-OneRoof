@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/homePgHasHouseFragment"
-        android:name="ca.oneroof.oneroof.ui.HomePgHasHouseFragment"
+        android:name="ca.oneroof.oneroof.ui.house.HomePgHasHouseFragment"
         android:label="fragment_home_pg_has_house"
         tools:layout="@layout/fragment_home_pg_has_house" >
         <action

@@ -4,15 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="purchase"
             type="ca.oneroof.oneroof.api.Purchase" />
+        <variable
+            name="callback"
+            type="ca.oneroof.oneroof.ui.common.ClickCallback"/>
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{callback::click}"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardUseCompatPadding="true"
         app:contentPadding="10dp">
 
@@ -26,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{purchase.memo}"
+                android:visibility="@{purchase.memo.length() > 0 ? View.VISIBLE : View.GONE}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

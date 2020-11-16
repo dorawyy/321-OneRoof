@@ -1,6 +1,7 @@
-package ca.oneroof.oneroof.ui;
+package ca.oneroof.oneroof.ui.house;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
-import ca.oneroof.oneroof.ui.house.PurchaseListAdapter;
+import ca.oneroof.oneroof.ui.house.HomePgHasHouseFragmentDirections;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -42,7 +43,7 @@ public class HomePgHasHouseFragment extends Fragment {
         binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
-        PurchaseListAdapter purchaseListAdapter = new PurchaseListAdapter();
+        PurchaseListAdapter purchaseListAdapter = new PurchaseListAdapter(p -> Log.d("OneRoof", String.format("clicked %s", p.memo)));
         RecyclerView purchaseRecycler = (RecyclerView) binding.getRoot().findViewById(R.id.house_purchases);
         purchaseRecycler.setAdapter(purchaseListAdapter);
         purchaseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
