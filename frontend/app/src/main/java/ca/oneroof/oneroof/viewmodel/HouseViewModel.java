@@ -1,5 +1,6 @@
 package ca.oneroof.oneroof.viewmodel;
 
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -13,6 +14,7 @@ import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.api.NetworkLiveData;
 import ca.oneroof.oneroof.api.OneRoofAPI;
+import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.api.Purchase;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,21 +34,15 @@ public class HouseViewModel extends ViewModel {
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
 
-        house = new NetworkLiveData<>(Transformations.map(houseId, id -> {
-            return api.getHouse(id);
-        }));
+        house = new NetworkLiveData<>(Transformations.map(houseId, api::getHouse));
+        purchases = new NetworkLiveData<>(Transformations.map(houseId, api::getPurchases));
+        debtStats = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtSummary));
 
-        purchases = new NetworkLiveData<>(Transformations.map(houseId, id -> {
-            return api.getPurchases(id);
-        }));
-
-        budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
-            return api.getBudgetStats(id);
-        }));
-
-        debtStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
-            return api.getDebtSummary(houseId.getValue(), id);
-        }));
+// TODO: put this in its own viewmodel
+//        budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, api::getBudgetStats));
+//        debtStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
+//            return api.getDebtSummary(houseId.getValue(), id);
+//        }));
 
         permissions = "owner";
     }

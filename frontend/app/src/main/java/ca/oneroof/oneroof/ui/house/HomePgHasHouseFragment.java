@@ -3,20 +3,25 @@ package ca.oneroof.oneroof.ui.house;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
-import ca.oneroof.oneroof.ui.house.HomePgHasHouseFragmentDirections;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -49,24 +54,16 @@ public class HomePgHasHouseFragment extends Fragment {
         purchaseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         purchaseListAdapter.observe(getViewLifecycleOwner(), viewmodel.purchases.data);
 
+        setHasOptionsMenu(true);
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         viewmodel.house.data.observe(getViewLifecycleOwner(), r -> {
             if (r.data != null) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(r.data.name);
+                appCompatActivity.getSupportActionBar().setSubtitle(r.data.name);
             }
         });
 
         View view = binding.getRoot();
         return view;
-    }
-
-    public void clickProfile(View v) {
-        if (viewmodel.permissions.equals("owner")) {
-            Navigation.findNavController(v)
-                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToHouseLeaderProfileFragment());
-        } else {
-            Navigation.findNavController(v)
-                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
-        }
     }
 
     public void clickAddPurchase(View v) {
@@ -77,5 +74,22 @@ public class HomePgHasHouseFragment extends Fragment {
     public void clickIOUS(View v) {
         Navigation.findNavController(v)
                 .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToDebtSummaryFragment());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_house, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_profile) {
+            Navigation.findNavController(getView())
+                    .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToBasicProfileFragment());
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

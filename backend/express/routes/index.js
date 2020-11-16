@@ -29,7 +29,7 @@ router.post("/login", async function(req, res) {
   await knex("tokens")
         .insert({"token": fcm, "roommate_id": roommateID});
 
-  res.json({"id": roommateID});
+  res.json({roommate_id: roommateID});
 });
 
 router.get("/", function(req, res, next) {

@@ -71,6 +71,7 @@ router.get("/:houseId/purchases", async function(req, res) {
             memo: p.purchase_memo,
         };
     });
+    purchases.reverse();
 
     res.json(purchases);
 });

@@ -160,9 +160,6 @@ public class LoginFragment extends Fragment {
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
                     .get(HouseViewModel.class);
 
-        // TODO: Hardcoded house id for now.
-        houseViewModel.houseId.setValue(1);
-
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
