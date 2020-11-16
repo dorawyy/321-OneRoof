@@ -175,6 +175,7 @@ public class LoginFragment extends Fragment {
                                         if (response.isSuccessful()) {
                                             Log.d("OneRoof", "Roommate id: " + response.body().id);
                                             houseViewModel.roommateId.setValue(response.body().id);
+                                            houseViewModel.roommateName.setValue(response.body().name);
                                         } else {
                                             Log.d("OneRoof",
                                                     "Failure to receive roommate id: " + response.message());

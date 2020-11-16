@@ -23,6 +23,7 @@ public class HouseViewModel extends ViewModel {
 
     public MutableLiveData<Integer> houseId = new MutableLiveData<>();
     public MutableLiveData<Integer> roommateId = new MutableLiveData<>();
+    public MutableLiveData<String> roommateName = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
     public String permissions; // TODO: change this and the hardcoding below
