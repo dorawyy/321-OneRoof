@@ -35,7 +35,7 @@ router.post("/login", async function(req, res) {
 
   console.log("Name: " + roommateName);
 
-  res.json({"id": roommateID, "name": roommateName});
+  res.json({"id": roommateID, "name": roommateName, "invite_code": roommateID});
 });
 
 router.get("/", function(req, res, next) {
