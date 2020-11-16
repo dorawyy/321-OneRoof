@@ -244,7 +244,26 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
 });
 
 router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(req, res) {
-    res.send("Get all debts for roommates " + req.params["userRoommateId"] + " and " + req.params["otherRoommateId"] + " from house " + req.params["houseId"]);
+    var houseId = req.params["houseId"];
+
+    var userRoommateId = req.params["userRoommateId"];
+    var otherRoommateId = req.params["otherRoommateId"];
+
+    var allDebts = await debtCalculator.getAllDebts(knex, houseId);
+
+    var debts = allDebts.filter(d => (d.payee == userRoommateId &&
+        d.payer == otherRoommateId) || (d.payee == otherRoommateId &&
+        d.payer == userRoommateId));
+        
+    console.log(allDebts);
+
+    var purchases = debts.filter(d => d.type === "purchase")
+        .map(d => d.purchase);
+
+    var reimbursements = debts.filter(d => d.type === "payed back")
+        .map(d => d.youoweme);
+
+    res.json({purchases: purchases, reimbursements: reimbursements});
 });
 
 module.exports = router;
