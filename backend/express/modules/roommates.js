@@ -1,6 +1,7 @@
 const BadRequestError = require("./errors/BadRequestError");
 
 var knex = require("../db");
+const ForbiddenError = require("./errors/ForbiddenError");
 // var houses = require("./houses");
 
 var roommates = roommates || {};
@@ -18,19 +19,22 @@ roommates.getRoommateId = async function (uid) {
     return response[0].roommate_id;
 }
 
-roommates.setHouse = async function (roommateId, houseId) {
+roommates.setHouse = async function (roommateId, uid) {
     if (!(await this.validateRoommateId(roommateId))) {
         throw new BadRequestError("roommate id not found");
     }
 
-    // if (!(await houses.validateHouseId(houseId))) {
-    //     throw new Error("house id not found");
-    // }
+    var userRoommate = await roommates.getRoommateFromUid(uid);
 
-    var response = await knex("roommates")
-        .update("roommate_house", houseId)
+    if (userRoommate.permissions !== "owner") {
+        throw new ForbiddenError("requester is not the house owner");
+    }
+
+    var rowsUpdated = await knex("roommates")
+        .update("roommate_house", userRoommate.house)
         .where("roommate_id", roommateId);
-    console.log(response);
+
+    return rowsUpdated;
 }
 
 roommates.getRoommateFromUid = async function (uid) {

@@ -2,7 +2,8 @@ var express = require("express");
 var auth = require("../auth");
 const knex = require("../db");
 var router = express.Router();
-var budgetCalculator = require("../budget")
+var budgetCalculator = require("../budget");
+var roommates = require("../modules/roommates");
 
 router.use(auth.authMiddleware);
 
@@ -26,8 +27,11 @@ router.get("/:roommateId", async function(req, res) {
         .from("houses")
         .where("house_id", roommate[0]["roommate_house"]);
 
+    console.log("House: ", house[0]);
+
     var permissions = house[0]["house_admin"] == roommateId ? "owner" : "member";
-    res.json({name: roommate[0]["roommate_name"], permissions: permissions})
+    res.json({name: roommate[0]["roommate_name"], house: roommate[0]["roommate_house"], 
+        permissions: permissions})
 });
 
 router.delete("/:roommateId", async function(req, res) {
@@ -38,6 +42,18 @@ router.delete("/:roommateId", async function(req, res) {
         .del();
         
     res.json({"rows deleted": rowsDeleted});
+});
+
+router.patch("/sethouse", async function(req, res) {
+    const roommateId = req.body.invite_code;
+
+    try {
+        var rowUpdated = await roommates.setHouse(roommateId, res.locals.user.uid);
+        res.json({"rows updated": rowUpdated});
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 /*
