@@ -125,14 +125,36 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var roommateId = req.params["roommateId"];
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
+    var house = await houses.getHouse(houseId);
+
+    var debts = new Map();
+
+    for (roommate of house.roommates) {
+        if (roommate != roommateId) {
+            debts[roommate] = 0;
+        }
+    }
+
+    for (debt of allDebts) {
+        var amount = debt["amount"];
+
+        if (debt["payer"] == roommateId) {
+            var roommate = debt["payee"].toString();
+            debts.set(roommate, (debts.get(roommate) || 0) - amount);
+        } else if (debt["payee"] == roommateId) {
+            var roommate = debt["payer"].toString();
+            debts.set(roommate, (debts.get(roommate) || 0) + amount);
+        }
+    }
+
     var you_owe = 0;
     var you_are_owed = 0;
 
-    for (debt of allDebts) {
-        if (debt["payer"] == roommateId) {
-            you_owe += debt["amount"];
-        } else if (debt["payee"] == roommateId) {
-            you_are_owed += debt["amount"];
+    for (const [roommate, debt] of debts) {
+        if (debt > 0) {
+            you_are_owed += debt;
+        } else if (debt < 0) {
+            you_owe += debt;
         }
     }
 
@@ -206,7 +228,10 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
             .select('roommate_name')
             .where('roommate_id', id);
         name = name[0]['roommate_name'];
-        debtsSummary.push({ roommate: id, amount: amount, roommate_name: name});
+
+        if (amount != 0) {
+            debtsSummary.push({ roommate: id, amount: amount, roommate_name: name});
+        }
     }
 
     console.log(debtsSummary);
