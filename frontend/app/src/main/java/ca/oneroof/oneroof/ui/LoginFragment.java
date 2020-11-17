@@ -62,9 +62,8 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", true);
+        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", false);
         authTestUser = getActivity().getIntent().getStringExtra("authTestUser");
-        authTestUser = "Alice";
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
