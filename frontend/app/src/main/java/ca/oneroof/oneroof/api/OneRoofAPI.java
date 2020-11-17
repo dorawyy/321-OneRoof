@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -29,4 +30,7 @@ public interface OneRoofAPI {
 
     @GET("roommates/{roommate}/budget")
     Call<BudgetStats> getBudgetStats(@Path("roommate") int roommateId);
+
+    @PATCH("roommates/sethouse")
+    Call<Void> patchRoommate(@Body AddRoommate inviteCode);
 }

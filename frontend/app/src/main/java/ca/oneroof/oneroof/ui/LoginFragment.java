@@ -176,6 +176,8 @@ public class LoginFragment extends Fragment {
                                             Log.d("OneRoof", "Roommate id: " + response.body().id);
                                             houseViewModel.roommateId.setValue(response.body().id);
                                             houseViewModel.roommateName.setValue(response.body().name);
+                                            houseViewModel.inviteCode.setValue(response.body().invite_code);
+                                            Log.d("OneRoof", "invite code: " + response.body().invite_code);
                                         } else {
                                             Log.d("OneRoof",
                                                     "Failure to receive roommate id: " + response.message());
@@ -192,6 +194,7 @@ public class LoginFragment extends Fragment {
                     }
                 });
 
+        // TODO: change this for has/doesn't have house
         Navigation.findNavController(getView())
                 .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
     }
