@@ -1,8 +1,6 @@
 const BadRequestError = require("./errors/BadRequestError");
 const ForbiddenError = require("./errors/ForbiddenError");
 
-// var knex = require("../db");
-
 class Roommates {
     constructor (knex) {
         this.knex = knex;
@@ -118,6 +116,10 @@ class Roommates {
         this.checkIfUserIsInHouse = async function (uid, houseId) {
             var roommate = await this.getRoommateFromUid(uid);
             return roommate.house == houseId;
+        }
+
+        this.isHouseOwnerOrSiteAdmin = async function (uid, houseId) {
+            return false;
         }
     }
 }
