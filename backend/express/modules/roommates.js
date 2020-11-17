@@ -20,9 +20,9 @@ class Roommates {
         }
         
         this.getRoommateId = async function (uid) {
-            var response = await this.knex.select("roommate_id")
-                .from("roommates")
-                .where("roommate_uid", uid);
+            var response = await this.knex("roommates")
+                .where("roommate_uid", uid)
+                .select("roommate_id");
         
             if (response.length == 0) {
                 throw new BadRequestError("uid " + uid + " not found");
@@ -58,9 +58,9 @@ class Roommates {
         }
         
         this.getRoommateFromUid = async function (uid) {
-            var roommatesList = await this.knex.select()
-                .table("roommates")
-                .where("roommate_uid", uid);
+            var roommatesList = await this.knex("roommates")
+                .where("roommate_uid", uid)
+                .select();
         
             var roommate = roommatesList[0];
         
@@ -83,9 +83,9 @@ class Roommates {
         }
         
         this.getRoommateFromId = async function (roommateId) {
-            var roommatesList = await this.knex.select()
-                .table("roommates")
-                .where("roommate_id", roommateId);
+            var roommatesList = await this.knex("roommates")
+                .where("roommate_id", roommateId)
+                .select();
         
             var roommate = roommatesList[0];
         
@@ -93,9 +93,9 @@ class Roommates {
                 return {name: roommate.roommate_name};
             }
             
-            var housesList = await this.knex.select("house_admin")
-                .from("houses")
-                .where("house_id", roommate.roommate_house);
+            var housesList = await this.knex("houses")
+                .where({house_id: roommate.roommate_house})
+                .select("house_admin");
             
             var house = housesList[0];
             
