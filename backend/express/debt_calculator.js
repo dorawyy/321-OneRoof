@@ -129,7 +129,7 @@ debtCalculator.getAllDebts = async function (knex, houseId) {
         debts.push({
             payee: youoweme.youoweme_me, 
             payer: youoweme.youoweme_you, 
-            amount: youoweme.youoweme_amount.roommate_id,
+            amount: youoweme.youoweme_amount,
             type: "payed back" ,
             youoweme: youoweme.youoweme_id
         });
