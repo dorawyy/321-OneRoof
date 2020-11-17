@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import ca.oneroof.oneroof.R;
@@ -20,6 +21,7 @@ import ca.oneroof.oneroof.api.CreateHouseRequest;
 import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
 import ca.oneroof.oneroof.databinding.FragmentHomePgNoHouseBinding;
+import ca.oneroof.oneroof.ui.LoginFragmentDirections;
 import ca.oneroof.oneroof.ui.house.HomePgHasHouseFragmentDirections;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import retrofit2.Call;
@@ -64,8 +66,9 @@ public class HomePgNoHouseFragment extends Fragment {
                     public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
                         if (response.isSuccessful()) {
                             viewmodel.houseId.setValue(response.body().id);
-                            Navigation.findNavController(v)
-                                    .navigate(HomePgNoHouseFragmentDirections.actionHomePgNoHouseFragmentToHomePgHasHouseFragment());
+                            NavController nav = Navigation.findNavController(v);
+                            nav.popBackStack();
+                            nav.navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
                         }
                     }
 
