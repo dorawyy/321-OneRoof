@@ -1,23 +1,33 @@
 package ca.oneroof.oneroof.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ca.oneroof.oneroof.R;
+import ca.oneroof.oneroof.api.CreateHouseRequest;
+import ca.oneroof.oneroof.api.Debt;
+import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.databinding.FragmentDebtSummaryBinding;
+import ca.oneroof.oneroof.ui.house.PurchaseListAdapter;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DebtSummaryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DebtSummaryFragment extends Fragment {
     private HouseViewModel viewmodel;
 
@@ -37,8 +47,37 @@ public class DebtSummaryFragment extends Fragment {
         binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
+        DebtListAdapter debtListAdapter = new DebtListAdapter(this::clickPay);
+        RecyclerView debtRecycler = (RecyclerView) binding.getRoot().findViewById(R.id.debt_list);
+        debtRecycler.setAdapter(debtListAdapter);
+        debtRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        debtListAdapter.observe(getViewLifecycleOwner(), viewmodel.detailDebts.data);
+
         View view = binding.getRoot();
 
         return view;
+    }
+
+    private void clickPay(Debt d) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Forgive debt");
+
+        final EditText editText = new EditText(getContext());
+        editText.setHint("1.23");
+        editText.setSingleLine();
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        builder.setView(editText);
+        builder.setPositiveButton("Forgive", (dialog, which) -> {
+            int amount = (int) (Float.parseFloat(editText.getText().toString()) * 100);
+            viewmodel.postPayment(d.roommate, amount);
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 }

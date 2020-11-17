@@ -44,8 +44,28 @@ router.get("/:houseId", async function(req, res) {
 
 router.get("/:houseId/purchases", async function(req, res) {
     try {
-        res.json(await purchases.getPurchases(res.locals.user.uid,
-            req.params["houseId"]));
+        var houseId = req.params["houseId"];
+        
+        var purchases = await knex("purchases")
+            .join("roommates", "roommate_id", "=", "purchase_roommate")
+            .join("houses", "house_id", "=", "roommate_house")
+            .where("house_id", houseId)
+            .select("purchase_id", "purchase_roommate", 
+                    "purchase_amount", "purchase_memo",
+                    "roommate_name");
+        
+        purchases = purchases.map(p => {
+            return {
+                id: p.purchase_id,
+                purchaser: p.purchase_roommate,
+                purchaser_name: p.roommate_name,
+                amount: p.purchase_amount,
+                memo: p.purchase_memo,
+            };
+        });
+        purchases.reverse();
+        
+        res.json(purchases);
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -140,7 +160,49 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
         }
     }
 
+    console.log(debts);
     res.json(debts);
+});
+
+// Remove after M9
+router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
+    var houseId = req.params["houseId"];
+    var roommateId = req.params["roommateId"];
+
+    var allDebts = await debtCalculator.getAllDebts(knex, houseId);
+    var house = await houses.getHouse(houseId);
+
+    var debts = new Map();
+
+    for (roommate of house.roommates) {
+        if (roommate != roommateId) {
+            debts[roommate] = 0;
+        }
+    }
+
+    for (debt of allDebts) {
+        var amount = debt["amount"];
+
+        if (debt["payer"] == roommateId) {
+            var roommate = debt["payee"].toString();
+            debts.set(roommate, (debts.get(roommate) || 0) - amount);
+        } else if (debt["payee"] == roommateId) {
+            var roommate = debt["payer"].toString();
+            debts.set(roommate, (debts.get(roommate) || 0) + amount);
+        }
+    }
+
+    var debtsSummary = [];
+    for (const [id, amount] of debts) {
+        var name = await knex('roommates')
+            .select('roommate_name')
+            .where('roommate_id', id);
+        name = name[0]['roommate_name'];
+        debtsSummary.push({ roommate: id, amount: amount, roommate_name: name});
+    }
+
+    console.log(debtsSummary);
+    res.json(debtsSummary);
 });
 
 router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(req, res) {

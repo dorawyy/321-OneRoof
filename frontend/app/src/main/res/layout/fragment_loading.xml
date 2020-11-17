@@ -4,21 +4,32 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="ca.oneroof.oneroof.api.ApiResponse" />
+        <import type="ca.oneroof.oneroof.api.Resource" />
 
-        <variable name="response" type="ApiResponse"/>
+        <variable name="resource" type="Resource"/>
     </data>
 
     <LinearLayout
         android:orientation="vertical"
-        android:visibility="@{response.data == null ? View.GONE : View.VISIBLE}"
+        android:visibility="@{resource.isSuccess() ? View.GONE : View.VISIBLE}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{resource.isLoading() ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/loading_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{resource.message}"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:visibility="@{resource.isError() ? View.VISIBLE : View.GONE}" />
 
     </LinearLayout>
 

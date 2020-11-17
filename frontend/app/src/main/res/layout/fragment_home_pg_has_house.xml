@@ -10,117 +10,123 @@
             type="ca.oneroof.oneroof.viewmodel.HouseViewModel"/>
         <variable
             name="fragment"
-            type="ca.oneroof.oneroof.ui.HomePgHasHouseFragment"/>
+            type="ca.oneroof.oneroof.ui.house.HomePgHasHouseFragment"/>
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomePgHasHouseFragment">
-
-        <!-- TODO: Update blank fragment layout -->
+        tools:context=".ui.house.HomePgHasHouseFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
-            <TextView
-                android:id="@+id/house_name_header"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_purchase_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="@{viewmodel.house.data.data.name}"
-                android:textAllCaps="true"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold"
+                android:layout_margin="32dp"
+                android:clickable="true"
+                android:onClick="@{fragment.clickAddPurchase}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/house_purchases"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="8dp"
+                tools:listitem="@layout/item_purchase" />
+
+            <include
+                layout="@layout/fragment_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_btn" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:resource="@{(ca.oneroof.oneroof.api.Resource) viewmodel.house.data}"
+                tools:visibility="invisible" />
 
             <TextView
-                android:id="@+id/add_purchase_header"
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Add Purchase"
-                android:textAllCaps="true"
+                android:layout_marginTop="8dp"
+                android:text="Purchase History"
                 android:textColor="#000000"
-                android:textSize="28sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/receipt_btn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_owe" />
 
-            <Button
-                android:id="@+id/receipt_btn"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginBottom="70dp"
-                android:backgroundTint="#875DD3"
-                android:text="Scan Receipt"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/enter_purchase_btn"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="70dp"
-                android:backgroundTint="#875DD3"
-                android:text="Enter Manually"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:onClick="@{fragment::clickAddPurchase}"
-                app:layout_constraintBottom_toTopOf="@+id/view_purchases_btn"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <Button
-                android:id="@+id/debts_btn"
+            <TextView
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:backgroundTint="#875DD3"
-                android:onClick="@{fragment::clickIOUS}"
-                android:text="IOU's &amp; UOMe's"
-                android:textColor="#FFFFFF"
+                android:text="You owe"
+                android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/add_purchase_header"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/profile_btn"
+            <TextView
+                android:id="@+id/text_owe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="#875DD3"
-                android:text="Profile"
-                android:textColor="#FFFFFF"
+                android:layout_marginTop="8dp"
+                android:text="@{ca.oneroof.oneroof.Utils.formatDollarsSign(viewmodel.debtStats.data.data.you_owe)}"
+                android:textColor="#900000"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:onClick="@{fragment::clickProfile}"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/text_are_owed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{ca.oneroof.oneroof.Utils.formatDollarsSign(viewmodel.debtStats.data.data.you_are_owed)}"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:text="You are owed"
+                android:textColor="#000000"
+                android:textSize="18sp "
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/view_purchases_btn"
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="#875DD3"
-                android:text="View Previous Purchases"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:onClick="@{fragment::clickViewPurchases}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginStart="25dp"
+                android:text="See Debts"
+                android:onClick="@{fragment::clickDebts}"
+                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

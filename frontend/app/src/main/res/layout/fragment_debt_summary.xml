@@ -24,72 +24,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/request_payment_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:backgroundTint="#875DD3"
-                android:text="Request Payment"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:visibility="invisible"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/debt_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/iou_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="40dp"
-                android:text="You owe:"
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/iou_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
-                android:text="@{viewmodel.debtStats.data.data.youOweString()}"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/uome_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="250dp"
-                android:text="You are owed:"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iou_header" />
-
-            <TextView
-                android:id="@+id/uome_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="250dp"
-                android:layout_marginEnd="30dp"
-                android:text="@{viewmodel.debtStats.data.data.youAreOwedString()}"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iou_total" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_debt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

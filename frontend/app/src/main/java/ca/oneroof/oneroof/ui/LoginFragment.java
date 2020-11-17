@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -48,11 +49,10 @@ import retrofit2.Response;
  */
 public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 1;
+    public String authTestUser;
+    public boolean authDisabled = false;
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
-
-    public String authTestUser = "foo";
-    public boolean authDisabled = false;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -62,7 +62,9 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", false);
+        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", true);
+        authTestUser = getActivity().getIntent().getStringExtra("authTestUser");
+        authTestUser = "Alice";
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -84,6 +86,8 @@ public class LoginFragment extends Fragment {
                 trySignIn();
             }
         });
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(null);
 
         return view;
     }
@@ -155,10 +159,7 @@ public class LoginFragment extends Fragment {
 
         HouseViewModel houseViewModel =
                 new ViewModelProvider(getActivity(), new HouseViewModelFactory(api))
-                    .get(HouseViewModel.class);
-
-        // TODO: Hardcoded house id for now.
-        houseViewModel.houseId.setValue(1);
+                        .get(HouseViewModel.class);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -173,9 +174,17 @@ public class LoginFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         if (response.isSuccessful()) {
-                                            Log.d("OneRoof", "Roommate id: " + response.body().id);
-                                            houseViewModel.roommateId.setValue(response.body().id);
+                                            Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
+                                            houseViewModel.roommateId.setValue(response.body().roommate_id);
                                             houseViewModel.roommateName.setValue(response.body().name);
+                                            if (response.body().house_id == null) {
+                                                Navigation.findNavController(getView())
+                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgNoHouseFragment());
+                                            } else {
+                                                houseViewModel.houseId.setValue(response.body().house_id);
+                                                Navigation.findNavController(getView())
+                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+                                            }
                                         } else {
                                             Log.d("OneRoof",
                                                     "Failure to receive roommate id: " + response.message());
@@ -191,9 +200,6 @@ public class LoginFragment extends Fragment {
                                 });
                     }
                 });
-
-        Navigation.findNavController(getView())
-                .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
     }
 
     private void loginFail() {

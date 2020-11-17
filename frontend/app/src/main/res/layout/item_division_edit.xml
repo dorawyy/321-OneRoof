@@ -5,7 +5,7 @@
     <data>
         <variable
             name="divisionEdit"
-            type="ca.oneroof.oneroof.ui.DivisionEdit" />
+            type="ca.oneroof.oneroof.ui.purchase.DivisionEdit" />
     </data>
 
     <androidx.cardview.widget.CardView

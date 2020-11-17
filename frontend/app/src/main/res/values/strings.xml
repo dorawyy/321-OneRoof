@@ -5,4 +5,5 @@
     <string name="no_house">Looks like you don\'t belong to a house yet!  To use OneRoof, have a
         house leader add you to a house, or create a new house.</string>
     <string name="NA">N/A</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
