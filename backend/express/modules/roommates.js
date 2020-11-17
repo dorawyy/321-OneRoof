@@ -37,12 +37,26 @@ roommates.setHouse = async function (roommateId, uid) {
     return rowsUpdated;
 }
 
+roommates.setHouseOfOwner = async function (uid, houseId) {
+    var rowsUpdated = await knex("roommates")
+        .update("roommate_house", houseId)
+        .where("roommate_uid", uid);
+
+    return rowsUpdated;
+}
+
 roommates.getRoommateFromUid = async function (uid) {
     var roommatesList = await knex.select()
         .table("roommates")
         .where("roommate_uid", uid);
 
     var roommate = roommatesList[0];
+
+    console.log("Uid: ", uid);
+
+    if (!roommate.roommate_house) {
+        return {name: roommate.roommate_name};
+    }
     
     var housesList = await knex.select("house_admin")
         .from("houses")
