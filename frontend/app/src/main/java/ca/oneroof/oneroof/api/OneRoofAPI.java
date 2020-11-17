@@ -40,6 +40,9 @@ public interface OneRoofAPI {
     @GET("roommates/{roommate}/budget")
     Call<BudgetStats> getBudgetStats(@Path("roommate") int roommateId);
 
+    @POST("payment")
+    Call<Void> postPayment(@Body Payment payment);
+
     @PATCH("roommates/sethouse")
     Call<Void> patchRoommate(@Body AddRoommate inviteCode);
 }

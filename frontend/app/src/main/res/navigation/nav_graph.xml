@@ -31,7 +31,11 @@
         tools:layout="@layout/fragment_home_pg_has_house" >
         <action
             android:id="@+id/action_homePgHasHouseFragment_to_houseLeaderProfileFragment"
-            app:destination="@id/houseLeaderProfileFragment" />
+            app:destination="@id/houseLeaderProfileFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:popEnterAnim="@anim/anim_pop_in"
+            app:popExitAnim="@anim/anim_pop_out" />
         <action
             android:id="@+id/action_homePgHasHouseFragment_to_debtSummaryFragment"
             app:destination="@id/debtSummaryFragment"
@@ -62,10 +66,18 @@
         tools:layout="@layout/fragment_house_leader_profile" >
         <action
             android:id="@+id/action_houseLeaderProfileFragment_to_houseSettingsFragment"
-            app:destination="@id/houseSettingsFragment" />
+            app:destination="@id/houseSettingsFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:popEnterAnim="@anim/anim_pop_in"
+            app:popExitAnim="@anim/anim_pop_out" />
         <action
             android:id="@+id/action_houseLeaderProfileFragment_to_budgetFragment"
-            app:destination="@id/budgetFragment" />
+            app:destination="@id/budgetFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:popEnterAnim="@anim/anim_pop_in"
+            app:popExitAnim="@anim/anim_pop_out" />
     </fragment>
     <fragment
         android:id="@+id/houseSettingsFragment"

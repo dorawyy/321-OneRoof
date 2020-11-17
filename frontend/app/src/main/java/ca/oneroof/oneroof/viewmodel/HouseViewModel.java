@@ -20,6 +20,7 @@ import ca.oneroof.oneroof.api.IdResponse;
 import ca.oneroof.oneroof.api.NetworkLiveData;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIUtils;
+import ca.oneroof.oneroof.api.Payment;
 import ca.oneroof.oneroof.api.Purchase;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -92,6 +93,25 @@ public class HouseViewModel extends ViewModel {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 // Empty
+            }
+        });
+    }
+
+    public void postPayment(int roommate, int amount) {
+        Payment p = new Payment();
+        p.me = roommateId.getValue();
+        p.you = roommate;
+        p.amount = amount;
+        api.postPayment(p).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                debtStats.refresh();
+                detailDebts.refresh();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // empty
             }
         });
     }

@@ -43,6 +43,21 @@ router.post("/login", async function(req, res) {
   res.json(r);
 });
 
+// Remove after M9?
+router.post("/payment", async function (req, res) {
+  var d = {
+    youoweme_me: req.body.me,
+    youoweme_you: req.body.you,
+    youoweme_create_date: new Date(),
+    youoweme_payed: true,
+    youoweme_amount: req.body.amount,
+  };
+  console.log(d);
+  await knex('youowemes')
+    .insert(d);
+  res.sendStatus(200);
+});
+
 router.get("/", function(req, res, next) {
   res.send("Welcome to the One Roof API!");
 });
