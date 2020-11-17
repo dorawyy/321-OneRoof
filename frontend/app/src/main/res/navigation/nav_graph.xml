@@ -50,7 +50,11 @@
         android:id="@+id/homePgNoHouseFragment"
         android:name="ca.oneroof.oneroof.ui.nohouse.HomePgNoHouseFragment"
         android:label="fragment_home_pg_no_house"
-        tools:layout="@layout/fragment_home_pg_no_house" />
+        tools:layout="@layout/fragment_home_pg_no_house" >
+        <action
+            android:id="@+id/action_homePgNoHouseFragment_to_homePgHasHouseFragment"
+            app:destination="@id/homePgHasHouseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/basicProfileFragment"
         android:name="ca.oneroof.oneroof.ui.BasicProfileFragment"

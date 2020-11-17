@@ -21,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HouseViewModel extends ViewModel {
-    private final OneRoofAPI api;
+    public final OneRoofAPI api;
 
     public MutableLiveData<Integer> houseId = new MutableLiveData<>();
     public MutableLiveData<Integer> roommateId = new MutableLiveData<>();

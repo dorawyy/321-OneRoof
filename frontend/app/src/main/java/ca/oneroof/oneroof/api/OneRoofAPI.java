@@ -1,5 +1,7 @@
 package ca.oneroof.oneroof.api;
 
+import androidx.annotation.IdRes;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -11,6 +13,9 @@ import retrofit2.http.Path;
 public interface OneRoofAPI {
     @POST("login")
     Call<LoginResponse> postLogin(@Body LoginRequest body);
+
+    @POST("houses")
+    Call<IdResponse> postCreateHouse(@Body CreateHouseRequest request);
 
     @GET("houses/{house}")
     Call<House> getHouse(@Path("house") int houseId);
