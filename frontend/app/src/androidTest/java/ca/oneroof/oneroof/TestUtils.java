@@ -200,4 +200,31 @@ public class TestUtils {
 
         scenario.close();
     }
+
+    public static void checkStats(ActivityScenario<MainActivity> scenario, String budget,
+                                  String monthly_spending, String avg_purchase_price,
+                                  String num_purchases, String most_expensive_purchase,
+                                  String likelihood) {
+        // not sure if scenario arg is needed for context
+        onView(withId(R.id.current_monthly_budget))
+                .check(matches(withText(monthly_spending)));
+        onView(withId(R.id.monthly_spending_data))
+                .check(matches(withText(monthly_spending)));
+        onView(withId(R.id.avg_purchase_price_data))
+                .check(matches(withText(avg_purchase_price)));
+        onView(withId(R.id.num_purchases_data))
+                .check(matches(withText(num_purchases)));
+        onView(withId(R.id.most_expensive_purchase_data))
+                .check(matches(withText(most_expensive_purchase)));
+        onView(withId(R.id.likelihood_data))
+                .check(matches(withText(likelihood)));
+    }
+
+    public static void setBudget(ActivityScenario<MainActivity> scenario, String newBudget) {
+        // enter a new budget and click on update
+        onView(withId(R.id.monthly_budget_text_input))
+                .perform(replaceText(newBudget));
+        onView(withId(R.id.update_budget_btn))
+                .perform(click());
+    }
 }

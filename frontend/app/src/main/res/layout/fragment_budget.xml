@@ -206,7 +206,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/monthly_budget_header" />
 
             <TextView
-                android:id="@+id/curent_monthly_budget"
+                android:id="@+id/current_monthly_budget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -228,7 +228,7 @@
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/curent_monthly_budget"
+                app:layout_constraintEnd_toStartOf="@+id/current_monthly_budget"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
