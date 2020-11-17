@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import ca.oneroof.oneroof.api.AddRoommate;
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.BudgetUpdate;
 import ca.oneroof.oneroof.api.Debt;
@@ -29,6 +30,8 @@ public class HouseViewModel extends ViewModel {
 
     public MutableLiveData<Integer> houseId = new MutableLiveData<>();
     public MutableLiveData<Integer> roommateId = new MutableLiveData<>();
+    public MutableLiveData<String> roommateName = new MutableLiveData<>();
+    public MutableLiveData<Integer> inviteCode = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
     public String permissions; // TODO: change this and the hardcoding below
@@ -47,6 +50,7 @@ public class HouseViewModel extends ViewModel {
         detailDebts = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtsDetailed));
 
         permissions = "owner";
+        //permissions = "member";
     }
 
     public void postPurchase(Purchase purchase) {
@@ -72,6 +76,21 @@ public class HouseViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call call, Throwable t) {
+                // Empty
+            }
+        });
+    }
+
+    public void patchRoommates(AddRoommate addRoommate) {
+        api.patchRoommate(addRoommate).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                // get house data again to show update of new roommate
+                house.refresh();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 // Empty
             }
         });

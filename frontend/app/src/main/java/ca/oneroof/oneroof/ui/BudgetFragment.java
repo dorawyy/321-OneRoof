@@ -75,21 +75,23 @@ public class BudgetFragment extends Fragment {
         // get the purchase total input by the user
         monthlyBudgetDisplay = view.findViewById(R.id.curent_monthly_budget);
 
-        viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<Resource<BudgetStats>>() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onChanged(Resource<BudgetStats> budgetStatsResource) {
-                int monthlySpendingCents = budgetStatsResource.data.month_spending;
-                monthlySpending.setText(String.format("$%d.%02d", monthlySpendingCents / 100, monthlySpendingCents % 100));
-                int avgPriceCents = (int) Math.round(budgetStatsResource.data.mean_purchase);
-                avgPurchasePrice.setText(String.format("$%d.%02d", avgPriceCents / 100, avgPriceCents % 100));
-                numPurchases.setText(String.valueOf(budgetStatsResource.data.number_of_purchases));
-                int mostExpensivePurchaseCents = budgetStatsResource.data.most_expensive_purchase;
-                mostExpensivePurchase.setText(String.format("$%d.02%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
-                monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsResource.data.budget / 100, budgetStatsResource.data.budget % 100));
-                likelihoodText.setText(String.format("%%%.0f", budgetStatsResource.data.likelihood * 100.0));
-            }
-        });
+        if(viewmodel.budgetStats.data != null) {
+            viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<ApiResponse<BudgetStats>>() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onChanged(ApiResponse<BudgetStats> budgetStatsApiResponse) {
+                    int monthlySpendingCents = budgetStatsApiResponse.data.month_spending;
+                    monthlySpending.setText(String.format("$%d.%02d", monthlySpendingCents / 100, monthlySpendingCents % 100));
+                    int avgPriceCents = (int) Math.round(budgetStatsApiResponse.data.mean_purchase);
+                    avgPurchasePrice.setText(String.format("$%d.%02d", avgPriceCents / 100, avgPriceCents % 100));
+                    numPurchases.setText(String.valueOf(budgetStatsApiResponse.data.number_of_purchases));
+                    int mostExpensivePurchaseCents = budgetStatsApiResponse.data.most_expensive_purchase;
+                    mostExpensivePurchase.setText(String.format("$%d.02%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
+                    monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsApiResponse.data.budget / 100, budgetStatsApiResponse.data.budget % 100));
+                    likelihoodText.setText(String.format("%%%.0f", budgetStatsApiResponse.data.likelihood * 100.0));
+                }
+            });
+        }
 
         monthlyBudgetText.addTextChangedListener(new TextWatcher() {
             @Override

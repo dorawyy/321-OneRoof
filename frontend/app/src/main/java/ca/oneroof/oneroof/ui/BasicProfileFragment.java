@@ -54,6 +54,7 @@ public class BasicProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_basic_profile, container, false);
 
         name = view.findViewById(R.id.user_name);
+        name.setText(String.valueOf(viewmodel.roommateName.getValue()));
 
         houseName = view.findViewById(R.id.house_name);
         viewmodel.house.data.observe(getViewLifecycleOwner(), new Observer<Resource<House>>() {
