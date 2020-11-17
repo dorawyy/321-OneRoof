@@ -1,5 +1,6 @@
 const BadRequestError = require("./errors/BadRequestError");
 const ForbiddenError = require("./errors/ForbiddenError");
+var admin = require("firebase-admin");
 
 var lodash = require("lodash");
 var knex = require("../db");
