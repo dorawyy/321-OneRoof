@@ -4,7 +4,7 @@ const knex = require("../db");
 var auth = require("../auth");
 
 router.get("/version", function (req, res) {
-    res.send({version: "0.4.2"});
+    res.send({version: "0.4.3"});
 });
 
 router.use("/login", auth.authMiddleware);
