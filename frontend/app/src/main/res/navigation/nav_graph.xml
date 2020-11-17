@@ -30,10 +30,6 @@
         android:label="fragment_home_pg_has_house"
         tools:layout="@layout/fragment_home_pg_has_house" >
         <action
-            android:id="@+id/action_homePgHasHouseFragment_to_basicProfileFragment"
-            app:destination="@id/basicProfileFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
-        <action
             android:id="@+id/action_homePgHasHouseFragment_to_houseLeaderProfileFragment"
             app:destination="@id/houseLeaderProfileFragment" />
         <action
@@ -59,15 +55,6 @@
         android:name="ca.oneroof.oneroof.ui.nohouse.HomePgNoHouseFragment"
         android:label="fragment_home_pg_no_house"
         tools:layout="@layout/fragment_home_pg_no_house" />
-    <fragment
-        android:id="@+id/basicProfileFragment"
-        android:name="ca.oneroof.oneroof.ui.BasicProfileFragment"
-        android:label="fragment_basic_profile"
-        tools:layout="@layout/fragment_basic_profile" >
-        <action
-            android:id="@+id/action_basicProfileFragment_to_budgetFragment"
-            app:destination="@id/budgetFragment" />
-    </fragment>
     <fragment
         android:id="@+id/houseLeaderProfileFragment"
         android:name="ca.oneroof.oneroof.ui.HouseLeaderProfileFragment"
