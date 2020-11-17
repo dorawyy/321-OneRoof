@@ -26,18 +26,18 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/debt_roommate_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Roommate Name"
                 android:text="@{debt.roommate_name}"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Roommate Name" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/debt_pay_button"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="48dp"
                 android:layout_height="40dp"
@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/debt_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -58,19 +58,19 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button3"
+                app:layout_constraintEnd_toStartOf="@+id/debt_pay_button"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="$10.00" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/debt_descriptor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="@{debt.descriptor()}"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView13"
+                app:layout_constraintEnd_toStartOf="@+id/debt_amount"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="owes you" />
         </androidx.constraintlayout.widget.ConstraintLayout>
