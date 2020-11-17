@@ -3,6 +3,7 @@ package ca.oneroof.oneroof.api;
 import androidx.annotation.IdRes;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,6 +29,9 @@ public interface OneRoofAPI {
 
     @GET("houses/{house}/statistics/{roommate}")
     Call<DebtSummary> getDebtSummary(@Path("house") int houseId, @Path("roommate") int roommateId);
+
+    @GET("houses/{house}/debts_detailed/{roommate}")
+    Call<ArrayList<Debt>> getDebtsDetailed(@Path("house") int houseId, @Path("roommate") int roommateId);
 
     @POST("roommates/{roommate}/budget")
     Call<Void> postBudget(@Path("roommate") int roommateId, @Body BudgetUpdate update);

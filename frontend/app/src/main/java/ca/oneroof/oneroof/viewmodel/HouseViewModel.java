@@ -1,14 +1,18 @@
 package ca.oneroof.oneroof.viewmodel;
 
-import androidx.lifecycle.MediatorLiveData;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.BudgetUpdate;
+import ca.oneroof.oneroof.api.Debt;
 import ca.oneroof.oneroof.api.DebtSummary;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.IdResponse;
@@ -30,6 +34,8 @@ public class HouseViewModel extends ViewModel {
     public String permissions; // TODO: change this and the hardcoding below
     public NetworkLiveData<BudgetStats> budgetStats;
     public NetworkLiveData<DebtSummary> debtStats;
+    public NetworkLiveData<Map<Integer, Integer>> debts;
+    public NetworkLiveData<ArrayList<Debt>> detailDebts;
 
     public HouseViewModel(OneRoofAPI api) {
         this.api = api;
@@ -37,12 +43,8 @@ public class HouseViewModel extends ViewModel {
         house = new NetworkLiveData<>(Transformations.map(houseId, api::getHouse));
         purchases = new NetworkLiveData<>(Transformations.map(houseId, api::getPurchases));
         debtStats = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtSummary));
-
-// TODO: put this in its own viewmodel
-//        budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, api::getBudgetStats));
-//        debtStats = new NetworkLiveData<>(Transformations.map(roommateId, id -> {
-//            return api.getDebtSummary(houseId.getValue(), id);
-//        }));
+        budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, api::getBudgetStats));
+        detailDebts = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtsDetailed));
 
         permissions = "owner";
     }

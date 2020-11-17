@@ -47,8 +47,8 @@
             app:popEnterAnim="@anim/anim_pop_in"
             app:popExitAnim="@anim/anim_pop_out" />
         <action
-            android:id="@+id/action_homePgHasHouseFragment_to_purchaseHistoryFragment"
-            app:destination="@id/purchaseHistoryFragment" />
+            android:id="@+id/action_homePgHasHouseFragment_to_viewPurchase"
+            app:destination="@id/viewPurchase" />
     </fragment>
     <fragment
         android:id="@+id/homePgNoHouseFragment"
@@ -92,13 +92,17 @@
         android:label="fragment_add_purchase"
         tools:layout="@layout/fragment_add_purchase" />
     <fragment
-        android:id="@+id/purchaseHistoryFragment"
-        android:name="ca.oneroof.oneroof.ui.PurchaseHistoryFragment"
-        android:label="fragment_purchase_history"
-        tools:layout="@layout/fragment_purchase_history" />
-    <fragment
         android:id="@+id/budgetFragment"
         android:name="ca.oneroof.oneroof.ui.BudgetFragment"
         android:label="fragment_budget"
         tools:layout="@layout/fragment_budget" />
+    <fragment
+        android:id="@+id/viewPurchase"
+        android:name="ca.oneroof.oneroof.ViewPurchase"
+        android:label="fragment_view_purchase"
+        tools:layout="@layout/fragment_view_purchase" >
+        <argument
+            android:name="purchaseId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

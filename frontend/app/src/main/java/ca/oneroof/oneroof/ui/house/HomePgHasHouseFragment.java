@@ -48,7 +48,9 @@ public class HomePgHasHouseFragment extends Fragment {
         binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
-        PurchaseListAdapter purchaseListAdapter = new PurchaseListAdapter(p -> Log.d("OneRoof", String.format("clicked %s", p.memo)));
+        PurchaseListAdapter purchaseListAdapter = new PurchaseListAdapter(p -> {
+
+        });
         RecyclerView purchaseRecycler = (RecyclerView) binding.getRoot().findViewById(R.id.house_purchases);
         purchaseRecycler.setAdapter(purchaseListAdapter);
         purchaseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
