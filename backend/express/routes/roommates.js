@@ -3,7 +3,8 @@ var auth = require("../auth");
 const knex = require("../db");
 var router = express.Router();
 var budgetCalculator = require("../budget");
-var roommates = require("../modules/roommates");
+var Roommates = require("../modules/roommates");
+var roommates = new Roommates(knex);
 
 router.use(auth.authMiddleware);
 
