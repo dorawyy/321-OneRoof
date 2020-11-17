@@ -6,6 +6,8 @@ var lodash = require("lodash");
 var debtCalculator = require("../debt_calculator");
 var admin = require("firebase-admin");
 var houses = require("../modules/houses");
+var purchases = require("../modules/purchases");
+
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
@@ -32,9 +34,8 @@ router.delete("/:houseId", async function(req, res) {
 
 router.get("/:houseId", async function(req, res) {
     try {
-        var house = await houses.getHouse(req.params["houseId"],
-            res.locals.user.uid);
-        res.json(house);
+        res.json(await houses.getHouse(req.params["houseId"],
+            res.locals.user.uid));
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -42,27 +43,13 @@ router.get("/:houseId", async function(req, res) {
 });
 
 router.get("/:houseId/purchases", async function(req, res) {
-    var houseId = req.params["houseId"];
-
-    var purchases = await knex("purchases")
-        .join("roommates", "roommate_id", "=", "purchase_roommate")
-        .join("houses", "house_id", "=", "roommate_house")
-        .where("house_id", houseId)
-        .select("purchase_id", "purchase_roommate", 
-                "purchase_amount", "purchase_memo",
-                "roommate_name");
-
-    purchases = purchases.map(p => {
-        return {
-            id: p.purchase_id,
-            purchaser: p.purchase_roommate,
-            purchaser_name: p.roommate_name,
-            amount: p.purchase_amount,
-            memo: p.purchase_memo,
-        };
-    });
-
-    res.json(purchases);
+    try {
+        res.json(await purchases.getPurchases(res.locals.user.uid,
+            req.params["houseId"]));
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.post("/:houseId/purchases", async function(req, res) {

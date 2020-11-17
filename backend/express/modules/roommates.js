@@ -1,7 +1,7 @@
 const BadRequestError = require("./errors/BadRequestError");
+const ForbiddenError = require("./errors/ForbiddenError");
 
 var knex = require("../db");
-const ForbiddenError = require("./errors/ForbiddenError");
 // var houses = require("./houses");
 
 var roommates = roommates || {};
@@ -73,6 +73,13 @@ roommates.getRoommateFromUid = async function (uid) {
             "owner" : "member",
         house: roommate.roommate_house
     };
+}
+
+roommates.checkIfUserIsInHouse = async function (uid, houseId) {
+    var roommate = await this.getRoommateFromUid(uid);
+    console.log(roommate);
+    console.log(houseId);
+    return roommate.house == houseId;
 }
 
 module.exports = roommates;

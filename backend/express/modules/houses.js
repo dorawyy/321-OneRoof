@@ -29,8 +29,8 @@ houses.addHouse = async function (name, uid) {
 }
 
 houses.deleteHouse = async function (houseId, uid) {
-    if (!(this.validateHouseId(houseId))) {
-        throw new BadRequestError("house id is found");
+    if (!(await this.validateHouseId(houseId))) {
+        throw new BadRequestError("house id " + houseId + " not found");
     }
 
     var roommate;
