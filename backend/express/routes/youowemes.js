@@ -2,6 +2,7 @@ var express = require("express");
 var auth = require("../auth");
 var router = express.Router();
 var admin = require("firebase-admin");
+const knex = require("../db");
 
 router.use(auth.authMiddleware);
 

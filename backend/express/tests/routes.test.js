@@ -58,7 +58,7 @@ describe("Index endpoints", () => {
 describe("Roommates endpoints", () => {
     it("should add roommate", async () => {
         const res = await request(app)
-            .post('/login')
+            .post('/roommates/login')
             .send({
                 name: "test roommate",
             });
