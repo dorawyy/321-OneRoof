@@ -23,9 +23,8 @@ houses.addHouse = async function (name, uid) {
     var response = await knex("houses")
         .insert({house_name: name, house_admin: roommateId}, ["id"]);
 
-    console.log(houses);
     var id = response[0];
-    await roommates.setHouse(roommateId, id);
+    await roommates.setHouseOfOwner(uid, id);
     
     return id;
 }

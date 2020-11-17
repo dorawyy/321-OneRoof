@@ -9,6 +9,7 @@ var houses = require("../modules/houses");
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
+    console.log("Uid: ", res.locals.user.uid);
     try {
         const id = await houses.addHouse(req.body.name, res.locals.user.uid);
         res.json({id: id});
