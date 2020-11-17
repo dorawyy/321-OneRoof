@@ -242,6 +242,7 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
         }
     }
 
+    console.log(debts);
     res.json(debts);
 });
 

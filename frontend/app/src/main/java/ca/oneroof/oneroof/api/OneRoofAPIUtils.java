@@ -16,13 +16,13 @@ public class OneRoofAPIUtils {
         mediatorLiveData.addSource(l1, d -> {
             d1.setValue(d);
             if (d2.getValue() != null) {
-                f.transform(d1.getValue(), d2.getValue());
+                mediatorLiveData.setValue(f.transform(d1.getValue(), d2.getValue()));
             }
         });
         mediatorLiveData.addSource(l2, d -> {
             d2.setValue(d);
             if (d1.getValue() != null) {
-                f.transform(d1.getValue(), d2.getValue());
+                mediatorLiveData.setValue(f.transform(d1.getValue(), d2.getValue()));
             }
         });
         return mediatorLiveData;
