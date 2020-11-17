@@ -40,19 +40,18 @@ router.post("/", async function(req, res) {
 });
 
 router.patch("/:youowemeId", async function(req, res) {
+    var youowemeid = req.params["youowemeId"];
+    var payed = req.body.payed;
     try{
-        var youowemeid = req.params["youowemeId"];
-        var payed = req.body.payed;
-
         await knex("youowemes")
         .update("youoweme_payed", payed)
         .where("youoweme_id", youowemeid);
+        res.status(200);
     }
     catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
-    res.status(200);
 });
 
 router.delete("/:youowemeId", function(req, res) {
