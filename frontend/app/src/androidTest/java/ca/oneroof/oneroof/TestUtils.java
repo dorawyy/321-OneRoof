@@ -12,17 +12,25 @@ import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
 
 import org.hamcrest.Matcher;
+import org.junit.Test;
+
+import java.util.Random;
 
 import ca.oneroof.oneroof.ui.MainActivity;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
 
 public class TestUtils {
     public static String getText(ViewInteraction matcher) {
@@ -124,5 +132,72 @@ public class TestUtils {
                 .perform(click());
 
         return scenario;
+    }
+
+    /**
+     * Have user1 make a purchase for $10.00 + user2Cents*100, with the shared part being assigned
+     * to user2.
+     */
+    public static void createSharedPurchase(String user1, String user2, int user2Cents, String memo) {
+        // Make a purchase as user1, shared between user1 and 2
+        ActivityScenario<MainActivity> scenario = loginAs(user1);
+
+        // Hit the add purchase button.
+        onView(withId(R.id.add_purchase_button))
+                .perform(click());
+
+        // Type "10" into the first division.
+        onData(anything())
+                .inAdapterView(withId(R.id.division_list)).atPosition(0)
+                .onChildView(withId(R.id.division_amount))
+                .perform(replaceText("10"));
+
+        onView(withId(R.id.purchase_total))
+                .check(matches(withText("10.00")));
+
+        // Add a division.
+        onView(withId(R.id.add_division_btn))
+                .perform(click());
+
+        // Type "20" into the second division.
+        onData(anything())
+                .inAdapterView(withId(R.id.division_list)).atPosition(1)
+                .onChildView(withId(R.id.division_amount))
+                .perform(replaceText(Utils.formatDollars(user2Cents)));
+
+        // Make the second user owe us for the 20 dollars.
+        onData(anything())
+                .inAdapterView(withId(R.id.division_list)).atPosition(1)
+                .onChildView(allOf(withId(R.id.roommate_toggle), withText(user2)))
+                .perform(click());
+
+        // Total should now read 30.
+        onView(withId(R.id.purchase_total))
+                .check(matches(withText(Utils.formatDollars(1000 + user2Cents))));
+
+        onView(withId(R.id.memo_text))
+                .perform(replaceText(memo));
+
+        // Make the purchase.
+        onView(withId(R.id.action_save_purchase))
+                .perform(click());
+
+        scenario.close();
+
+        scenario = loginAs(user2);
+
+        // Make sure the new purchase shows up on the list for the other user.
+        onView(withId(R.id.house_purchases))
+                .perform(scrollToPosition(0))
+                .check(matches(hasDescendant(allOf(withId(R.id.purchase_purchaser), withText(user1)))));
+        onView(withId(R.id.house_purchases))
+                .perform(scrollToPosition(0))
+                .check(matches(hasDescendant(allOf(withId(R.id.purchase_amount),
+                        withText("$" + Utils.formatDollars(1000 + user2Cents))))));
+        onView(withId(R.id.house_purchases))
+                .perform(scrollToPosition(0))
+                .check(matches(hasDescendant(allOf(withId(R.id.purchase_memo), withText(memo)))));
+
+        scenario.close();
     }
 }
