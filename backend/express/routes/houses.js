@@ -129,6 +129,7 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
     }
 
     for (debt of allDebts) {
+        console.log(debt);
         var amount = debt["amount"];
 
         if (debt["payer"] == roommateId) {
