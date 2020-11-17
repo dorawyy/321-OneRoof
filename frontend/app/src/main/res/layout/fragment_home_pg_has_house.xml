@@ -123,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:text="See Debts"
+                android:onClick="@{fragment::clickDebts}"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="parent" />

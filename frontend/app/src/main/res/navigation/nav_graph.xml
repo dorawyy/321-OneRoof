@@ -38,7 +38,11 @@
             app:destination="@id/houseLeaderProfileFragment" />
         <action
             android:id="@+id/action_homePgHasHouseFragment_to_debtSummaryFragment"
-            app:destination="@id/debtSummaryFragment" />
+            app:destination="@id/debtSummaryFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:popEnterAnim="@anim/anim_pop_in"
+            app:popExitAnim="@anim/anim_pop_out" />
         <action
             android:id="@+id/action_homePgHasHouseFragment_to_addPurchaseFragment"
             app:destination="@id/addPurchaseFragment"

@@ -73,7 +73,7 @@ public class HomePgHasHouseFragment extends Fragment {
                 .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToAddPurchaseFragment());
     }
 
-    public void clickIOUS(View v) {
+    public void clickDebts(View v) {
         Navigation.findNavController(v)
                 .navigate(HomePgHasHouseFragmentDirections.actionHomePgHasHouseFragmentToDebtSummaryFragment());
     }
