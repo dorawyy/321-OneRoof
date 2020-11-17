@@ -11,6 +11,7 @@ describe("Houses endpoints", () => {
             });
         expect(res.body.id).toEqual(1);
         expect(res.body).toHaveProperty("post");
+        done();
     });
 
     it("should get a house", async () => {
@@ -20,6 +21,7 @@ describe("Houses endpoints", () => {
             .send();
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty("get");
+        done();
     });
 
     it("should fail to get a house", async () => {
@@ -29,6 +31,7 @@ describe("Houses endpoints", () => {
             .send();
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty("get");
+        done();
     });
   });
 
@@ -41,6 +44,7 @@ describe("Index endpoints", () => {
             });
         expect(res.body.invite_code).toEqual(1);
         expect(res.body).toHaveProperty("post");
+        done();
     });
 
     it("should post a new payment", async () => {
@@ -52,6 +56,7 @@ describe("Index endpoints", () => {
             });
         expect(res.body.id).toEqual(1);
         expect(res.body).toHaveProperty("post");
+        done();
     });
 });
 
@@ -64,6 +69,7 @@ describe("Roommates endpoints", () => {
             });
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty("post");
+        done();
     });
 });
 
@@ -76,6 +82,7 @@ describe("Youowemes endpoints", () => {
             });
         expect(res.statusCode).toEqual(400);
         expect(res.body).toHaveProperty("post");
+        done();
     });
 
     it("should send youoweme", async () => {
@@ -86,5 +93,6 @@ describe("Youowemes endpoints", () => {
             });
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty("patch");
+        done();
     });
 });
