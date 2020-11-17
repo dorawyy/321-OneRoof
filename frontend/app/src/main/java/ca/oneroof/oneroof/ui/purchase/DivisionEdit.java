@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof.ui;
+package ca.oneroof.oneroof.ui.purchase;
 
 import java.util.ArrayList;
 

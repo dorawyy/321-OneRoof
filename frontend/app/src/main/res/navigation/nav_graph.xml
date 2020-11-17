@@ -97,7 +97,7 @@
         tools:layout="@layout/fragment_request_payment" />
     <fragment
         android:id="@+id/addPurchaseFragment"
-        android:name="ca.oneroof.oneroof.ui.AddPurchaseFragment"
+        android:name="ca.oneroof.oneroof.ui.purchase.AddPurchaseFragment"
         android:label="fragment_add_purchase"
         tools:layout="@layout/fragment_add_purchase" />
     <fragment

@@ -1,4 +1,4 @@
-package ca.oneroof.oneroof.ui;
+package ca.oneroof.oneroof.ui.purchase;
 
 import android.content.Context;
 import android.text.Editable;
@@ -49,7 +49,7 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
 
 
         EditText amount = binding.getRoot().findViewById(R.id.division_amount);
-        amount.setText(AddPurchaseFragment.formatDollars(divisionEdit.amount));
+//        amount.setText(Utils.formatDollars(divisionEdit.amount));
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
