@@ -54,6 +54,7 @@ public class HomePgNoHouseFragment extends Fragment {
         builder.setTitle("Create house");
 
         final EditText editText = new EditText(getContext());
+        editText.setId(R.id.house_name);
         editText.setHint("House name");
         editText.setSingleLine();
         builder.setView(editText);
