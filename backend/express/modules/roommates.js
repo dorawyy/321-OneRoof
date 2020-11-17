@@ -12,6 +12,12 @@ roommates.validateRoommateId = async function (roommateId) {
     return response.length > 0;
 }
 
+roommates.addRoommate = async function (name) {
+    var id = await knex("roommates")
+        .insert({roommate_name: name});
+    return id[0];
+}
+
 roommates.getRoommateId = async function (uid) {
     var response = await knex.select("roommate_id")
         .from("roommates")
@@ -75,10 +81,41 @@ roommates.getRoommateFromUid = async function (uid) {
     };
 }
 
+roommates.getRoommateFromId = async function (roommateId) {
+    var roommatesList = await knex.select()
+        .table("roommates")
+        .where("roommate_id", roommateId);
+
+    var roommate = roommatesList[0];
+
+    if (!roommate.roommate_house) {
+        return {name: roommate.roommate_name};
+    }
+    
+    var housesList = await knex.select("house_admin")
+        .from("houses")
+        .where("house_id", roommate.roommate_house);
+    
+    var house = housesList[0];
+    
+    return {
+        name: roommate.roommate_name,
+        permissions: house.house_admin === roommate.roommate_id ? 
+            "owner" : "member",
+        house: roommate.roommate_house
+    };
+}
+
+roommates.deleteRoommate = async function (roommateId) {
+    var rowsDeleted = await knex("roommates")
+        .where("roommate_id", roommateId)
+        .del();
+        
+    return rowsDeleted;
+}
+
 roommates.checkIfUserIsInHouse = async function (uid, houseId) {
     var roommate = await this.getRoommateFromUid(uid);
-    console.log(roommate);
-    console.log(houseId);
     return roommate.house == houseId;
 }
 

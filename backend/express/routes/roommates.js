@@ -8,40 +8,32 @@ var roommates = require("../modules/roommates");
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
-    var name = req.body.name;
-    var house = req.body.house;
-
-    var id = await knex("roommates")
-        .insert({roommate_name: name, roommate_house: house});
-    res.json({id: id[0]});
+    try {
+        var id = await roommates.addRoommate(req.body.name);
+        res.json({id: id});
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.get("/:roommateId", async function(req, res) {
-    var roommateId = req.params["roommateId"];
-
-    var roommate = await knex.select("roommate_name", "roommate_house")
-        .from("roommates")
-        .where("roommate_id", roommateId);
-
-    var house = await knex.select("house_admin")
-        .from("houses")
-        .where("house_id", roommate[0]["roommate_house"]);
-
-    console.log("House: ", house[0]);
-
-    var permissions = house[0]["house_admin"] == roommateId ? "owner" : "member";
-    res.json({name: roommate[0]["roommate_name"], house: roommate[0]["roommate_house"], 
-        permissions: permissions})
+    try {
+        res.json(await roommates.getRoommateFromId(req.params["roommateId"]));
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.delete("/:roommateId", async function(req, res) {
-    const roommateId = req.params["roommateId"];
-
-    var rowsDeleted = await knex("roommates")
-        .where("roommate_id", roommateId)
-        .del();
-        
-    res.json({"rows deleted": rowsDeleted});
+    try {
+        var rowsDeleted = await roommates.deleteRoommate(req.params["roommateId"]);
+        res.json({"rows deleted": rowsDeleted});
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.patch("/sethouse", async function(req, res) {
