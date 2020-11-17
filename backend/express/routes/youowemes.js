@@ -39,8 +39,18 @@ router.post("/", async function(req, res) {
     res.json({id: id[0]});
 });
 
-router.patch("/:youowemeId", function(req, res) {
-    res.send("Update youoweme " + req.params["youowemeId"]);
+router.patch("/:youowemeId", async function(req, res) {
+    var youowemeid = req.params["youowemeId"];
+    var payed = req.body.payed;
+    try {
+        await knex("youowemes")
+        .update("youoweme_payed", payed)
+        .where("youoweme_id", youowemeid);
+        res.status(200);
+    } catch (error) {
+        console.log(error); // eslint-disable-line no-console
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.delete("/:youowemeId", function(req, res) {
