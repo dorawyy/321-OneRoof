@@ -40,7 +40,7 @@ houses.deleteHouse = async function (houseId, uid) {
     } catch (error) {
         throw new BadRequestError("requester not found");
     }
-    
+
     if (roommate.house != houseId || roommate.permissions !== "owner") {
         throw new ForbiddenError("requester is not the house owner");
     }
@@ -59,6 +59,10 @@ houses.getHouse = async function (houseId) {
     var houseAttributes = await knex.select("house_name", "house_admin")
         .from("houses")
         .where("house_id", houseId);
+
+    if (houseAttributes.length === 0) {
+        throw new BadRequestError("house id " + houseId + " not found");
+    }
 
     house["name"] = houseAttributes[0]["house_name"];
     house["admin"] = houseAttributes[0]["house_admin"];

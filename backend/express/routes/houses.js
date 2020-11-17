@@ -31,25 +31,14 @@ router.delete("/:houseId", async function(req, res) {
 });
 
 router.get("/:houseId", async function(req, res) {
-    const houseId = req.params["houseId"];
-    let house = {};
-    house["id"] = houseId;
-
-    var houseAttributes = await knex.select("house_name", "house_admin")
-        .from("houses")
-        .where("house_id", houseId);
-
-    house["name"] = houseAttributes[0]["house_name"];
-    house["admin"] = houseAttributes[0]["house_admin"];
-    
-    var roommates = await knex.select("roommate_id", "roommate_name")
-        .from("roommates")
-        .where("roommate_house", houseId);
-
-    house["roommates"] = roommates.map(r => r.roommate_id);
-    house["roommate_names"] = roommates.map(r => r.roommate_name);
-    
-    res.json(house);
+    try {
+        var house = await houses.getHouse(req.params["houseId"],
+            res.locals.user.uid);
+        res.json(house);
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 });
 
 router.get("/:houseId/purchases", async function(req, res) {
