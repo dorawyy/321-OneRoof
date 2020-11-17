@@ -18,7 +18,7 @@ router.post("/login", async function(req, res) {
 
   var roommateID;
   var roommateName;
-  var existing_fcm;
+  var existingFCM;
 
   if (roommate.length === 0){
     roommateID = await knex("roommates")
@@ -31,11 +31,11 @@ router.post("/login", async function(req, res) {
     roommateID = roommate[0]["roommate_id"];
     roommateName = roommate[0]["roommate_name"];
   }
-  existing_fcm = await knex("tokens")
+  existingFCM = await knex("tokens")
         .select("token")
         .where("token", fcm);
 
-  if (existing_fcm.length == 0) {
+  if (existingFCM.length === 0) {
     await knex("tokens")
         .insert({"token": fcm, "roommate_id": roommateID});
   }
