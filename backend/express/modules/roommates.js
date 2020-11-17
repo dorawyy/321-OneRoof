@@ -20,9 +20,9 @@ class Roommates {
         }
         
         this.getRoommateId = async function (uid) {
-            var response = await this.knex.select("roommate_id")
-                .from("roommates")
-                .where("roommate_uid", uid);
+            var response = await this.knex("roommates")
+                .where("roommate_uid", uid)
+                .select("roommate_id");
         
             if (response.length == 0) {
                 throw new BadRequestError("uid " + uid + " not found");
