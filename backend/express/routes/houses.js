@@ -48,7 +48,7 @@ router.get("/:houseId", async function(req, res) {
 
     house["roommates"] = roommates.map(r => r.roommate_id);
     house["roommate_names"] = roommates.map(r => r.roommate_name);
-    console.log(house);
+    
     res.json(house);
 });
 
@@ -94,7 +94,6 @@ router.post("/:houseId/purchases", async function(req, res) {
         var divisionMemo = division["memo"];
         var roommates = division["roommates"];
 
-        console.log(roommates);
         roommates.forEach(r => allRoommates.add(r));
 
         var divisionId = await knex("divisions")
@@ -159,7 +158,7 @@ router.get("/:houseId/purchases/:purchaseId", async function(req, res) {
         .where("division_purchase", purchaseId);
 
     var groupedDivisions = lodash.groupBy(divisions, "division_id");
-    console.log(groupedDivisions);
+    
     var divisionsList = new Array();
     for (const [_, group] of Object.entries(groupedDivisions)) {
         var roommates = new Array();
@@ -255,8 +254,6 @@ router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(re
     var debts = allDebts.filter(d => (d.payee == userRoommateId &&
         d.payer == otherRoommateId) || (d.payee == otherRoommateId &&
         d.payer == userRoommateId));
-        
-    console.log(allDebts);
 
     var purchases = debts.filter(d => d.type === "purchase")
         .map(d => d.purchase);

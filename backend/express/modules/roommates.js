@@ -16,6 +16,11 @@ roommates.getRoommateId = async function (uid) {
     var response = await knex.select("roommate_id")
         .from("roommates")
         .where("roommate_uid", uid);
+
+    if (response.length == 0) {
+        throw new BadRequestError("uid " + uid + " not found");
+    }
+
     return response[0].roommate_id;
 }
 
@@ -51,8 +56,6 @@ roommates.getRoommateFromUid = async function (uid) {
         .where("roommate_uid", uid);
 
     var roommate = roommatesList[0];
-
-    console.log("Uid: ", uid);
 
     if (!roommate.roommate_house) {
         return {name: roommate.roommate_name};

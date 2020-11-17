@@ -12,18 +12,17 @@ houses.addHouse = async function (name, uid) {
         throw new BadRequestError("name is not a string");
     }
 
-    var roommateId;
+    var roommateId = await roommates.getRoommateId(uid);
+    var id;
 
     try {
-        roommateId = await roommates.getRoommateId(uid);
+        var response = await knex("houses")
+            .insert({house_name: name, house_admin: roommateId}, ["id"]);
+        id = response[0];
     } catch (error) {
-        throw new BadRequestError("requester not found");
+        throw new Error("Failed to insert house \n" + error);
     }
 
-    var response = await knex("houses")
-        .insert({house_name: name, house_admin: roommateId}, ["id"]);
-
-    var id = response[0];
     await roommates.setHouseOfOwner(uid, id);
     
     return id;
@@ -41,7 +40,7 @@ houses.deleteHouse = async function (houseId, uid) {
     } catch (error) {
         throw new BadRequestError("requester not found");
     }
-    console.log(roommate);
+    
     if (roommate.house != houseId || roommate.permissions !== "owner") {
         throw new ForbiddenError("requester is not the house owner");
     }
