@@ -4,7 +4,7 @@ admin.initializeApp({
     credential: admin.credential.applicationDefault()
 });
 
-const AUTH_DISABLED = process.env.AUTH_DISABLED || 0;
+const AUTH_DISABLED = process.env.AUTH_DISABLED || process.env.NODE_ENV === "test";
 
 function firebaseAuthMiddleware(req, res, next) {
     var auth = req.header("Authorization");
