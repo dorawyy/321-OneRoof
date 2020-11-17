@@ -10,8 +10,11 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.NavigableMap;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.AddRoommate;
@@ -58,50 +61,20 @@ public class HouseSettingsFragment extends Fragment {
         // for invite code input
         TextInputEditText inviteCodeInput = view.findViewById(R.id.invite_code);
 
-        inviteCodeInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Empty
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Empty
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                int inviteCodeInput;
-                try {
-                    inviteCodeInput = Integer.parseInt(editable.toString());
-                } catch(Exception e) {
-                    inviteCodeInput = -1;
-                }
-
-                // shouldn't have -ive invite code
-                if(inviteCodeInput < 0) {
-                    inviteCode = -1;
-                    return;
-                }
-
-            }
-        });
-
         Button addRoommateBtn = view.findViewById(R.id.add_roommate_btn);
         addRoommateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // add a new roommate to the house using the entered invite code
-
-                // don't update if we have an invalid value
-                if(inviteCode < 0) {
+                AddRoommate addRoommate = new AddRoommate();
+                try {
+                    addRoommate.invite_code = Integer.parseInt(inviteCodeInput.getText().toString());
+                } catch (Exception e) {
+                    // ignore invalid invites
                     return;
                 }
-
-                AddRoommate addRoommate = new AddRoommate();
-                addRoommate.invite_code = inviteCode;
-
                 viewmodel.patchRoommates(addRoommate);
+                Navigation.findNavController(view)
+                        .navigateUp();
             }
         });
 

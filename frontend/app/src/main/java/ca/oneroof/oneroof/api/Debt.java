@@ -6,7 +6,7 @@ public class Debt {
     public int amount;
 
     public String descriptor() {
-        if (amount < 0) {
+        if (amount > 0) {
             return "owes you";
         } else {
             return "is owed";

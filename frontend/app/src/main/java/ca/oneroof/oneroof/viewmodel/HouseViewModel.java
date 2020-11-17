@@ -107,6 +107,7 @@ public class HouseViewModel extends ViewModel {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 debtStats.refresh();
                 detailDebts.refresh();
+                budgetStats.refresh();
             }
 
             @Override

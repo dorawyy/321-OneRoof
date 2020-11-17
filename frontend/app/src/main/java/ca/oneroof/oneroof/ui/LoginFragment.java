@@ -49,7 +49,7 @@ import retrofit2.Response;
  */
 public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 1;
-    public String authTestUser = "foo";
+    public String authTestUser;
     public boolean authDisabled = false;
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
@@ -62,8 +62,9 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", false);
+        authDisabled = getActivity().getIntent().getBooleanExtra("authDisabled", true);
         authTestUser = getActivity().getIntent().getStringExtra("authTestUser");
+        authTestUser = "Alice";
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -175,6 +176,7 @@ public class LoginFragment extends Fragment {
                                         if (response.isSuccessful()) {
                                             Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
                                             houseViewModel.roommateId.setValue(response.body().roommate_id);
+                                            houseViewModel.roommateName.setValue(response.body().name);
                                             if (response.body().house_id == null) {
                                                 Navigation.findNavController(getView())
                                                         .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgNoHouseFragment());

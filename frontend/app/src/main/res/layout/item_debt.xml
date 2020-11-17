@@ -42,7 +42,7 @@
                 android:layout_width="48dp"
                 android:layout_height="40dp"
                 android:backgroundTint="#875DD3"
-                android:visibility="@{debt.amount &lt; 0 ? View.VISIBLE : View.GONE}"
+                android:visibility="@{debt.amount &gt; 0 ? View.VISIBLE : View.GONE}"
                 android:onClick="@{callback::click}"
                 android:drawableStart="@drawable/ic_baseline_monetization_on_24"
                 app:layout_constraintBottom_toBottomOf="parent"
