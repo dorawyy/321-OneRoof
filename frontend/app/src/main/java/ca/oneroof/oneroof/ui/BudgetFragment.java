@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,37 +21,13 @@ import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.Resource;
 import ca.oneroof.oneroof.api.BudgetStats;
 import ca.oneroof.oneroof.api.BudgetUpdate;
+import ca.oneroof.oneroof.databinding.FragmentBudgetBinding;
+import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BudgetFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BudgetFragment extends Fragment {
-
-    private int monthlyBudgetCents = -1; // indicator val
-
     private HouseViewModel viewmodel;
-
-    private TextView monthlySpending;
-    private TextView avgPurchasePrice;
-    private TextView numPurchases;
-    private TextView mostExpensivePurchase;
-    private TextView monthlyBudgetDisplay;
-    private TextView likelihoodText;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment BudgetFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BudgetFragment newInstance() {
-        BudgetFragment fragment = new BudgetFragment();
-        return fragment;
-    }
+    private TextInputEditText editBudget;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,87 +38,32 @@ public class BudgetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_budget, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
+        FragmentBudgetBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_budget, container, false);
+        binding.setViewmodel(viewmodel);
+        binding.setFragment(this);
+        binding.setLifecycleOwner(this);
 
-        monthlySpending = view.findViewById(R.id.monthly_spending_data);
-        avgPurchasePrice = view.findViewById(R.id.avg_purchase_price_data);
-        numPurchases = view.findViewById(R.id.num_purchases_data);
-        mostExpensivePurchase = view.findViewById(R.id.most_expensive_purchase_data);
-        likelihoodText = view.findViewById(R.id.likelihood_data);
-
-        // for new budget input
-        TextInputEditText monthlyBudgetText = view.findViewById(R.id.monthly_budget_text_input);
-        // get the purchase total input by the user
-        monthlyBudgetDisplay = view.findViewById(R.id.curent_monthly_budget);
-
-        viewmodel.budgetStats.data.observe(getViewLifecycleOwner(), new Observer<Resource<BudgetStats>>() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onChanged(Resource<BudgetStats> budgetStatsResource) {
-                int monthlySpendingCents = budgetStatsResource.data.month_spending;
-                monthlySpending.setText(String.format("$%d.%02d", monthlySpendingCents / 100, monthlySpendingCents % 100));
-                int avgPriceCents = (int) Math.round(budgetStatsResource.data.mean_purchase);
-                avgPurchasePrice.setText(String.format("$%d.%02d", avgPriceCents / 100, avgPriceCents % 100));
-                numPurchases.setText(String.valueOf(budgetStatsResource.data.number_of_purchases));
-                int mostExpensivePurchaseCents = budgetStatsResource.data.most_expensive_purchase;
-                mostExpensivePurchase.setText(String.format("$%d.02%d", mostExpensivePurchaseCents / 100, mostExpensivePurchaseCents % 100));
-                monthlyBudgetDisplay.setText(String.format("%d.%02d", budgetStatsResource.data.budget / 100, budgetStatsResource.data.budget % 100));
-                likelihoodText.setText(String.format("%%%.0f", budgetStatsResource.data.likelihood * 100.0));
-            }
-        });
-
-        monthlyBudgetText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Empty
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Empty
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                double newBudget;
-                try {
-                    newBudget = Double.parseDouble(editable.toString());
-                } catch(Exception e) {
-                    newBudget = -1;
-                }
-
-                if(newBudget < 0) {
-                    monthlyBudgetCents = -1;
-                    return;
-                }
-
-                // convert to cents
-                monthlyBudgetCents = (int) Math.round(newBudget * 100);
-            }
-        });
-
-        Button updateBudgetBtn = view.findViewById(R.id.update_budget_btn);
-        updateBudgetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // change the budget both locally and on the backend
-
-                // if it is the same as before, don't update anything
-                // if(monthlyBudgetCents == oldBudgetCents) {return;}
-
-                // don't update if we have an invalid value
-                if(monthlyBudgetCents < 0) {
-                    return;
-                }
-
-                BudgetUpdate update = new BudgetUpdate();
-                update.limit = monthlyBudgetCents;
-
-                viewmodel.postBudget(update);
-            }
-        });
+        View view = binding.getRoot();
+        editBudget = view.findViewById(R.id.monthly_budget_text_input);
 
         return view;
+    }
+
+    public void clickUpdateBudget(View v) {
+        try {
+            float budget = Float.parseFloat(editBudget.getText().toString());
+            int budgetCents = (int) (budget * 100);
+            BudgetUpdate update = new BudgetUpdate();
+            update.limit = budgetCents;
+            viewmodel.postBudget(update);
+        } catch (NumberFormatException e) {
+            // Ignore invalid budgets
+        }
+    }
+
+    public String formatLikelihood(double x) {
+        return String.format("%%%.0f", x * 100.0);
     }
 }

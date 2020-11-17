@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
                 android:clickable="true"
-                android:onClick="@{fragment.clickAddPurchase}"
+                android:onClick="@{fragment::clickAddPurchase}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24" />

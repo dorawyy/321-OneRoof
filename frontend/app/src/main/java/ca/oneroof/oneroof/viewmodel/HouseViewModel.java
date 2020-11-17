@@ -99,8 +99,8 @@ public class HouseViewModel extends ViewModel {
 
     public void postPayment(int roommate, int amount) {
         Payment p = new Payment();
-        p.me = roommateId.getValue();
-        p.you = roommate;
+        p.you = roommateId.getValue();
+        p.me = roommate;
         p.amount = amount;
         api.postPayment(p).enqueue(new Callback<Void>() {
             @Override
