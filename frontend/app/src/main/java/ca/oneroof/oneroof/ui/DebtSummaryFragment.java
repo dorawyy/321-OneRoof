@@ -64,6 +64,7 @@ public class DebtSummaryFragment extends Fragment {
 
         final EditText editText = new EditText(getContext());
         editText.setHint("1.23");
+        editText.setId(R.id.debt_amount);
         editText.setSingleLine();
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         builder.setView(editText);
