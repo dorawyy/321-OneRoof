@@ -59,6 +59,7 @@ public class HouseViewModel extends ViewModel {
             @Override
             public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
                 purchases.refresh();
+                budgetStats.refresh();
             }
 
             @Override

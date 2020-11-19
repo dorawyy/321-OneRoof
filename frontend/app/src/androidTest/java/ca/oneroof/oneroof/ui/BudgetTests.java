@@ -60,7 +60,8 @@ public class BudgetTests {
                 .perform(click());
 
         // since this is a new user, check that no monthly budget is set yet (and all stats are 0)
-        checkStats(scenario, "0", "$0", "$0",
+        // starting budget is automatically set to $10.00
+        checkStats(scenario, "10.00", "$0", "$0",
                 "0", "$0", "0");
 
         // then, set a new monthly budget and check that the display is updated

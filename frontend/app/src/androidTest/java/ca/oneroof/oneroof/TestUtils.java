@@ -207,7 +207,7 @@ public class TestUtils {
                                   String likelihood) {
         // not sure if scenario arg is needed for context
         onView(withId(R.id.current_monthly_budget))
-                .check(matches(withText(monthly_spending)));
+                .check(matches(withText(budget)));
         onView(withId(R.id.monthly_spending_data))
                 .check(matches(withText(monthly_spending)));
         onView(withId(R.id.avg_purchase_price_data))

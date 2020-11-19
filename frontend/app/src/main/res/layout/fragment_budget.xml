@@ -211,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{Utils.formatDollars(viewmodel.budgetStats.data.data.monthly_budget)}"
+                android:text="@{Utils.formatDollars(viewmodel.budgetStats.data.data.budget)}"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"

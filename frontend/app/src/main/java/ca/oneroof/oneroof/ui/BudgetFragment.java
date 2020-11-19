@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,5 @@ public class BudgetFragment extends Fragment {
         }
     }
 
-    public String formatLikelihood(double x) {
-        return String.format("%%%.0f", x * 100.0);
-    }
+    public String formatLikelihood(double x) { return String.format("%.0f", x * 100.0) + "%"; }
 }
