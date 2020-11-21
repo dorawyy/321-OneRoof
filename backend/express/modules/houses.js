@@ -9,6 +9,7 @@ class Houses {
     constructor (knex, roommates) {
         this.knex = knex;
         this.roommates = roommates;
+        
         this.addHouse = async function (name, uid) {
             if (!(typeof name === "string")) {
                 throw new BadRequestError("name is not a string");
