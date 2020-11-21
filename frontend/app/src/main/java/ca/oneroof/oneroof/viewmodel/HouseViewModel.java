@@ -117,4 +117,19 @@ public class HouseViewModel extends ViewModel {
             }
         });
     }
+
+    public void deleteHouse(int houseId) {
+        api.deleteHouse(houseId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                // should have nothing (might fail idk)
+                house.refresh();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Empty
+            }
+        });
+    }
 }

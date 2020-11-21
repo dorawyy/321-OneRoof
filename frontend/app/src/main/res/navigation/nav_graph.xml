@@ -83,7 +83,11 @@
         android:id="@+id/houseSettingsFragment"
         android:name="ca.oneroof.oneroof.ui.HouseSettingsFragment"
         android:label="fragment_house_settings"
-        tools:layout="@layout/fragment_house_settings" />
+        tools:layout="@layout/fragment_house_settings" >
+        <action
+            android:id="@+id/action_houseSettingsFragment_to_homePgNoHouseFragment"
+            app:destination="@id/homePgNoHouseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/debtSummaryFragment"
         android:name="ca.oneroof.oneroof.ui.DebtSummaryFragment"
