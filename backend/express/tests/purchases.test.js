@@ -87,7 +87,7 @@ test("getPurchases with invalid house id", async () => {
     roommates.checkIfUserIsInHouse.mockResolvedValue(true);
     houses.validateHouseId.mockResolvedValue(false);
     
-    await expect(async () => await purchases.getPurchases("valid uid", 1))
+    await expect(async () => await purchases.getPurchases("valid uid", 99))
         .rejects.toEqual(new NotFoundError("house id not found"));
 });
 
@@ -95,7 +95,7 @@ test("getPurchases with invalid requester", async () => {
     roommates.checkIfUserIsInHouse.mockResolvedValue(false);
     houses.validateHouseId.mockResolvedValue(true);
     
-    await expect(async () => await purchases.getPurchases("valid uid", 1))
+    await expect(async () => await purchases.getPurchases("invalid uid", 1))
         .rejects.toEqual(new ForbiddenError("requester is not in house"));
 });
 
@@ -225,7 +225,7 @@ test("addPurchase with invalid house id", async () => {
         }
     ];
 
-    await expect(async () => await purchases.addPurchase(1, 5000, "Earls", divisions))
+    await expect(async () => await purchases.addPurchase(99, 5000, "Earls", divisions))
         .rejects.toEqual(new NotFoundError("house id not found"));
 });
 
@@ -276,6 +276,6 @@ test("deletePurchase with invalid requester", async () => {
     knex().del.mockResolvedValue(1);
 
     await expect(async () => await purchases.deletePurchase(99))
-    .rejects.toEqual(new ForbiddenError("requester is not the admin nor a site admin"));
+        .rejects.toEqual(new ForbiddenError("requester is not the admin nor a site admin"));
 });
 
