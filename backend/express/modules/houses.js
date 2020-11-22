@@ -49,63 +49,60 @@ class Houses {
 
             var rowsDeleted;
 
-            // rowsDeleted = await knex("division_roommate_join")
-            //     .join("roommates", "roommate_id", "=", "division_roommate_join_roomate")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .del();
+            rowsDeleted = await knex("division_roommate_join")
+                .whereIn("division_roommate_join_roommate", function() {
+                    return this.from("roommates")
+                        .join("houses", "house_id", "=", "roommate_house")
+                        .where("house_id", houseId)
+                        .select("roommate_id");
+                })
+                .del();
             
-            // console.log("rows deleted: ", rowsDeleted);
+            console.log("rows deleted: ", rowsDeleted);
 
-            // rowsDeleted = await knex("divisions")
-            //     .join("purchases", "purchase_id", "=", "division_purchase")
-            //     .join("roommates", "roommate_id", "=", "purchase_roommate")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .del();
+            rowsDeleted = await knex("divisions")
+                .whereIn("division_purchase", function() {
+                    return this.from("purchases")
+                        .join("roommates", "roommate_id", "=", "purchase_roommate")
+                        .join("houses", "house_id", "=", "roommate_house")
+                        .where("house_id", houseId)
+                        .select("purchase_id");
+                })
+                .del();
 
-            // console.log("rows deleted: ", rowsDeleted);
+            console.log("rows deleted: ", rowsDeleted);
 
-            // rowsDeleted = await knex("purchases")
-            //     .join("roommates", "roommate_id", "=", "purchase_roommate")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .del();
+            rowsDeleted = await knex("purchases")
+                .whereIn("purchase_roommate", function() {
+                    return this.from("roommates")
+                        .join("houses", "house_id", "=", "roommate_house")
+                        .where("house_id", houseId)
+                        .select("roommate_id");
+                })
+                .del();
 
-            // console.log("rows deleted: ", rowsDeleted);
+            console.log("rows deleted: ", rowsDeleted);
 
-            // rowsDeleted = await knex("youowemes")
-            //     .join("roommates", "roommate_id", "=", "youoweme_you")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .del();
+            rowsDeleted = await knex("youowemes")
+                .whereIn("youoweme_you", function() {
+                    return this.from("roommates")
+                        .join("houses", "house_id", "=", "roommate_house")
+                        .where("house_id", houseId)
+                        .select("roommate_id");
+                })
+                .del();
 
-            // console.log("rows deleted: ", rowsDeleted);
+            console.log("rows deleted: ", rowsDeleted);
 
-            // rowsDeleted = await knex("budgets")
-            //     .join("roommates", "roommate_id", "=", "budget_roommate")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .del();
-
-            // console.log("rows deleted: ", rowsDeleted);
-
-            // rowsDeleted = await knex("roommates")
-            //     .join("houses", "house_id", "=", "roommate_house")
-            //     .where("house_id", houseId)
-            //     .update("roommate_house", null);
-
-            // console.log("rows updated: ", rowsDeleted);
-
-            rowsDeleted = await knex("roommates")
+            var rowsUpdated = await knex("roommates")
                 .whereIn("roommate_house", function() {
-                    this.from("houses")
+                    return this.from("houses")
                         .where("house_id", houseId)
                         .select("house_id");
                 })
                 .update("roommate_house", null);
 
-            console.log("rows updated: ", rowsDeleted);
+            console.log("rows updated: ", rowsUpdated);
         
             rowsDeleted = await knex("houses")
                 .where("house_id", houseId)
