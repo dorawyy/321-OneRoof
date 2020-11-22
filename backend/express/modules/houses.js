@@ -46,10 +46,72 @@ class Houses {
             if (roommate.house != houseId || roommate.permissions !== "owner") {
                 throw new ForbiddenError("requester is not the house owner");
             }
+
+            var rowsDeleted;
+
+            // rowsDeleted = await knex("division_roommate_join")
+            //     .join("roommates", "roommate_id", "=", "division_roommate_join_roomate")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .del();
+            
+            // console.log("rows deleted: ", rowsDeleted);
+
+            // rowsDeleted = await knex("divisions")
+            //     .join("purchases", "purchase_id", "=", "division_purchase")
+            //     .join("roommates", "roommate_id", "=", "purchase_roommate")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .del();
+
+            // console.log("rows deleted: ", rowsDeleted);
+
+            // rowsDeleted = await knex("purchases")
+            //     .join("roommates", "roommate_id", "=", "purchase_roommate")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .del();
+
+            // console.log("rows deleted: ", rowsDeleted);
+
+            // rowsDeleted = await knex("youowemes")
+            //     .join("roommates", "roommate_id", "=", "youoweme_you")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .del();
+
+            // console.log("rows deleted: ", rowsDeleted);
+
+            // rowsDeleted = await knex("budgets")
+            //     .join("roommates", "roommate_id", "=", "budget_roommate")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .del();
+
+            // console.log("rows deleted: ", rowsDeleted);
+
+            // rowsDeleted = await knex("roommates")
+            //     .join("houses", "house_id", "=", "roommate_house")
+            //     .where("house_id", houseId)
+            //     .update("roommate_house", null);
+
+            // console.log("rows updated: ", rowsDeleted);
+
+            rowsDeleted = await knex("roommates")
+                .whereIn("roommate_house", function() {
+                    this.from("houses")
+                        .where("house_id", houseId)
+                        .select("house_id");
+                })
+                .update("roommate_house", null);
+
+            console.log("rows updated: ", rowsDeleted);
         
-            var rowsDeleted = await knex("houses")
+            rowsDeleted = await knex("houses")
                 .where("house_id", houseId)
                 .del();
+
+            console.log("rows deleted: ", rowsDeleted);
                 
             return rowsDeleted;
         }
