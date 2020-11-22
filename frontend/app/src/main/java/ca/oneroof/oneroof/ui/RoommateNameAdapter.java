@@ -1,6 +1,7 @@
 package ca.oneroof.oneroof.ui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +28,13 @@ public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapte
         }
     }
 
-    private HouseViewModel viewmodel;
-    private List<String> roommates;
+    private ArrayList<String> roommates;
+    private String user_name;
 
-    public RoommateNameAdapter() {
+    public RoommateNameAdapter(ArrayList<String> roommates, String user_name) {
         // TODO: error handling if this is null???
-        //roommates = viewmodel.house.data.getValue().data.roommate_names;
-        roommates = new ArrayList<String>();
-        roommates.add("Alyssa");
-        roommates.add("Maddie");
+        this.roommates = roommates;
+        this.user_name = user_name;
     }
 
     @Override
@@ -51,9 +50,8 @@ public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapte
     @Override
     public void onBindViewHolder(RoommateNameAdapter.ViewHolder holder, int position) {
         String roommate = roommates.get(position);
-
-        // if the name is the current user, don't want to display in list
-        //if (roommate.equals(viewmodel.roommateName.getValue())) { return; }
+        // if this is the user's name, don't display it
+        if (roommate.equals(user_name)) { return; }
 
         TextView textView = holder.nameTextView;
         textView.setText(roommate);
@@ -62,7 +60,6 @@ public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapte
     @Override
     public int getItemCount() {
         // exclude current user in count, since we won't display their name
-        //return roommates.size() - 1;
-        return roommates.size();
+        return roommates.size() - 1;
     }
 }

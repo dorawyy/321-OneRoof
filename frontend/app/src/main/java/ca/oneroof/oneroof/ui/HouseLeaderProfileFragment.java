@@ -66,7 +66,7 @@ public class HouseLeaderProfileFragment extends Fragment {
         // roommate list stuff
         RecyclerView roommate_list = (RecyclerView) view.findViewById(R.id.roommate_list);
         // Create adapter passing in the sample user data
-        RoommateNameAdapter adapter = new RoommateNameAdapter();
+        RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommate_names, viewmodel.roommateName.getValue());
         // Attach the adapter to the recyclerview to populate items
         roommate_list.setAdapter(adapter);
         // Set layout manager to position the items
