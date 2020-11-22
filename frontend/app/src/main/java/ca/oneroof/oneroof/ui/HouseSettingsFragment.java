@@ -18,7 +18,6 @@ import java.util.NavigableMap;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.AddRoommate;
-import ca.oneroof.oneroof.api.BudgetUpdate;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**
@@ -75,6 +74,16 @@ public class HouseSettingsFragment extends Fragment {
                 viewmodel.patchRoommates(addRoommate);
                 Navigation.findNavController(view)
                         .navigateUp();
+            }
+        });
+
+        Button deleteHouseBtn = view.findViewById(R.id.delete_house_btn);
+        deleteHouseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // delete house, and direct user to home screen to create or join a new house
+                viewmodel.deleteHouse(viewmodel.houseId.getValue());
+                Navigation.findNavController(view).navigate(R.id.action_houseSettingsFragment_to_homePgNoHouseFragment);
             }
         });
 

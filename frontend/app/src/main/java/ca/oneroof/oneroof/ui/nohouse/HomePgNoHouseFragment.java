@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
@@ -35,6 +36,18 @@ public class HomePgNoHouseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                /* do nothing: disable back button for this page
+                 * if a house leader deletes a house, they shouldn't be able to go back to
+                 * the settings page of the now deleted house
+                 */
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
