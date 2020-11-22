@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.Resource;
@@ -60,6 +62,15 @@ public class HouseLeaderProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_houseLeaderProfileFragment_to_budgetFragment);
             }
         });
+
+        // roommate list stuff
+        RecyclerView roommate_list = (RecyclerView) view.findViewById(R.id.roommate_list);
+        // Create adapter passing in the sample user data
+        RoommateNameAdapter adapter = new RoommateNameAdapter();
+        // Attach the adapter to the recyclerview to populate items
+        roommate_list.setAdapter(adapter);
+        // Set layout manager to position the items
+        roommate_list.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         return view;
     }
