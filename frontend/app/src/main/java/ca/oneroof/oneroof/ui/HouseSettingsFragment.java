@@ -83,7 +83,6 @@ public class HouseSettingsFragment extends Fragment {
             public void onClick(View view) {
                 // delete house, and direct user to home screen to create or join a new house
                 viewmodel.deleteHouse(viewmodel.houseId.getValue());
-                // TODO: figure out how to not let user press back button and go back to profile
                 Navigation.findNavController(view).navigate(R.id.action_houseSettingsFragment_to_homePgNoHouseFragment);
             }
         });
