@@ -2,14 +2,12 @@ package ca.oneroof.oneroof.ui.nohouse;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -20,10 +18,8 @@ import androidx.navigation.Navigation;
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.CreateHouseRequest;
 import ca.oneroof.oneroof.api.IdResponse;
-import ca.oneroof.oneroof.databinding.FragmentHomePgHasHouseBinding;
 import ca.oneroof.oneroof.databinding.FragmentHomePgNoHouseBinding;
 import ca.oneroof.oneroof.ui.LoginFragmentDirections;
-import ca.oneroof.oneroof.ui.house.HomePgHasHouseFragmentDirections;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,9 +36,9 @@ public class HomePgNoHouseFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                /* do nothing: disable back button for this page
-                 * if a house leader deletes a house, they shouldn't be able to go back to
-                 * the settings page of the now deleted house
+                /* Do nothing: disable back button for this page.
+                 * If a house leader deletes a house, they shouldn't be able to go back to
+                 * the settings page of the now deleted house.
                  */
             }
         };

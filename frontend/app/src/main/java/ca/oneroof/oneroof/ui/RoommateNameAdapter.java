@@ -32,7 +32,6 @@ public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapte
     private String user_name;
 
     public RoommateNameAdapter(ArrayList<String> roommates, String user_name) {
-        // TODO: error handling if this is null???
         this.roommates = roommates;
         this.user_name = user_name;
     }
