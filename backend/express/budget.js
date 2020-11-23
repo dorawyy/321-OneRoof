@@ -37,6 +37,7 @@ function hypergeom(a, b, c, z){
     var sum = 0;
     for(n = 0; n < 60; n++){
         sum += (pochhammer(a, n) * pochhammer(b, n) / (pochhammer(c, n) * factorial(n)) )* (z ** n) ;
+        console.log(sum);
     }
     return sum;
 }
@@ -54,15 +55,29 @@ function gamma(n){
 }
 
 function tDistCDF(t, v){
+    var cp;
     if(t < 0){
-        return 1 - tDistCDF(-1*t, v);
+        cp = 1 - tDistCDF(-1*t, v);
     }
-    var F12 = hypergeom(1/2, 1/2*(v+1), 3/2, -1 * (t**2)/v);
-    return 1/2 + t * gamma(1/2*(v + 1)) * F12 / (Math.sqrt(v * 3.1415926) * gamma(v/2));
+    else if (v == 1){
+        cp = 1/2 + 1/Math.PI*Math.atan(t);
+    }
+    else if (v == 2){
+        cp = 1/2 + t/(2*Math.sqrt(2)*Math.sqrt(1 + t**2/2));
+    }
+    else if (v == 3){
+        cp = 1/2 + 1/Math.PI*(t/(Math.sqrt(3)*(1+t**2/3)) + Math.atan(t/Math.sqrt(3)));
+    }
+    else {
+        var F12 = hypergeom(1/2, 1/2*(v+1), 3/2, -1 * (t**2)/v);
+        cp = 1/2 + t * gamma(1/2*(v + 1)) * F12 / (Math.sqrt(v * 3.1415926) * gamma(v/2));
+
+    }
+    return cp;    
 }
 
 
-function budgetPredictionFromList(purchases, limit){
+budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(purchases, limit){
     var probability;
     var purchase;
     var sum = 0;
@@ -111,7 +126,7 @@ function budgetPredictionFromList(purchases, limit){
         }
     }
 
-    var mean = sum/purchases.length;
+    var mean = sum/validPurchasesCount;
     var sumSq = 0;
 
     for(purchase of purchases){
