@@ -44,8 +44,8 @@ router.post("/login", async function(req, res) {
   }
   
   console.log("Name: " + roommateName);
-
-  var house = knex("houses")
+  
+  var house = await knex("houses")
     .where("house_id", roommateHouse)
     .select("house_admin");
 
