@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class House {
     public int id;
     public String name;
+    public int admin;
     public ArrayList<Integer> roommates;
     public ArrayList<String> roommate_names;
 }
