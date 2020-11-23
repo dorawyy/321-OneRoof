@@ -1,12 +1,9 @@
 package ca.oneroof.oneroof.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -35,7 +32,7 @@ public class HouseViewModel extends ViewModel {
     public MutableLiveData<Integer> inviteCode = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
-    public String permissions; // TODO: change this and the hardcoding below
+    public Boolean isHouseLeader;
     public NetworkLiveData<BudgetStats> budgetStats;
     public NetworkLiveData<DebtSummary> debtStats;
     public NetworkLiveData<Map<Integer, Integer>> debts;
@@ -49,9 +46,6 @@ public class HouseViewModel extends ViewModel {
         debtStats = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtSummary));
         budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, api::getBudgetStats));
         detailDebts = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtsDetailed));
-
-        permissions = "owner";
-        //permissions = "member";
     }
 
     public void postPurchase(Purchase purchase) {
@@ -122,7 +116,6 @@ public class HouseViewModel extends ViewModel {
         api.deleteHouse(houseId).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                // should have nothing (might fail idk)
                 house.refresh();
             }
 

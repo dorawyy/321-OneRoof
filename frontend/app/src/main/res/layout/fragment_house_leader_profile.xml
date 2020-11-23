@@ -115,30 +115,31 @@
                 android:id="@+id/house_settings_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="#875DD3"
-                android:text="House Settings"
                 android:onClick="@{fragment::clickSettings}"
+                android:text="House Settings"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/budget_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="#875DD3"
-                android:text="Budget"
                 android:onClick="@{fragment::clickBudget}"
+                android:text="Budget"
                 android:textColor="#FFFFFF"
                 android:textColorHighlight="#FFFFFF"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/roommate_list"
