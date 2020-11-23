@@ -45,7 +45,11 @@ router.post("/login", async function(req, res) {
   
   console.log("Name: " + roommateName);
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse};
+  var house = knex("houses")
+    .where("house_id", roommateHouse)
+    .select("house_admin");
+
+  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": house[0].house_admin};
   console.log(r)
   res.json(r);
 });
