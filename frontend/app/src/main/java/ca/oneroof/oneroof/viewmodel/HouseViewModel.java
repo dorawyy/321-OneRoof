@@ -1,12 +1,9 @@
 package ca.oneroof.oneroof.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -35,7 +32,7 @@ public class HouseViewModel extends ViewModel {
     public MutableLiveData<Integer> inviteCode = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
-    public String permissions; // TODO: change this and the hardcoding below
+    public Boolean isHouseLeader; // TODO: change this and the hardcoding below
     public NetworkLiveData<BudgetStats> budgetStats;
     public NetworkLiveData<DebtSummary> debtStats;
     public NetworkLiveData<Map<Integer, Integer>> debts;
@@ -50,8 +47,8 @@ public class HouseViewModel extends ViewModel {
         budgetStats = new NetworkLiveData<>(Transformations.map(roommateId, api::getBudgetStats));
         detailDebts = new NetworkLiveData<>(OneRoofAPIUtils.doubleTransform(houseId, roommateId, api::getDebtsDetailed));
 
-        permissions = "owner";
-        //permissions = "member";
+        isHouseLeader = true;
+        //isHouseLeader = false;
     }
 
     public void postPurchase(Purchase purchase) {
