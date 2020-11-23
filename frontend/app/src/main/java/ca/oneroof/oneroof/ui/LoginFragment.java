@@ -174,6 +174,7 @@ public class LoginFragment extends Fragment {
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         if (response.isSuccessful()) {
                                             Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
+                                            Log.d("OneRoof", "House id: " + response.body().house_id);
                                             houseViewModel.roommateId.setValue(response.body().roommate_id);
                                             houseViewModel.roommateName.setValue(response.body().name);
                                             if (response.body().house_id == null) {
