@@ -182,8 +182,7 @@ public class LoginFragment extends Fragment {
                                                         .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgNoHouseFragment());
                                             } else {
                                                 houseViewModel.houseId.setValue(response.body().house_id);
-                                                //houseViewModel.isHouseLeader = response.body().roommate_id == response.body().admin;
-                                                Log.d("OneRoof", String.valueOf(response.body().admin));
+                                                houseViewModel.isHouseLeader = response.body().roommate_id == response.body().admin;
                                                 Navigation.findNavController(getView())
                                                         .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
                                             }
