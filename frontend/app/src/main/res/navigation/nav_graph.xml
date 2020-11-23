@@ -52,7 +52,11 @@
             app:popExitAnim="@anim/anim_pop_out" />
         <action
             android:id="@+id/action_homePgHasHouseFragment_to_viewPurchase"
-            app:destination="@id/viewPurchase" />
+            app:destination="@id/viewPurchase"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:popEnterAnim="@anim/anim_pop_in"
+            app:popExitAnim="@anim/anim_pop_out" />
     </fragment>
     <fragment
         android:id="@+id/homePgNoHouseFragment"
@@ -83,7 +87,14 @@
         android:id="@+id/houseSettingsFragment"
         android:name="ca.oneroof.oneroof.ui.HouseSettingsFragment"
         android:label="fragment_house_settings"
-        tools:layout="@layout/fragment_house_settings" />
+        tools:layout="@layout/fragment_house_settings" >
+        <action
+            android:id="@+id/action_houseSettingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_houseSettingsFragment_to_houseLeaderProfileFragment"
+            app:destination="@id/houseLeaderProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/debtSummaryFragment"
         android:name="ca.oneroof.oneroof.ui.DebtSummaryFragment"

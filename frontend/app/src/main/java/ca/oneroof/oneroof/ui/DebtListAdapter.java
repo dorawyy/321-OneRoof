@@ -10,9 +10,7 @@ import java.util.function.Consumer;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.Debt;
-import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.databinding.ItemDebtBinding;
-import ca.oneroof.oneroof.databinding.ItemPurchaseBinding;
 import ca.oneroof.oneroof.ui.common.ClickCallback;
 import ca.oneroof.oneroof.ui.common.DataBoundListAdapter;
 
