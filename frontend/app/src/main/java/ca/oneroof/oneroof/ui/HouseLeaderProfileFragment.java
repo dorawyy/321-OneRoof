@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -54,6 +55,10 @@ public class HouseLeaderProfileFragment extends Fragment {
             Button houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
             houseSettingsBtn.setVisibility(View.VISIBLE);
         }
+
+        // display type of roommate: either house leader or house member
+        TextView type = view.findViewById(R.id.house_member_type);
+        type.setText(viewmodel.isHouseLeader ? "House Leader" : "House Member");
 
         return view;
     }
