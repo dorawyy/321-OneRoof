@@ -57,7 +57,7 @@ public class HouseSettingsFragment extends Fragment {
                     return;
                 }
                 viewmodel.patchRoommates(addRoommate);
-                Navigation.findNavController(view).navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToHouseLeaderProfileFragment());
+                Navigation.findNavController(view).navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToHomePgHasHouseFragment());
             }
         });
 

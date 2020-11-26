@@ -40,14 +40,10 @@ public class HouseLeaderProfileFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        // TODO: make this update right away after adding new roommate
-        // roommate list stuff
+        // display roommate list
         RecyclerView roommate_list = view.findViewById(R.id.roommate_list);
-        // Create adapter passing in the sample user data
         RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommate_names, viewmodel.roommateName.getValue());
-        // Attach the adapter to the recyclerview to populate items
         roommate_list.setAdapter(adapter);
-        // Set layout manager to position the items
         roommate_list.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         // only allow house settings to be accessible if user is the house leader
