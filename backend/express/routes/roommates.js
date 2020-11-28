@@ -71,9 +71,9 @@ router.post("/:roommateId/budget", async function (req, res) {
     var roommateId = req.params["roommateId"];
     var budget = req.body.limit;
 
-    await knex("budgets")
-      .update("budget_goal", budget)
-      .where("budget_roommate", roommateId);
+    await knex("roommates")
+      .update("roommate_budget", budget)
+      .where("roommate_id", roommateId);
 
     res.sendStatus(200);
 });

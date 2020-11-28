@@ -7,6 +7,20 @@ test('Simple list, far under', () => {
     .toBeCloseTo(0, 4);
 });
 
+test('Simple list, over', () => {
+    var purchases = [50, 20];
+    var limit = 10;
+    expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
+    .toBeCloseTo(0.8524, 4);
+});
+
+test('Empty', () => {
+    var purchases = [];
+    var limit = 10;
+    expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
+    .toBeCloseTo(0, 4);
+});
+
 // test('Simple list, slightly under', () => {
 //     var purchases = [100, 200, 145, 355, 100];
 //     var limit = 1000;

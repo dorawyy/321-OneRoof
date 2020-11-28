@@ -54,10 +54,10 @@ function gamma(n){
     return retval;
 }
 
-function tDistCDF(t, v){
+budgetCalculator.tDistCDF = function tDistCDF(t, v){
     var cp;
     if(t < 0){
-        cp = 1 - tDistCDF(-1*t, v);
+        cp = 1 - budgetCalculator.tDistCDF(-1*t, v);
     }
     else if (v == 1){
         cp = 1/2 + 1/Math.PI*Math.atan(t);
@@ -95,7 +95,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     }
 
     if(validPurchasesCount < 2){
-        if (purchases.length === 0){
+        if (validPurchasesCount === 0){
             return {
                 "monthly_budget": limit,
                 "likelihood": 0,
@@ -130,7 +130,9 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     var sumSq = 0;
 
     for(purchase of purchases){
-        sumSq  += (purchase - mean) ** 2;
+        if (purchase != null && purchase > 0){
+            sumSq  += (purchase - mean) ** 2;
+        }
     }
 
     var perPurchase = limit/validPurchasesCount;
@@ -140,13 +142,13 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
 
     var testStatistic = (mean - perPurchase) * Math.sqrt(validPurchasesCount) / sigma;
 
-    probability = tDistCDF(testStatistic, validPurchasesCount - 1);
+    probability = budgetCalculator.tDistCDF(testStatistic, validPurchasesCount - 1);
 
     return {
         "budget": limit,
         "likelihood": probability,
         "mean_purchase": mean,
-        "number_of_purchases": purchases.length,
+        "number_of_purchases": validPurchasesCount,
         "most_expensive_purchase": max,
         "monthly_spending": sum
       };
@@ -156,15 +158,15 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
 budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     var purchases = await debtCalculator.getTotalSpent(knex, roommateID);
 
-    budget = await knex.select("budget_goal")
-    .from("budgets")
-    .where("budget_roommate", roommateID);
+    budget = await knex.select("roommate_budget")
+    .from("roommates")
+    .where("roommate_id", roommateID);
 
     var limit = budget[0];
-    limit = limit ? limit["budget_goal"] : 1000;
+    limit = limit >= 0 ? limit["budget_goal"] : 1000;
 
     console.log(purchases); // eslint-disable-line no-console
 
-    return budgetPredictionFromList(purchases, limit);
+    return budgetCalculator.budgetPredictionFromList(purchases, limit);
 };
 module.exports = budgetCalculator;
