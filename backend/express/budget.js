@@ -148,7 +148,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
         "budget": limit,
         "likelihood": probability,
         "mean_purchase": mean,
-        "number_of_purchases": validPurchaseCount,
+        "number_of_purchases": validPurchasesCount,
         "most_expensive_purchase": max,
         "monthly_spending": sum
       };
@@ -163,7 +163,7 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     .where("roommate_id", roommateID);
 
     var limit = budget[0];
-    limit = limit >= 0 ? limit["budget_goal"] : 10;
+    limit = limit >= 0 ? limit["budget_goal"] : 1000;
 
     console.log(purchases); // eslint-disable-line no-console
 
