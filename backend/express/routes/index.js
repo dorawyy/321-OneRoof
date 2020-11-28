@@ -43,7 +43,7 @@ router.post("/login", async function(req, res) {
   
   console.log("Name: " + roommateName);
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse};
+  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "roommate_budget": 10};
   console.log(r)
   res.json(r);
 });
