@@ -42,8 +42,15 @@ router.post("/login", async function(req, res) {
   }
   
   console.log("Name: " + roommateName);
+  
+  var house = await knex("houses")
+    //.where("house_id", roommateHouse)
+    .where("house_id", roommateHouse || -1)
+    .select("house_admin");
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "roommate_budget": 10};
+  var admin = house.length > 0 ? house[0].house_admin : null;
+
+  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin, "roommate_budget": 10};
   console.log(r)
   res.json(r);
 });

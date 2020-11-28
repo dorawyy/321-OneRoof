@@ -1,5 +1,7 @@
 package ca.oneroof.oneroof.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.widget.Button;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -56,8 +57,7 @@ public class HouseSettingsFragment extends Fragment {
                     return;
                 }
                 viewmodel.patchRoommates(addRoommate);
-                Navigation.findNavController(view).navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToHouseLeaderProfileFragment());
-                //      .navigateUp();
+                Navigation.findNavController(view).navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToHomePgHasHouseFragment());
             }
         });
 
@@ -65,10 +65,26 @@ public class HouseSettingsFragment extends Fragment {
     }
 
     public void clickDelete(View v) {
-        // delete house, and direct user to home screen to create or join a new house
-        viewmodel.deleteHouse(viewmodel.houseId.getValue());
-        Navigation.findNavController(v)
-                .navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToLoginFragment());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Are you sure you want to delete the house?");
+
+        // get confirmation before actually deleting
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // delete house, and direct user to home screen to create or join a new house
+                viewmodel.deleteHouse(viewmodel.houseId.getValue());
+                Navigation.findNavController(v)
+                        .navigate(HouseSettingsFragmentDirections.actionHouseSettingsFragmentToLoginFragment());
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) { dialogInterface.cancel(); }
+        });
+
+        builder.show();
     }
 
 }

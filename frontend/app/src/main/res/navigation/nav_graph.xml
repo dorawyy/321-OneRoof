@@ -92,8 +92,8 @@
             android:id="@+id/action_houseSettingsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_houseSettingsFragment_to_houseLeaderProfileFragment"
-            app:destination="@id/houseLeaderProfileFragment" />
+            android:id="@+id/action_houseSettingsFragment_to_homePgHasHouseFragment"
+            app:destination="@id/homePgHasHouseFragment" />
     </fragment>
     <fragment
         android:id="@+id/debtSummaryFragment"
