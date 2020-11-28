@@ -113,6 +113,20 @@ class Houses {
         }
         
         this.getHouse = async function (houseId, uid) {
+            var roommate;
+        
+            try {
+                roommate = await this.roommates.getRoommateFromUid(uid);
+            } catch (error) {
+                throw new BadRequestError("requester not found");
+            }
+
+            console.log(roommate.house + "\n" + houseId);
+        
+            if (roommate.house !== houseId) {
+                throw new ForbiddenError("requester is not in the house");
+            }
+
             let house = {};
             house["id"] = houseId;
         

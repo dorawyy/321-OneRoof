@@ -1,10 +1,7 @@
 const BadRequestError = require("./errors/BadRequestError");
 const ForbiddenError = require("./errors/ForbiddenError");
-<<<<<<< HEAD
 var admin = require("firebase-admin");
-=======
 const NotFoundError = require("../modules/errors/NotFoundError");
->>>>>>> Implement backend module tests
 
 var lodash = require("lodash");
 

@@ -11,7 +11,8 @@ jest.mock("../db", () => {
         insert: jest.fn(() => mKnex),
         into: jest.fn(() => mKnex),
         del: jest.fn(() => mKnex),
-        update: jest.fn(() => mKnex)
+        update: jest.fn(() => mKnex),
+        whereIn: jest.fn(() => mKnex)
     };
     return jest.fn(() => mKnex);
 });
@@ -114,6 +115,11 @@ test("getHouse", async () => {
 });
 
 test("getHouse with invalid id", async () => {
+    roommates.getRoommateFromUid
+        .mockResolvedValueOnce({
+            house: 99
+        });
+
     knex().select
         .mockResolvedValueOnce([])
         .mockResolvedValueOnce([]);
@@ -123,20 +129,11 @@ test("getHouse with invalid id", async () => {
 });
 
 test("getHouse with invalid requester", async () => {
-    knex().select
-        .mockResolvedValueOnce([{
-            house_name: "House 1",
-            house_admin: 1
-        }])
-        .mockResolvedValueOnce([{
-                roommate_id: 1,
-                roommate_name: "Maddie"
-            }, {
-                roommate_id: 2,
-                roommate_name: "Alyssa"
-            }
-        ]);
-
+    roommates.getRoommateFromUid
+        .mockResolvedValueOnce({
+            house: 1
+        });
+        
     await expect(async () => await houses.getHouse(2, "invalid uid"))
         .rejects.toEqual(new ForbiddenError(
             "requester is not in the house"));
