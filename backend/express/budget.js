@@ -57,7 +57,7 @@ function gamma(n){
 budgetCalculator.tDistCDF = function tDistCDF(t, v){
     var cp;
     if(t < 0){
-        cp = 1 - tDistCDF(-1*t, v);
+        cp = 1 - budgetCalculator.tDistCDF(-1*t, v);
     }
     else if (v == 1){
         cp = 1/2 + 1/Math.PI*Math.atan(t);
@@ -142,7 +142,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
 
     var testStatistic = (mean - perPurchase) * Math.sqrt(validPurchasesCount) / sigma;
 
-    probability = tDistCDF(testStatistic, validPurchasesCount - 1);
+    probability = budgetCalculator.tDistCDF(testStatistic, validPurchasesCount - 1);
 
     return {
         "budget": limit,
@@ -163,7 +163,7 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     .where("roommate_id", roommateID);
 
     var limit = budget[0];
-    limit = limit ? limit["budget_goal"] : 1000;
+    limit = limit >= 0 ? limit["budget_goal"] : 10;
 
     console.log(purchases); // eslint-disable-line no-console
 
