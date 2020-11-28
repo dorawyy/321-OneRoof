@@ -23,7 +23,7 @@ router.post("/login", async function(req, res) {
 
   if (roommate.length === 0){
     roommateID = await knex("roommates")
-        .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": null, "roommate_budget": 10});
+        .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": null, "roommate_budget": 1000});
     roommateID = roommateID[0];
     roommateName = res.locals.user.name;
   }
@@ -50,7 +50,7 @@ router.post("/login", async function(req, res) {
 
   var admin = house.length > 0 ? house[0].house_admin : null;
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin, "roommate_budget": 10};
+  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin, "roommate_budget": 1000};
   console.log(r)
   res.json(r);
 });
