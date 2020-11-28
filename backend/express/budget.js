@@ -95,7 +95,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     }
 
     if(validPurchasesCount < 2){
-        if (purchases.length === 0){
+        if (validPurchasesCount === 0){
             return {
                 "monthly_budget": limit,
                 "likelihood": 0,
@@ -130,7 +130,9 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     var sumSq = 0;
 
     for(purchase of purchases){
-        sumSq  += (purchase - mean) ** 2;
+        if (purchase != null && purchase > 0){
+            sumSq  += (purchase - mean) ** 2;
+        }
     }
 
     var perPurchase = limit/validPurchasesCount;
@@ -146,7 +148,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
         "budget": limit,
         "likelihood": probability,
         "mean_purchase": mean,
-        "number_of_purchases": purchases.length,
+        "number_of_purchases": validPurchaseCount,
         "most_expensive_purchase": max,
         "monthly_spending": sum
       };
