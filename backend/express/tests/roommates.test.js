@@ -54,7 +54,7 @@ test("getRoommateFromId with invalid id", async () => {
     knex().select
         .mockResolvedValueOnce([]);
 
-    await expect(async () => await roommates.getRoommateFromId(1))
+    await expect(async () => await roommates.getRoommateFromId(99))
         .rejects.toEqual(new NotFoundError("roommate id not found"));
 });
 
@@ -67,7 +67,7 @@ test("deleteRoommate", async () => {
 test("deleteRoommate with invalid id", async () => {
     knex().del.mockResolvedValue(0);
 
-    await expect(async () => await roommates.deleteRoommate(1))
+    await expect(async () => await roommates.deleteRoommate(99))
         .rejects.toEqual(new NotFoundError("roommate id not found"));
 });
 
