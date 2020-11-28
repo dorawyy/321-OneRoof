@@ -116,7 +116,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
                 probability = 0;
             }
             return  {
-                "monthly_budget": limit,
+                "budget": limit,
                 "likelihood": probability,
                 "mean_purchase": purchases[0],
                 "number_of_purchases": purchases.length,
