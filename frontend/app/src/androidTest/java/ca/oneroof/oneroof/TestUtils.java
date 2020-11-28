@@ -110,9 +110,9 @@ public class TestUtils {
         onView(withId(R.id.add_roommate_btn))
                 .perform(click());
 
-        // Check that we're back in the profile page
-        onView(withId(R.id.house_name))
-                .check(matches(withText(houseName)));
+        // Check that we're back in the home page
+        onView(withId(R.id.house_purchases))
+                .check(matches(isDisplayed()));
 
         scenario.close();
     }
