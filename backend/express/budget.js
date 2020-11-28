@@ -156,15 +156,15 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
 budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     var purchases = await debtCalculator.getTotalSpent(knex, roommateID);
 
-    budget = await knex.select("budget_goal")
-    .from("budgets")
-    .where("budget_roommate", roommateID);
+    budget = await knex.select("roommate_budget")
+    .from("roommates")
+    .where("roommate_id", roommateID);
 
     var limit = budget[0];
     limit = limit ? limit["budget_goal"] : 1000;
 
     console.log(purchases); // eslint-disable-line no-console
 
-    return budgetPredictionFromList(purchases, limit);
+    return budgetCalculator.budgetPredictionFromList(purchases, limit);
 };
 module.exports = budgetCalculator;
