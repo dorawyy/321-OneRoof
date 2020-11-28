@@ -97,7 +97,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     if(validPurchasesCount < 2){
         if (validPurchasesCount === 0){
             return {
-                "monthly_budget": limit,
+                "budget": limit,
                 "likelihood": 0,
                 "mean_purchase": 0,
                 "number_of_purchases": 0,
