@@ -54,7 +54,7 @@ function gamma(n){
     return retval;
 }
 
-function tDistCDF(t, v){
+budgetCalculator.tDistCDF = function tDistCDF(t, v){
     var cp;
     if(t < 0){
         cp = 1 - tDistCDF(-1*t, v);
