@@ -25,7 +25,6 @@ import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.Division;
 import ca.oneroof.oneroof.api.Purchase;
 import ca.oneroof.oneroof.databinding.FragmentAddPurchaseBinding;
-import ca.oneroof.oneroof.ui.house.HomePgHasHouseFragmentDirections;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 /**

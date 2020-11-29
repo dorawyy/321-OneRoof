@@ -1,7 +1,6 @@
 package ca.oneroof.oneroof.ui;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 // reference: https://guides.codepath.com/android/using-the-recyclerview
 public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapter.ViewHolder> {

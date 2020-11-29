@@ -1,9 +1,6 @@
 package ca.oneroof.oneroof.api;
 
-import androidx.annotation.IdRes;
-
 import java.util.ArrayList;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
