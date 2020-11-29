@@ -1,5 +1,6 @@
 const BadRequestError = require("./errors/BadRequestError");
 const ForbiddenError = require("./errors/ForbiddenError");
+const NotFoundError = require("./errors/NotFoundError");   
 
 class Roommates {
     constructor (knex) {
@@ -12,6 +13,10 @@ class Roommates {
         }
         
         this.addRoommate = async function (name) {
+            if (typeof name !== "string") {
+                throw new BadRequestError("name is not a string");
+            }
+
             var id = await this.knex("roommates")
                 .insert({roommate_name: name});
             return id[0];
@@ -59,20 +64,21 @@ class Roommates {
             var roommatesList = await this.knex("roommates")
                 .where("roommate_uid", uid)
                 .select();
-        
+
             var roommate = roommatesList[0];
-        
-            if (!roommate.roommate_house) {
-                return {name: roommate.roommate_name};
-            }
-            
-            var housesList = await this.knex.select("house_admin")
-                .from("houses")
-                .where("house_id", roommate.roommate_house);
+                
+             if (!roommate.roommate_house) {
+               return {id: roommate.roommate_id, name: roommate.roommate_name};
+             }
+                
+            var housesList = await this.knex("houses")
+                .where("house_id", roommate.roommate_house)
+                .select("house_admin");
             
             var house = housesList[0];
             
             return {
+                id: roommate.roommate_id,
                 name: roommate.roommate_name,
                 permissions: house.house_admin === roommate.roommate_id ? 
                     "owner" : "member",
@@ -84,7 +90,11 @@ class Roommates {
             var roommatesList = await this.knex("roommates")
                 .where("roommate_id", roommateId)
                 .select();
-        
+            
+            if (roommatesList.length === 0) {
+                throw new BadRequestError("roommate id not found");
+            }
+
             var roommate = roommatesList[0];
         
             if (!roommate.roommate_house) {
@@ -105,10 +115,20 @@ class Roommates {
             };
         }
         
-        this.deleteRoommate = async function (roommateId) {
+        this.deleteRoommate = async function (roommateId, uid) {
+            var roommate = await this.getRoommateFromUid(uid);
+
+            if (roommate.id != roommateId) {
+                throw new ForbiddenError("requester is not roommate to be deleted");
+            }
+
             var rowsDeleted = await this.knex("roommates")
                 .where("roommate_id", roommateId)
                 .del();
+
+            if (rowsDeleted === 0) {
+                throw new NotFoundError("roommate id not found");
+            }
                 
             return rowsDeleted;
         }

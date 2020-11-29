@@ -29,7 +29,8 @@ router.get("/:roommateId", async function(req, res) {
 
 router.delete("/:roommateId", async function(req, res) {
     try {
-        var rowsDeleted = await roommates.deleteRoommate(req.params["roommateId"]);
+        var rowsDeleted = await roommates.deleteRoommate(req.params["roommateId"],
+            res.locals.user.uid);
         res.json({"rows deleted": rowsDeleted});
     } catch (error) {
         console.log(error);
