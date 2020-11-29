@@ -2,14 +2,12 @@ const BadRequestError = require("./errors/BadRequestError");
 const ForbiddenError = require("./errors/ForbiddenError");
 const NotFoundError = require("../modules/errors/NotFoundError");
 
-// var knex = require("../db");
-// var roommates = require("./roommates");
-
 class Houses {
     constructor (knex, roommates) {
         this.knex = knex;
         this.roommates = roommates;
         
+
         this.addHouse = async function (name, uid) {
             if (!(typeof name === "string")) {
                 throw new BadRequestError("name is not a string");
@@ -115,6 +113,18 @@ class Houses {
         }
         
         this.getHouse = async function (houseId, uid) {
+            var roommate;
+        
+            try {
+                roommate = await this.roommates.getRoommateFromUid(uid);
+            } catch (error) {
+                throw new BadRequestError("requester not found");
+            }
+        
+            if (roommate.house != houseId) {
+                throw new ForbiddenError("requester is not in the house");
+            }
+
             let house = {};
             house["id"] = houseId;
         

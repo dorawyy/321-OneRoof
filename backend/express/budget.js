@@ -68,6 +68,25 @@ budgetCalculator.tDistCDF = function tDistCDF(t, v){
     else if (v == 3){
         cp = 1/2 + 1/Math.PI*(t/(Math.sqrt(3)*(1+t**2/3)) + Math.atan(t/Math.sqrt(3)));
     }
+    else if (v == 4){
+        cp = 1 - (1/12) * t**2 / (1 + t**2 / 4);
+        cp *= 3/8 * t / Math.sqrt(1 + t**2 / 4);
+        cp += 1/2;
+    }
+    else if (v == 5){
+        cp = 1 + 2 / (3*(1 + t**2 / 5));
+        cp *= t / (Math.sqrt(5)*(1 + t**2 / 5));
+        cp *= 1 / Math.PI;
+        cp += 1/2;
+    }
+    else if (t**2 >= v){ // our hypergeom only works if this isn't the case
+        if (t < 0){
+            cp = 0.01;
+        }
+        else {
+            cp = 0.99; // close enough approximation
+        }
+    }
     else {
         var F12 = hypergeom(1/2, 1/2*(v+1), 3/2, -1 * (t**2)/v);
         cp = 1/2 + t * gamma(1/2*(v + 1)) * F12 / (Math.sqrt(v * 3.1415926) * gamma(v/2));
@@ -97,7 +116,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     if(validPurchasesCount < 2){
         if (validPurchasesCount === 0){
             return {
-                "monthly_budget": limit,
+                "budget": limit,
                 "likelihood": 0,
                 "mean_purchase": 0,
                 "number_of_purchases": 0,

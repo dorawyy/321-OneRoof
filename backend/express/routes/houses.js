@@ -6,13 +6,14 @@ var knex = require("../db");
 var debtCalculator = require("../debt_calculator");
 var admin = require("firebase-admin");
 
-var purchases = require("../modules/purchases");
-
 var Roommates = require("../modules/roommates");
 var roommates = new Roommates(knex);
 
 var Houses = require("../modules/houses");
 var houses = new Houses(knex, roommates);
+
+var Purchases = require("../modules/purchases");
+var purchases = new Purchases(knex, houses, roommates);
 
 router.use(auth.authMiddleware);
 
@@ -125,7 +126,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var roommateId = req.params["roommateId"];
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
-    var house = await houses.getHouse(houseId);
+    var house = await houses.getHouse(houseId, res.locals.user.uid);
 
     var debts = new Map();
 
@@ -200,7 +201,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
     var roommateId = req.params["roommateId"];
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
-    var house = await houses.getHouse(houseId);
+    var house = await houses.getHouse(houseId, res.locals.user.uid);
 
     var debts = new Map();
 
