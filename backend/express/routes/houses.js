@@ -126,7 +126,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var roommateId = req.params["roommateId"];
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
-    var house = await houses.getHouse(houseId);
+    var house = await houses.getHouse(houseId, res.locals.user.uid);
 
     var debts = new Map();
 
@@ -201,7 +201,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
     var roommateId = req.params["roommateId"];
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
-    var house = await houses.getHouse(houseId);
+    var house = await houses.getHouse(houseId, res.locals.user.uid);
 
     var debts = new Map();
 
