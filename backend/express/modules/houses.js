@@ -120,8 +120,6 @@ class Houses {
             } catch (error) {
                 throw new BadRequestError("requester not found");
             }
-
-            console.log(roommate.house + "\n" + houseId);
         
             if (roommate.house != houseId) {
                 throw new ForbiddenError("requester is not in the house");
