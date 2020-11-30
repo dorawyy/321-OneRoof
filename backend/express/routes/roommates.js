@@ -71,10 +71,9 @@ router.post("/:roommateId/budget", async function (req, res) {
     const roommateId = req.params["roommateId"];
     const budget = req.body.limit;
     try {
-    await knex("roommates")
-      .update("roommate_budget", budget)
-      .where("roommate_id", roommateId);
-
+        await knex("roommates")
+        .update("roommate_budget", budget)
+        .where("roommate_id", roommateId);
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -87,10 +86,9 @@ router.patch("/:roommateId/budget", async function (req, res) {
     const roommateId = req.params["roommateId"];
     const budget = req.body.limit;
     try {
-    await knex("roommates")
-      .update("roommate_budget", budget)
-      .where("roommate_id", roommateId);
-
+        await knex("roommates")
+        .update("roommate_budget", budget)
+        .where("roommate_id", roommateId);
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
