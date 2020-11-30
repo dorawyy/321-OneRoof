@@ -84,6 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/add_roommate_hdr" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/invite_code_input"
                 android:layout_width="174dp"
                 android:layout_height="wrap_content"
                 android:hint="123456"
@@ -115,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/remove_rommmate_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
