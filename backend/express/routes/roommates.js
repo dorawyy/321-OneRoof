@@ -68,13 +68,33 @@ router.get(":roommateId/avatar", async function(req, res) {
 })
 
 router.post("/:roommateId/budget", async function (req, res) {
-    console.log(`Post to budget: ${req.body.limit}`);
-    var roommateId = req.params["roommateId"];
-    var budget = req.body.limit;
-
+    const roommateId = req.params["roommateId"];
+    const budget = req.body.limit;
+    try {
     await knex("roommates")
       .update("roommate_budget", budget)
       .where("roommate_id", roommateId);
+
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
+
+    res.sendStatus(200);
+});
+
+router.patch("/:roommateId/budget", async function (req, res) {
+    const roommateId = req.params["roommateId"];
+    const budget = req.body.limit;
+    try {
+    await knex("roommates")
+      .update("roommate_budget", budget)
+      .where("roommate_id", roommateId);
+
+    } catch (error) {
+        console.log(error);
+        res.status(error.status || 500).send(error.message);
+    }
 
     res.sendStatus(200);
 });

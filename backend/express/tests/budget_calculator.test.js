@@ -1,29 +1,29 @@
 const budgetCalculator = require("../budget");
 
 test('Simple list, far under', () => {
-    var purchases = [50, 20, 10, 5];
-    var limit = 1500;
+    var purchases = [5000, 2000, 1000, 500];
+    var limit = 150000;
     expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
     .toBeCloseTo(0, 4);
 });
 
 test('Simple list, over', () => {
-    var purchases = [50, 20];
-    var limit = 10;
+    var purchases = [5000, 2000];
+    var limit = 1000;
     expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
     .toBeCloseTo(0.8524, 4);
 });
 
 test('Empty', () => {
     var purchases = [];
-    var limit = 10;
+    var limit = 1000;
     expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
     .toBeCloseTo(0, 4);
 });
 
-// test('Simple list, slightly under', () => {
-//     var purchases = [100, 200, 145, 355, 100];
-//     var limit = 1000;
-//     expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
-//     .toBeCloseTo(0.3476, 4);
-//   });
+test('Far overrun v = 4', () => {
+    var purchases = [2000, 5000, 1000, 500, 1500];
+    var limit = 1000;
+    expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
+    .toBeCloseTo(0.9575, 4);
+});
