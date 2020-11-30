@@ -46,11 +46,9 @@ public class BudgetFragment extends Fragment {
         try {
             float budget = Float.parseFloat(editBudget.getText().toString());
             int budgetCents = (int) (budget * 100);
-            //if (budgetCents >= 0) {
-                BudgetUpdate update = new BudgetUpdate();
-                update.limit = budgetCents;
-                viewmodel.postBudget(update);
-            //}
+            BudgetUpdate update = new BudgetUpdate();
+            update.limit = budgetCents;
+            viewmodel.patchBudget(update);
         } catch (NumberFormatException e) {
             // Ignore invalid budgets
         }

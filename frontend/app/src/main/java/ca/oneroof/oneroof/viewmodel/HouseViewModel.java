@@ -62,8 +62,8 @@ public class HouseViewModel extends ViewModel {
         });
     }
 
-    public void postBudget(BudgetUpdate update) {
-        api.postBudget(roommateId.getValue(), update).enqueue(new Callback() {
+    public void patchBudget(BudgetUpdate update) {
+        api.patchBudget(roommateId.getValue(), update).enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 budgetStats.refresh();

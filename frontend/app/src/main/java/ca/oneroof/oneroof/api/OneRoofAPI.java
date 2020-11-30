@@ -35,8 +35,8 @@ public interface OneRoofAPI {
     @GET("houses/{house}/debts_detailed/{roommate}")
     Call<ArrayList<Debt>> getDebtsDetailed(@Path("house") int houseId, @Path("roommate") int roommateId);
 
-    @POST("roommates/{roommate}/budget")
-    Call<Void> postBudget(@Path("roommate") int roommateId, @Body BudgetUpdate update);
+    @PATCH("roommates/{roommate}/budget")
+    Call<Void> patchBudget(@Path("roommate") int roommateId, @Body BudgetUpdate update);
 
     @GET("roommates/{roommate}/budget")
     Call<BudgetStats> getBudgetStats(@Path("roommate") int roommateId);
