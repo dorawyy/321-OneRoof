@@ -1,11 +1,6 @@
 package ca.oneroof.oneroof.ui;
 
-import android.app.Activity;
-
-import androidx.annotation.ContentView;
 import androidx.test.core.app.ActivityScenario;
-
-import static androidx.test.espresso.Espresso.onView;
 
 import org.junit.Test;
 
@@ -13,14 +8,13 @@ import java.util.Random;
 
 import ca.oneroof.oneroof.R;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withTagKey;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static ca.oneroof.oneroof.TestUtils.createHouseInviteOther;
 import static ca.oneroof.oneroof.TestUtils.createSharedPurchase;
