@@ -1,6 +1,5 @@
 package ca.oneroof.oneroof;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -12,9 +11,6 @@ import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
 
 import org.hamcrest.Matcher;
-import org.junit.Test;
-
-import java.util.Random;
 
 import ca.oneroof.oneroof.ui.MainActivity;
 
