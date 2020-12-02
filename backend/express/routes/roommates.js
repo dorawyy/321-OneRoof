@@ -39,7 +39,7 @@ router.delete("/:roommateId", async function(req, res) {
 });
 
 router.patch("/sethouse", async function(req, res) {
-    const roommateId = req.body.invite_code;
+    const roommateId = req.body.inviteCode;
 
     try {
         var rowUpdated = await roommates.setHouse(roommateId, res.locals.user.uid);
