@@ -64,7 +64,7 @@ router.get("/:houseId/purchases", async function(req, res) {
             return {
                 id: p.purchase_id,
                 purchaser: p.purchase_roommate,
-                purchaseName: p.roommate_name,
+                purchaserName: p.roommate_name,
                 amount: p.purchase_amount,
                 memo: p.purchase_memo,
             };
