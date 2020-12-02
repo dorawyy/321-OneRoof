@@ -166,10 +166,10 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
     return {
         "budget": limit,
         "likelihood": probability,
-        "mean_purchase": mean,
-        "number_of_purchases": validPurchasesCount,
-        "most_expensive_purchase": max,
-        "monthly_spending": sum
+        "meanPurchase": mean,
+        "numberOfPurchases": validPurchasesCount,
+        "mostExpensivePurchase": max,
+        "monthlySpending": sum
       };
 }
 
