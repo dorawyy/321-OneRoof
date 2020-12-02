@@ -25,5 +25,21 @@ test('Far overrun v = 4', () => {
     var purchases = [2000, 5000, 1000, 500, 1500];
     var limit = 1000;
     expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
-    .toBeCloseTo(0.9575, 4);
+    .toBeCloseTo(0.95746, 4);
+});
+
+test('Extremely long purchase list (10000)', () => {
+    var purchases = [];
+    for (var i = 0; i < 10000; i++) {
+        purchases.push(500 + (i % 7) * 1000);
+    }
+
+    var limit = 10000 * 7000;
+
+    var begin = performance.now();
+    expect(budgetCalculator.budgetPredictionFromList(purchases, limit).likelihood)
+    .toBeCloseTo(0.01, 2);
+    var end = performance.now();
+
+    expect(end - begin <= 5).toBeTruthy(); // 5 ms
 });

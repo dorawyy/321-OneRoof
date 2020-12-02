@@ -2,11 +2,9 @@ package ca.oneroof.oneroof.viewmodel;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,7 +23,6 @@ import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.api.Payment;
 import ca.oneroof.oneroof.api.Purchase;
-import ca.oneroof.oneroof.ui.LoginFragmentDirections;
 import ca.oneroof.oneroof.ui.common.ClickCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -141,15 +138,15 @@ public class HouseViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()) {
-                            Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
-                            Log.d("OneRoof", "House id: " + response.body().house_id);
-                            roommateId.setValue(response.body().roommate_id);
+                            Log.d("OneRoof", "Roommate id: " + response.body().roommateId);
+                            Log.d("OneRoof", "House id: " + response.body().houseId);
+                            roommateId.setValue(response.body().roommateId);
                             roommateName.setValue(response.body().name);
-                            if (response.body().house_id == null) {
+                            if (response.body().houseId == null) {
                                 onNoHouse.click(null);
                             } else {
-                                houseId.setValue(response.body().house_id);
-                                isHouseLeader.setValue(response.body().roommate_id == response.body().admin);
+                                houseId.setValue(response.body().houseId);
+                                isHouseLeader.setValue(response.body().roommateId == response.body().admin);
                                 onHasHouse.click(null);
                             }
                         } else {
