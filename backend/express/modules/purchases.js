@@ -77,7 +77,11 @@ class Purchases {
             }
         
             return { roommate: purchase[0]["purchase_roommate"], 
+<<<<<<< HEAD
                 roommateName: purchase[0]["roommate_name"],
+=======
+                roommate_name: purchase[0]["roommate_name"],
+>>>>>>> 30bcf54e0c8bcb03128b0bd5926fa3eea76118de
                 amount: purchase[0]["purchase_amount"], 
                 divisions: divisionsList, 
                 memo: purchase[0]["purchase_memo"] };
