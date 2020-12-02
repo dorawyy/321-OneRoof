@@ -198,8 +198,7 @@ public class TestUtils {
     }
 
     public static void checkStats(String budget, String monthly_spending, String avg_purchase_price,
-                                  String num_purchases, String most_expensive_purchase,
-                                  String likelihood) {
+                                  String num_purchases, String most_expensive_purchase) {
         onView(withId(R.id.current_monthly_budget))
                 .check(matches(withText(budget)));
         onView(withId(R.id.monthly_spending_data))
@@ -210,8 +209,6 @@ public class TestUtils {
                 .check(matches(withText(num_purchases)));
         onView(withId(R.id.most_expensive_purchase_data))
                 .check(matches(withText(most_expensive_purchase)));
-        //onView(withId(R.id.likelihood_data))
-         //       .check(matches(withText(likelihood)));
     }
 
     public static void setBudget(String newBudget) {

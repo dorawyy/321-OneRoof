@@ -29,7 +29,7 @@
                 android:id="@+id/debt_roommate_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{debt.roommate_name}"
+                android:text="@{debt.roommateName}"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -45,13 +45,13 @@ public class BudgetTests {
         // since this is a new user, check that no monthly budget is set yet (and all stats are 0)
         // starting budget is automatically set to $10.00
         checkStats("$10.00", "$0.00", "$0.00",
-                "0", "$0.00", "0");
+                "0", "$0.00");
 
         // then, set a new monthly budget and check that the display is updated
         // we have no purchases, so the stats should still all be 0
         setBudget("125.00");
         checkStats("$125.00", "$0.00", "$0.00",
-                "0", "$0.00", "0");
+                "0", "$0.00");
         scenario.close();
 
         // now, add a new purchase shared between user1 and user2 and check the stats for user1
@@ -64,7 +64,7 @@ public class BudgetTests {
                 .perform(click());
 
         checkStats("$125.00", "$10.00", "$10.00",
-                "1", "$10.00", "0");
+                "1", "$10.00");
         scenario.close();
 
         // have user2 add a purchase and check user1's stats
@@ -77,17 +77,17 @@ public class BudgetTests {
         onView(withId(R.id.budget_btn))
                 .perform(click());
 
-        checkStats("$125.00", "$30.00", "$15.00",// uh oh!!!
-                "2", "$20.00", "0");
+        checkStats("$125.00", "$30.00", "$15.00",
+                "2", "$20.00");
 
         // try to change budget to -1: budget shouldn't change
         setBudget("budget");
         checkStats("$125.00", "$30.00", "$15.00",
-                "2", "$20.00", "0");
+                "2", "$20.00");
 
         // try to change the budget to a string of characters: budget shouldn't change
         setBudget("budget");
         checkStats("$125.00", "$30.00", "$15.00",
-                "2", "$20.00", "0");
+                "2", "$20.00");
     }
 }
