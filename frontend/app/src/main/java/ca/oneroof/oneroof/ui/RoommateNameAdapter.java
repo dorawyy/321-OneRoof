@@ -11,14 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.Purchase;
-import ca.oneroof.oneroof.databinding.ItemPurchaseBinding;
-import ca.oneroof.oneroof.ui.common.DataBoundListAdapter;
 
 // reference: https://guides.codepath.com/android/using-the-recyclerview
 public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapter.ViewHolder> {
     private ArrayList<String> roommates;
-    private String user_name;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
@@ -30,9 +26,8 @@ public class RoommateNameAdapter extends RecyclerView.Adapter<RoommateNameAdapte
         }
     }
 
-    public RoommateNameAdapter(ArrayList<String> roommates, String user_name) {
+    public RoommateNameAdapter(ArrayList<String> roommates) {
         this.roommates = roommates;
-        this.user_name = user_name;
     }
 
     @Override

@@ -22,8 +22,6 @@ import static ca.oneroof.oneroof.TestUtils.loginAs;
 import static org.hamcrest.Matchers.allOf;
 
 public class DebtTest {
-    private ActivityScenario<MainActivity> scenario;
-
     // To run this test, run the backend with AUTH_DISABLED=1.
     @Test
     public void debtTest() {

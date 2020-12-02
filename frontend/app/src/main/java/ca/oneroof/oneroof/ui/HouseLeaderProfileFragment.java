@@ -40,7 +40,7 @@ public class HouseLeaderProfileFragment extends Fragment {
 
         // display roommate list
         RecyclerView roommate_list = view.findViewById(R.id.roommate_list);
-        RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommateNames, viewmodel.roommateName.getValue());
+        RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommateNames);
         roommate_list.setAdapter(adapter);
         roommate_list.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
