@@ -63,7 +63,7 @@ public class AddPurchaseFragment extends Fragment {
         memoText = view.findViewById(R.id.memo_text);
 
         DivisionEdit divEdit = new DivisionEdit(
-                viewmodel.house.data.getValue().data.roommate_names,
+                viewmodel.house.data.getValue().data.roommateNames,
                 viewmodel.house.data.getValue().data.roommates);
         divEdit.roommateEnables.set(viewmodel.house.data.getValue().data.roommates.indexOf(
                 viewmodel.roommateId.getValue()
@@ -79,7 +79,7 @@ public class AddPurchaseFragment extends Fragment {
 
     public void clickAddDivision(View v) {
         divisionEditAdapter.add(new DivisionEdit(
-                viewmodel.house.data.getValue().data.roommate_names,
+                viewmodel.house.data.getValue().data.roommateNames,
                 viewmodel.house.data.getValue().data.roommates));
     }
 

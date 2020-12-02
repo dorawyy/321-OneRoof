@@ -41,18 +41,6 @@ public class HomePgNoHouseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                /* Do nothing: disable back button for this page.
-                 * If a house leader deletes a house, they shouldn't be able to go back to
-                 * the settings page of the now deleted house.
-                 */
-            }
-        };
-
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -95,8 +83,7 @@ public class HomePgNoHouseFragment extends Fragment {
                                             Log.d("OneRoof", "FCM token: " + task.getResult().getToken());
                                             viewmodel.doLogin(task.getResult().getToken(), v -> {
                                                 nav.popBackStack();
-                                                Navigation.findNavController(getView())
-                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+                                                nav.navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
                                             }, v -> {
                                             });
                                         }

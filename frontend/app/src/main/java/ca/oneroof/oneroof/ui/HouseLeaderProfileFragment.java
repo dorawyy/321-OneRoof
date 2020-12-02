@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -42,7 +40,7 @@ public class HouseLeaderProfileFragment extends Fragment {
 
         // display roommate list
         RecyclerView roommate_list = view.findViewById(R.id.roommate_list);
-        RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommate_names, viewmodel.roommateName.getValue());
+        RoommateNameAdapter adapter = new RoommateNameAdapter(viewmodel.house.data.getValue().data.roommateNames, viewmodel.roommateName.getValue());
         roommate_list.setAdapter(adapter);
         roommate_list.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
