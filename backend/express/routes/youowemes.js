@@ -23,7 +23,7 @@ router.post("/", async function(req, res) {
             body: memo
         },
         tokens: registrationTokens,
-        topic : topic
+        topic
     }
 
     try {

@@ -20,7 +20,7 @@ router.use(auth.authMiddleware);
 router.post("/", async function(req, res) {
     try {
         const id = await houses.addHouse(req.body.name, res.locals.user.uid);
-        res.json({id: id});
+        res.json({id});
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -129,7 +129,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
 
     var debts = new Map();
 
-    for (roommate of house.roommates) {
+    for (var roommate of house.roommates) {
         if (String(roommate) !== roommateId) {
             debts.set(roommate, 0);
         }
@@ -202,13 +202,13 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
 
     var debts = new Map();
 
-    for (roommate of house.roommates) {
+    for (var roommate of house.roommates) {
         if (roommate != roommateId) {
             debts[roommate] = 0;
         }
     }
 
-    for (debt of allDebts) {
+    for (var debt of allDebts) {
         var amount = debt["amount"];
 
         if (debt["payer"] == roommateId) {
@@ -228,7 +228,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
         name = name[0]["roommate_name"];
 
         if (amount !== 0) {
-            debtsSummary.push({ roommate: id, amount: amount, roommateName: name});
+            debtsSummary.push({ roommate: id, amount, roommateName: name});
         }
     }
 

@@ -59,7 +59,7 @@ test("deleteHouse", async () => {
     });
     knex().del.mockResolvedValue(1);
 
-    const actual = await houses.deleteHouse(1);
+    const actual = await houses.deleteHouse("1");
     expect(actual).toEqual(1);
 });
 
@@ -72,7 +72,7 @@ test("deleteHouse with non owner requester", async () => {
     });
     knex().del.mockResolvedValue(1);
 
-    await expect(async () => await houses.deleteHouse(2))
+    await expect(async () => await houses.deleteHouse("2"))
         .rejects.toEqual(new ForbiddenError(
             "requester is not the house owner"));
 });
@@ -86,7 +86,7 @@ test("deleteHouse with invalid house id", async () => {
     });
     knex().del.mockResolvedValue(1);
 
-    await expect(async () => await houses.deleteHouse(99))
+    await expect(async () => await houses.deleteHouse("99"))
         .rejects.toEqual(new NotFoundError("house id not found"));
 });
 
@@ -105,9 +105,9 @@ test("getHouse", async () => {
             }
         ]);
     
-    const actual = await houses.getHouse(1, "valid uid");
+    const actual = await houses.getHouse("1", "valid uid");
     expect(actual).toEqual({
-        id: 1,
+        id: "1",
         name: "House 1",
         admin: 1,
         roommates: [1, 2],
@@ -125,7 +125,7 @@ test("getHouse with invalid id", async () => {
         .mockResolvedValueOnce([])
         .mockResolvedValueOnce([]);
 
-    await expect(async () => await houses.getHouse(99, "valid uid"))
+    await expect(async () => await houses.getHouse("99", "valid uid"))
         .rejects.toEqual(new NotFoundError("house id not found"));
 });
 
@@ -135,7 +135,7 @@ test("getHouse with invalid requester", async () => {
             house: 1
         });
         
-    await expect(async () => await houses.getHouse(2, "invalid uid"))
+    await expect(async () => await houses.getHouse("2", "invalid uid"))
         .rejects.toEqual(new ForbiddenError(
             "requester is not in the house"));
 });

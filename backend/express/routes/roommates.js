@@ -11,7 +11,7 @@ router.use(auth.authMiddleware);
 router.post("/", async function(req, res) {
     try {
         var id = await roommates.addRoommate(req.body.name);
-        res.json({id: id});
+        res.json({id});
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);

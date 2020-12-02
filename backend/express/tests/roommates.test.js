@@ -44,7 +44,7 @@ test("getRoommateFromId", async () => {
             "house_admin": 1
         }]);
 
-    const actual = await roommates.getRoommateFromId(1);
+    const actual = await roommates.getRoommateFromId("1");
     expect(actual).toEqual({
         name: "Maddie",
         permissions: "owner",
@@ -56,7 +56,7 @@ test("getRoommateFromId with invalid id", async () => {
     knex().select
         .mockResolvedValueOnce([]);
 
-    await expect(async () => await roommates.getRoommateFromId(99))
+    await expect(async () => await roommates.getRoommateFromId("99"))
         .rejects.toEqual(new NotFoundError("roommate id not found"));
 });
 
@@ -75,7 +75,7 @@ test("deleteRoommate", async () => {
 
     knex().del.mockResolvedValue(1);
 
-    const actual = await roommates.deleteRoommate(1, "valid uid");
+    const actual = await roommates.deleteRoommate("1", "valid uid");
     expect(actual).toEqual(1);
 });
 
@@ -94,7 +94,7 @@ test("deleteRoommate with invalid id", async () => {
 
     knex().del.mockResolvedValue(0);
 
-    await expect(async () => await roommates.deleteRoommate(99, "valid uid"))
+    await expect(async () => await roommates.deleteRoommate("99", "valid uid"))
         .rejects.toEqual(new NotFoundError("roommate id not found"));
 });
 
@@ -113,6 +113,6 @@ test("deleteRoommate without permissions", async () => {
 
     knex().del.mockResolvedValue(1);
 
-    await expect(async () => await roommates.deleteRoommate(2, "invalid uid"))
+    await expect(async () => await roommates.deleteRoommate("2", "invalid uid"))
         .rejects.toEqual(new ForbiddenError("requester is not roommate to be deleted"));
 });
