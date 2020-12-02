@@ -38,7 +38,7 @@ class Purchases {
                 };
             });
         
-        }
+        };
         
         this.getPurchase = async function (purchaseId, houseId, uid) {
             if (!(await this.roommates.checkIfUserIsInHouse(uid, houseId))) {
@@ -76,13 +76,12 @@ class Purchases {
                     memo: group[0]["division_memo"], roommates: roommates, roommate_names});
             }
         
-            return {
-                roommate: purchase[0]["purchase_roommate"], 
+            return { roommate: purchase[0]["purchase_roommate"], 
                 roommate_name: purchase[0]["roommate_name"],
                 amount: purchase[0]["purchase_amount"], 
                 divisions: divisionsList, 
-                memo: purchase[0]["purchase_memo"]};
-        }
+                memo: purchase[0]["purchase_memo"] };
+        };
         
         this.addPurchase = async function (purchaser, amount, memo, 
                 divisions, houseId, uid) {
@@ -148,7 +147,7 @@ class Purchases {
             }
             
             return purchaseId[0];
-        }
+        };
         
         this.deletePurchase = async function (purchaseId, houseId, uid) {
             if (!(await this.roommates.isHouseOwnerOrSiteAdmin(uid, houseId))) {
@@ -164,7 +163,7 @@ class Purchases {
             }
                 
             return rowsDeleted;
-        }
+        };
     }
 }
 
