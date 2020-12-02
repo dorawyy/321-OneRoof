@@ -110,7 +110,7 @@ test("getHouse", async () => {
         name: "House 1",
         admin: 1,
         roommates: [1, 2],
-        roommate_names: ["Maddie", "Alyssa"]
+        roommateNames: ["Maddie", "Alyssa"]
     });
 });
 

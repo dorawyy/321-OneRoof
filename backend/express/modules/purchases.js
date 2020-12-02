@@ -32,13 +32,13 @@ class Purchases {
                 return {
                     id: p.purchase_id,
                     purchaser: p.purchase_roommate,
-                    purchaser_name: p.roommate_name,
+                    purchaserName: p.roommate_name,
                     amount: p.purchase_amount,
                     memo: p.purchase_memo,
                 };
             });
         
-        }
+        };
         
         this.getPurchase = async function (purchaseId, houseId, uid) {
             if (!(await this.roommates.checkIfUserIsInHouse(uid, houseId))) {
@@ -71,18 +71,21 @@ class Purchases {
                 group.forEach(roommate => {
                     roommates.push(roommate["division_roommate_join_roommate"]);
                 });
-                var roommate_names = group.map(d => d.roommate_name);
+                var roommateNames = group.map(d => d.roommate_name);
                 divisionsList.push({amount: group[0]["division_amount"], 
-                    memo: group[0]["division_memo"], roommates: roommates, roommate_names});
+                    memo: group[0]["division_memo"], roommates: roommates, roommateNames});
             }
         
-            return {
-                roommate: purchase[0]["purchase_roommate"], 
+            return { roommate: purchase[0]["purchase_roommate"], 
+<<<<<<< HEAD
+                roommateName: purchase[0]["roommate_name"],
+=======
                 roommate_name: purchase[0]["roommate_name"],
+>>>>>>> 30bcf54e0c8bcb03128b0bd5926fa3eea76118de
                 amount: purchase[0]["purchase_amount"], 
                 divisions: divisionsList, 
-                memo: purchase[0]["purchase_memo"]};
-        }
+                memo: purchase[0]["purchase_memo"] };
+        };
         
         this.addPurchase = async function (purchaser, amount, memo, 
                 divisions, houseId, uid) {
@@ -148,7 +151,7 @@ class Purchases {
             }
             
             return purchaseId[0];
-        }
+        };
         
         this.deletePurchase = async function (purchaseId, houseId, uid) {
             if (!(await this.roommates.isHouseOwnerOrSiteAdmin(uid, houseId))) {
@@ -164,7 +167,7 @@ class Purchases {
             }
                 
             return rowsDeleted;
-        }
+        };
     }
 }
 

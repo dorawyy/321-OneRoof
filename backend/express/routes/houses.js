@@ -64,7 +64,7 @@ router.get("/:houseId/purchases", async function(req, res) {
             return {
                 id: p.purchase_id,
                 purchaser: p.purchase_roommate,
-                purchaser_name: p.roommate_name,
+                purchaseName: p.roommate_name,
                 amount: p.purchase_amount,
                 memo: p.purchase_memo,
             };
@@ -89,7 +89,7 @@ router.post("/:houseId/purchases", async function(req, res) {
     try {
         var id = await purchases.addPurchase(purchaser, amount, memo, divisions,
             houseId, uid);
-        res.json({id: id});
+        res.json({id});
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -120,14 +120,6 @@ router.delete("/:houseId/purchases/:purchaseId", async function(req, res) {
     }
 });
 
-router.patch("/:houseId/purchases/:purchaseId", async function(req, res) {
-    res.send("Patch purchase " + req.params["purchaseId"] + " from house " + req.params["houseId"]);
-});
-
-router.post("/:houseId/purchases/:purchaseId/receipt", function(req, res) {
-    res.send("Add receipt for purchase " + req.params["purchaseId"] + " from house " + req.params["houseId"]);
-});
-
 router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var houseId = req.params["houseId"];
     var roommateId = req.params["roommateId"];
@@ -139,7 +131,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
 
     for (roommate of house.roommates) {
         if (roommate != roommateId) {
-            debts[roommate] = 0;
+            debts.set(roommate, 0);
         }
     }
 
@@ -155,18 +147,18 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
         }
     }
 
-    var you_owe = 0;
-    var you_are_owed = 0;
+    var youOwe = 0;
+    var youAreOwed = 0;
 
-    for (const [roommate, debt] of debts) {
+    for (const [_, debt] of debts) {
         if (debt > 0) {
-            you_are_owed += debt;
+            youAreOwed += debt;
         } else if (debt < 0) {
-            you_owe += debt;
+            youOwe += debt;
         }
     }
 
-    res.json({you_owe: you_owe, you_are_owed: you_are_owed});
+    res.json({youOwe, youAreOwed});
 });
 
 router.get("/:houseId/debts/:roommateId", async function(req, res) {
@@ -179,14 +171,13 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
 
     var debts = {};
 
-    for (roommate of house.roommates) {
-        if (roommate != roommateId) {
+    for (var roommate of house.roommates) {
+        if (String(roommate) !== roommateId) {
             debts[roommate] = 0;
         }
     }
 
-    for (debt of allDebts) {
-        console.log(debt);
+    for (var debt of allDebts) {
         var amount = debt["amount"];
 
         if (debt["payer"] == roommateId) {
@@ -198,7 +189,6 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
         }
     }
 
-    console.log(debts);
     res.json(debts);
 });
 
@@ -237,8 +227,8 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
             .where('roommate_id', id);
         name = name[0]['roommate_name'];
 
-        if (amount != 0) {
-            debtsSummary.push({ roommate: id, amount: amount, roommate_name: name});
+        if (amount !== 0) {
+            debtsSummary.push({ roommate: id, amount: amount, roommateName: name});
         }
     }
 
@@ -254,9 +244,9 @@ router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(re
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
 
-    var debts = allDebts.filter(d => (d.payee == userRoommateId &&
-        d.payer == otherRoommateId) || (d.payee == otherRoommateId &&
-        d.payer == userRoommateId));
+    var debts = allDebts.filter(d => (String(d.payee) === userRoommateId &&
+        String(d.payer) === otherRoommateId) || (String(d.payee) === otherRoommateId &&
+        String(d.payer) === userRoommateId));
 
     var purchases = debts.filter(d => d.type === "purchase")
         .map(d => d.purchase);
@@ -264,7 +254,7 @@ router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(re
     var reimbursements = debts.filter(d => d.type === "payed back")
         .map(d => d.youoweme);
 
-    res.json({purchases: purchases, reimbursements: reimbursements});
+    res.json({purchases, reimbursements});
 });
 
 module.exports = router;

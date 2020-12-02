@@ -50,7 +50,7 @@ router.post("/login", async function(req, res) {
 
   var admin = house.length > 0 ? house[0].house_admin : null;
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin};
+  var r = {roommateId, name: roommateName, inviteCode: roommateID, houseId: roommateHouse, admin: admin};
   console.log(r)
   res.json(r);
 });
@@ -73,9 +73,5 @@ router.post("/payment", async function (req, res) {
 router.get("/", function(req, res, next) {
   res.send("Welcome to the One Roof API!");
 });
-
-router.post("/receipt-ocr", function(req, res) {
-  res.send("Upload receipt and return total");
-})
 
 module.exports = router;

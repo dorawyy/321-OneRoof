@@ -104,7 +104,7 @@ debtCalculator.getAllDebts = async function (knex, houseId) {
             var numRoommates = division["roommates"].length;
             var amountPerRoommate = division["amount"] / numRoommates;
             for (roommate of division["roommates"]) {
-                if (roommate != purchaser) {
+                if (roommate !== purchaser) {
                     debts.push({
                         payee: purchaser, 
                         payer: roommate, 
