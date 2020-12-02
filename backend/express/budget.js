@@ -181,8 +181,7 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
     .from("roommates")
     .where("roommate_id", roommateID);
 
-    var limit = budget[0];
-    limit = limit >= 0 ? limit["budget_goal"] : 1000;
+    var limit = budget[0]["roommate_budget"];
 
     console.log(purchases); // eslint-disable-line no-console
 

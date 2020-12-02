@@ -83,9 +83,12 @@ router.post("/:houseId/purchases", async function(req, res) {
     var amount = req.body.amount;
     var memo = req.body.memo;
     var divisions = req.body.divisions;
+    var houseId = req.params["houseId"];
+    var uid = res.locals.user.uid;
 
     try {
-        var id = await purchases.addPurchase(purchaser, amount, memo, divisions);
+        var id = await purchases.addPurchase(purchaser, amount, memo, divisions,
+            houseId, uid);
         res.json({id: id});
     } catch (error) {
         console.log(error);
@@ -95,7 +98,8 @@ router.post("/:houseId/purchases", async function(req, res) {
 
 router.get("/:houseId/purchases/:purchaseId", async function(req, res) {
     try {
-        res.json(await purchases.getPurchase(req.params["purchaseId"]));
+        res.json(await purchases.getPurchase(req.params["purchaseId"],
+            req.params["houseId"], res.locals.user.uid));
     } catch (error) {
         console.log(error);
         res.status(error.status || 500).send(error.message);
@@ -103,8 +107,12 @@ router.get("/:houseId/purchases/:purchaseId", async function(req, res) {
 });
 
 router.delete("/:houseId/purchases/:purchaseId", async function(req, res) {
+    var purchaseId = req.params["purchaseId"];
+    var houseId = req.params["houseId"];
+    var uid = res.locals.user.uid;
+
     try {
-        var rowsDeleted = await purchases.deletePurchase(req.params["purchaseId"]);
+        var rowsDeleted = await purchases.deletePurchase(purchaseId, houseId, uid);
         res.json({"rows deleted": rowsDeleted});
     } catch (error) {
         console.log(error);
