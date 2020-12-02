@@ -20,7 +20,7 @@ debtCalculator.getPurchaseInfo = async function (knex, purchase) {
         divisionsList.push({
             amount: group[0]["division_amount"], 
             memo: group[0]["division_memo"], 
-            roommates: roommates});
+            roommates});
     }
 
     var purchaseInfo = {

@@ -73,7 +73,7 @@ class Purchases {
                 });
                 var roommateNames = group.map((d) => d.roommate_name);
                 divisionsList.push({amount: group[0]["division_amount"], 
-                    memo: group[0]["division_memo"], roommates: roommates, roommateNames});
+                    memo: group[0]["division_memo"], roommates, roommateNames});
             }
         
             return { roommate: purchase[0]["purchase_roommate"], 
@@ -138,7 +138,7 @@ class Purchases {
                     title: `Purchase by ${purchaserName.roommate_name} ($${Math.floor(amount / 100)}.${amount % 100})`,
                     body: `You share the cost of this purchase: ${memo}`
                 },
-                tokens: tokens,
+                tokens,
               };
             
             if (tokens.length > 0) {
