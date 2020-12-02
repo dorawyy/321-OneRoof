@@ -136,7 +136,7 @@ test("getPurchase", async () => {
             }
         ]);
     
-    const actual = await purchases.getPurchase(1);
+    const actual = await purchases.getPurchase(1, 1, "uid");
     expect(actual).toEqual({
         roommate: 1, 
         roommate_name: "Maddie",
@@ -166,7 +166,7 @@ test("getPurchase with invalid purchase id", async () => {
         .mockResolvedValueOnce([])
         .mockResolvedValueOnce([]);
     
-    await expect(async () => await purchases.getPurchase(99))
+    await expect(async () => await purchases.getPurchase(99, 1, "uid"))
         .rejects.toEqual(new NotFoundError("purchase id not found"));
 });
 
@@ -177,7 +177,7 @@ test("getPurchase with invalid requester", async () => {
         .mockResolvedValueOnce([])
         .mockResolvedValueOnce([]);
     
-    await expect(async () => await purchases.getPurchase(99))
+    await expect(async () => await purchases.getPurchase(99, 1, "invalid uid"))
         .rejects.toEqual(new ForbiddenError("requester is not in house"));
 });
 
@@ -257,7 +257,7 @@ test("deletePurchase", async () => {
     roommates.isHouseOwnerOrSiteAdmin.mockResolvedValue(true);
 
     knex().del.mockResolvedValue(1);
-    const actual = await purchases.deletePurchase(1);
+    const actual = await purchases.deletePurchase(1, 1, "uid");
     expect(actual).toEqual(1);
 });
 
@@ -266,7 +266,7 @@ test("deletePurchase with invalid purchase id", async () => {
 
     knex().del.mockResolvedValue(0);
 
-    await expect(async () => await purchases.deletePurchase(99))
+    await expect(async () => await purchases.deletePurchase(99, 1, "uid"))
         .rejects.toEqual(new NotFoundError("purchase id not found"));
 });
 
@@ -275,7 +275,7 @@ test("deletePurchase with invalid requester", async () => {
 
     knex().del.mockResolvedValue(1);
 
-    await expect(async () => await purchases.deletePurchase(99))
+    await expect(async () => await purchases.deletePurchase(99, 1, "invalid uid"))
         .rejects.toEqual(new ForbiddenError("requester is not the admin nor a site admin"));
 });
 
