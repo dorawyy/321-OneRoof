@@ -14,7 +14,7 @@ debtCalculator.getPurchaseInfo = async function (knex, purchase) {
 
     for (const [_, group] of Object.entries(groupedDivisions)) {
         var roommates = new Array();
-        group.forEach(roommate => {
+        group.forEach((roommate) => {
             roommates.push(roommate["division_roommate_join_roommate"]);
         });
         divisionsList.push({
@@ -30,7 +30,7 @@ debtCalculator.getPurchaseInfo = async function (knex, purchase) {
         memo: purchase["purchase_memo"]};
 
     return purchaseInfo;
-}
+};
 
 debtCalculator.getPurchaseInfoWithIds = async function (knex, purchase) {
     var divisions = await knex.select("division_id", "division_amount", 
@@ -44,7 +44,7 @@ debtCalculator.getPurchaseInfoWithIds = async function (knex, purchase) {
 
     for (const [_, group] of Object.entries(groupedDivisions)) {
         var roommates = new Array();
-        group.forEach(roommate => {
+        group.forEach((roommate) => {
             roommates.push(roommate["division_roommate_join_roommate"]);
         });
         divisionsList.push({
@@ -103,7 +103,7 @@ debtCalculator.getAllDebts = async function (knex, houseId) {
         for (var division of purchaseInfo["divisions"]) {
             var numRoommates = division["roommates"].length;
             var amountPerRoommate = division["amount"] / numRoommates;
-            for (roommate of division["roommates"]) {
+            for (var roommate of division["roommates"]) {
                 if (roommate !== purchaser) {
                     debts.push({
                         payee: purchaser, 
@@ -156,8 +156,8 @@ debtCalculator.getTotalSpent = async function(knex, roommateId) {
         for (var division of purchaseInfo["divisions"]) {
             var numRoommates = division["roommates"].length;
             var amountPerRoommate = division["amount"] / numRoommates;
-            for (roommate of division["roommates"]) {
-                if (roommate == roommateId) {
+            for (var roommate of division["roommates"]) {
+                if (String(roommate) == roommateId) {
                     purchaseAmounts.push(amountPerRoommate);
                 }
             }

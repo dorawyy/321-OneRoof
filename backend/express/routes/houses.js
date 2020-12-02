@@ -60,7 +60,7 @@ router.get("/:houseId/purchases", async function(req, res) {
                     "purchase_amount", "purchase_memo",
                     "roommate_name");
         
-        purchases = purchases.map(p => {
+        purchases = purchases.map((p) => {
             return {
                 id: p.purchase_id,
                 purchaser: p.purchase_roommate,
@@ -130,18 +130,18 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var debts = new Map();
 
     for (roommate of house.roommates) {
-        if (roommate != roommateId) {
+        if (String(roommate) !== roommateId) {
             debts.set(roommate, 0);
         }
     }
 
-    for (debt of allDebts) {
+    for (var debt of allDebts) {
         var amount = debt["amount"];
 
-        if (debt["payer"] == roommateId) {
+        if (String(debt["payer"]) === roommateId) {
             var roommate = debt["payee"].toString();
             debts.set(roommate, (debts.get(roommate) || 0) - amount);
-        } else if (debt["payee"] == roommateId) {
+        } else if (String(debt["payee"]) === roommateId) {
             var roommate = debt["payer"].toString();
             debts.set(roommate, (debts.get(roommate) || 0) + amount);
         }
@@ -222,10 +222,10 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
 
     var debtsSummary = [];
     for (const [id, amount] of debts) {
-        var name = await knex('roommates')
-            .select('roommate_name')
-            .where('roommate_id', id);
-        name = name[0]['roommate_name'];
+        var name = await knex("roommates")
+            .select("roommate_name")
+            .where("roommate_id", id);
+        name = name[0]["roommate_name"];
 
         if (amount !== 0) {
             debtsSummary.push({ roommate: id, amount: amount, roommateName: name});
@@ -244,15 +244,15 @@ router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(re
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
 
-    var debts = allDebts.filter(d => (String(d.payee) === userRoommateId &&
+    var debts = allDebts.filter((d) => (String(d.payee) === userRoommateId &&
         String(d.payer) === otherRoommateId) || (String(d.payee) === otherRoommateId &&
         String(d.payer) === userRoommateId));
 
-    var purchases = debts.filter(d => d.type === "purchase")
-        .map(d => d.purchase);
+    var purchases = debts.filter((d) => d.type === "purchase")
+        .map((d) => d.purchase);
 
-    var reimbursements = debts.filter(d => d.type === "payed back")
-        .map(d => d.youoweme);
+    var reimbursements = debts.filter((d) => d.type === "payed back")
+        .map((d) => d.youoweme);
 
     res.json({purchases, reimbursements});
 });

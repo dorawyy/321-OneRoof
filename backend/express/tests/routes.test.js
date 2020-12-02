@@ -1,10 +1,10 @@
-const request = require('supertest')
-const app = require('../app')
+const request = require("supertest")
+const app = require("../app")
 
 describe("Houses endpoints", () => {
     it("should create a new house", async () => {
         const res = await request(app)
-            .post('/houses/')
+            .post("/houses/")
             .send({
                 name: "Test house",
                 uid: 0
@@ -16,7 +16,7 @@ describe("Houses endpoints", () => {
 
     it("should get a house", async () => {
         const res = await request(app)
-            .get('/houses/')
+            .get("/houses/")
             .query({ houseId: 1})
             .send();
         expect(res.statusCode).toEqual(201);
@@ -26,7 +26,7 @@ describe("Houses endpoints", () => {
 
     it("should fail to get a house", async () => {
         const res = await request(app)
-            .get('/houses/')
+            .get("/houses/")
             .query({ houseId: 321})
             .send();
         expect(res.statusCode).toEqual(400);
@@ -38,7 +38,7 @@ describe("Houses endpoints", () => {
 describe("Index endpoints", () => {
     it("should login", async () => {
         const res = await request(app)
-            .post('/login')
+            .post("/login")
             .send({
                 fcm: "fcm test",
             });
@@ -49,7 +49,7 @@ describe("Index endpoints", () => {
 
     it("should post a new payment", async () => {
         const res = await request(app)
-            .post('/payment')
+            .post("/payment")
             .send({
                 name: "Test house",
                 uid: 0
@@ -63,7 +63,7 @@ describe("Index endpoints", () => {
 describe("Roommates endpoints", () => {
     it("should add roommate", async () => {
         const res = await request(app)
-            .post('/roommates/login')
+            .post("/roommates/login")
             .send({
                 name: "test roommate",
             });
@@ -76,7 +76,7 @@ describe("Roommates endpoints", () => {
 describe("Youowemes endpoints", () => {
     it("should send youoweme", async () => {
         const res = await request(app)
-            .post('/youowemes')
+            .post("/youowemes")
             .send({
                 target: 0
             });
@@ -87,7 +87,7 @@ describe("Youowemes endpoints", () => {
 
     it("should send youoweme", async () => {
         const res = await request(app)
-            .patch('/youowemes')
+            .patch("/youowemes")
             .send({
                 payed: true
             });
