@@ -139,7 +139,13 @@ class Roommates {
         }
 
         this.isHouseOwnerOrSiteAdmin = async function (uid, houseId) {
-            return false;
+            var roommate = await this.getRoommateFromUid(uid);
+
+            console.log(roommate);
+            console.log(houseId);
+
+            return roommate.house == houseId && 
+                roommate.permissions === "owner";
         }
     }
 }
