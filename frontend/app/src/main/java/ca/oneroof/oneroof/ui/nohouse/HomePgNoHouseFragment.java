@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,6 +32,7 @@ public class HomePgNoHouseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         viewmodel = new ViewModelProvider(getActivity()).get(HouseViewModel.class);
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {

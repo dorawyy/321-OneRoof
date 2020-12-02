@@ -39,6 +39,7 @@ public class HomePgHasHouseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         FragmentHomePgHasHouseBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_home_pg_has_house, container, false);
         binding.setViewmodel(viewmodel);
