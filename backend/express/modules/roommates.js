@@ -27,7 +27,7 @@ class Roommates {
                 .where("roommate_uid", uid)
                 .select("roommate_id");
         
-            if (response.length == 0) {
+            if (response.length === 0) {
                 throw new BadRequestError("uid " + uid + " not found");
             }
         
