@@ -174,12 +174,12 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
 }
 
 
-budgetCalculator.budgetPrediction = async function budgetPrediction(roommateID){
-    var purchases = await debtCalculator.getTotalSpent(knex, roommateID);
+budgetCalculator.budgetPrediction = async function budgetPrediction(roommateId){
+    var purchases = await debtCalculator.getTotalSpent(knex, roommateId);
 
     budget = await knex.select("roommate_budget")
     .from("roommates")
-    .where("roommate_id", roommateID);
+    .where("roommate_id", roommateId);
 
     var limit = budget[0]["roommate_budget"];
 

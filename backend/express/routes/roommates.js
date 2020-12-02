@@ -119,8 +119,8 @@ router.patch("/:roommateId/budget", async function (req, res) {
 // });
 
 router.get("/:roommateId/budget", async function(req, res) {
-    var roommate_id = req.params["roommateId"];
-    var result = await budgetCalculator.budgetPrediction(roommate_id);
+    var roommateId = req.params["roommateId"];
+    var result = await budgetCalculator.budgetPrediction(roommateId);
     console.log(result);
 
     res.json(result);
