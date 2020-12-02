@@ -21,9 +21,6 @@ import ca.oneroof.oneroof.databinding.FragmentHouseSettingsBinding;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 
 public class HouseSettingsFragment extends Fragment {
-
-    private int inviteCode = -1; // indicator val
-
     private HouseViewModel viewmodel;
 
     @Override
