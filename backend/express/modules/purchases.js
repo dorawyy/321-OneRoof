@@ -40,12 +40,20 @@ class Purchases {
         
         }
         
-        this.getPurchase = async function (purchaseId) {
+        this.getPurchase = async function (purchaseId, houseId, uid) {
+            if (!(await this.roommates.checkIfUserIsInHouse(uid, houseId))) {
+                throw new ForbiddenError("requester is not in house");
+            }
+
             var purchase = await this.knex("purchases")
                 .join("roommates", "purchase_roommate", "=", "roommate_id")
                 .where("purchase_id", purchaseId)
                 .select("purchase_roommate", "purchase_amount", 
                     "purchase_memo", "roommate_name");
+
+            if (purchase.length === 0) {
+                throw new NotFoundError("purchase id not found");
+            }
         
             var divisions = await this.knex("divisions")
                 .join("division_roommate_join", "division_roommate_join_division", 
@@ -76,7 +84,17 @@ class Purchases {
                 memo: purchase[0]["purchase_memo"]};
         }
         
-        this.addPurchase = async function (purchaser, amount, memo, divisions) {
+        this.addPurchase = async function (purchaser, amount, memo, 
+                divisions, houseId, uid) {
+
+            if (!(await this.houses.validateHouseId(houseId))) {
+                throw new NotFoundError("house id not found");
+            }
+
+            if (!(await this.roommates.checkIfUserIsInHouse(uid, houseId))) {
+                throw new ForbiddenError("requester is not in house");
+            }
+
             var purchaseId = await this.knex("purchases")
                 .insert({purchase_amount: amount, 
                 purchase_memo: memo, purchase_roommate: purchaser});
@@ -132,10 +150,18 @@ class Purchases {
             return purchaseId[0];
         }
         
-        this.deletePurchase = async function (purchaseId) {
+        this.deletePurchase = async function (purchaseId, houseId, uid) {
+            if (!(await this.roommates.isHouseOwnerOrSiteAdmin(uid, houseId))) {
+                throw new ForbiddenError("requester is not the admin nor a site admin");
+            }
+
             var rowsDeleted = await this.knex("purchases")
                 .where("purchase_id", purchaseId)
                 .del();
+
+            if (rowsDeleted === 0) {
+                throw new NotFoundError("purchase id not found");
+            }
                 
             return rowsDeleted;
         }
