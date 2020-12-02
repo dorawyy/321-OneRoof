@@ -71,13 +71,13 @@ test("getPurchases", async () => {
     expect(actual).toEqual([{
             id: 1,
             purchaser: 1,
-            purchaser_name: "Maddie",
+            purchaserName: "Maddie",
             amount: 5000,
             memo: "Earls",
         }, {
             id: 2,
             purchaser: 2,
-            purchaser_name: "Alyssa",
+            purchaserName: "Alyssa",
             amount: 2000
         }
     ]);
@@ -139,20 +139,20 @@ test("getPurchase", async () => {
     const actual = await purchases.getPurchase(1, 1, "uid");
     expect(actual).toEqual({
         roommate: 1, 
-        roommate_name: "Maddie",
+        roommateName: "Maddie",
         amount: 5000, 
         divisions: [
             {
                 amount: 3000, 
                 memo: "Wings", 
                 roommates: [1, 2], 
-                roommate_names: ["Maddie", "Alyssa"]
+                roommateNames: ["Maddie", "Alyssa"]
             },
             {
                 amount: 2000, 
                 memo: "Spinach Dip", 
                 roommates: [1], 
-                roommate_names: ["Maddie"]
+                roommateNames: ["Maddie"]
             }
         ], 
         memo: "Earls"

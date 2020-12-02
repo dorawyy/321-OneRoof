@@ -32,7 +32,7 @@ class Purchases {
                 return {
                     id: p.purchase_id,
                     purchaser: p.purchase_roommate,
-                    purchaser_name: p.roommate_name,
+                    purchaserName: p.roommate_name,
                     amount: p.purchase_amount,
                     memo: p.purchase_memo,
                 };
@@ -71,13 +71,13 @@ class Purchases {
                 group.forEach(roommate => {
                     roommates.push(roommate["division_roommate_join_roommate"]);
                 });
-                var roommate_names = group.map(d => d.roommate_name);
+                var roommateNames = group.map(d => d.roommate_name);
                 divisionsList.push({amount: group[0]["division_amount"], 
-                    memo: group[0]["division_memo"], roommates: roommates, roommate_names});
+                    memo: group[0]["division_memo"], roommates: roommates, roommateNames});
             }
         
             return { roommate: purchase[0]["purchase_roommate"], 
-                roommate_name: purchase[0]["roommate_name"],
+                roommateName: purchase[0]["roommate_name"],
                 amount: purchase[0]["purchase_amount"], 
                 divisions: divisionsList, 
                 memo: purchase[0]["purchase_memo"] };

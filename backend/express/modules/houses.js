@@ -134,7 +134,7 @@ class Houses {
                 .select("roommate_id", "roommate_name");
         
             house["roommates"] = roommates.map(r => r.roommate_id);
-            house["roommate_names"] = roommates.map(r => r.roommate_name);
+            house["roommateNames"] = roommates.map(r => r.roommate_name);
             
             return house;
         }
