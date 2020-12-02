@@ -3,6 +3,7 @@ const NotFoundError = require("../modules/errors/NotFoundError");
 const ForbiddenError = require("../modules/errors/ForbiddenError");
 
 var knex = require("../db");
+
 jest.mock("../db", () => {
     const mKnex = { 
         select: jest.fn(() => mKnex),

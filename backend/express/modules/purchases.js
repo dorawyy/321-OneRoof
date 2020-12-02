@@ -28,7 +28,7 @@ class Purchases {
                         "purchase_amount", "purchase_memo",
                         "roommate_name");
         
-            return purchases.map(p => {
+            return purchases.map((p) => {
                 return {
                     id: p.purchase_id,
                     purchaser: p.purchase_roommate,
@@ -68,10 +68,10 @@ class Purchases {
             var divisionsList = new Array();
             for (const [_, group] of Object.entries(groupedDivisions)) {
                 var roommates = new Array();
-                group.forEach(roommate => {
+                group.forEach((roommate) => {
                     roommates.push(roommate["division_roommate_join_roommate"]);
                 });
-                var roommateNames = group.map(d => d.roommate_name);
+                var roommateNames = group.map((d) => d.roommate_name);
                 divisionsList.push({amount: group[0]["division_amount"], 
                     memo: group[0]["division_memo"], roommates: roommates, roommateNames});
             }
@@ -104,7 +104,7 @@ class Purchases {
                 var divisionMemo = division["memo"];
                 var roommates = division["roommates"];
         
-                roommates.forEach(r => allRoommates.add(r));
+                roommates.forEach((r) => allRoommates.add(r));
         
                 var divisionId = await this.knex("divisions")
                     .insert({division_purchase: purchaseId, 

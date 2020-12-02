@@ -10,7 +10,7 @@ class Roommates {
             var response = await this.knex.select().table("roommates")
                 .where({roommate_id: roommateId});
             return response.length > 0;
-        }
+        };
         
         this.addRoommate = async function (name) {
             if (typeof name !== "string") {
@@ -32,7 +32,7 @@ class Roommates {
             }
         
             return response[0].roommate_id;
-        }
+        };
         
         this.setHouse = async function (roommateId, uid) {
             if (!(await this.validateRoommateId(roommateId))) {
@@ -50,7 +50,7 @@ class Roommates {
                 .where("roommate_id", roommateId);
         
             return rowsUpdated;
-        }
+        };
         
         this.setHouseOfOwner = async function (uid, houseId) {
             var rowsUpdated = await this.knex("roommates")
@@ -58,7 +58,7 @@ class Roommates {
                 .where("roommate_uid", uid);
         
             return rowsUpdated;
-        }
+        };
         
         this.getRoommateFromUid = async function (uid) {
             var roommatesList = await this.knex("roommates")
@@ -84,7 +84,7 @@ class Roommates {
                     "owner" : "member",
                 house: roommate.roommate_house
             };
-        }
+        };
         
         this.getRoommateFromId = async function (roommateId) {
             var roommatesList = await this.knex("roommates")
@@ -113,12 +113,12 @@ class Roommates {
                     "owner" : "member",
                 house: roommate.roommate_house
             };
-        }
+        };
         
         this.deleteRoommate = async function (roommateId, uid) {
             var roommate = await this.getRoommateFromUid(uid);
 
-            if (roommate.id != roommateId) {
+            if (String(roommate.id) !== roommateId) {
                 throw new ForbiddenError("requester is not roommate to be deleted");
             }
 
@@ -131,19 +131,19 @@ class Roommates {
             }
                 
             return rowsDeleted;
-        }
+        };
         
         this.checkIfUserIsInHouse = async function (uid, houseId) {
             var roommate = await this.getRoommateFromUid(uid);
-            return roommate.house == houseId;
-        }
+            return String(roommate.house) == houseId;
+        };
 
         this.isHouseOwnerOrSiteAdmin = async function (uid, houseId) {
             var roommate = await this.getRoommateFromUid(uid);
 
-            return roommate.house == houseId && 
+            return String(roommate.house) === houseId && 
                 roommate.permissions === "owner";
-        }
+        };
     }
 }
 

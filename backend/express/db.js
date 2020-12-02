@@ -1,5 +1,5 @@
 var knexInitFile = require("./knexfile");
-var knex
+var knex;
 if (process.env.NODE_ENV === "test") {
     knex = require("knex")(knexInitFile.test);
   } else {

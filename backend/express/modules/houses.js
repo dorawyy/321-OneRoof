@@ -27,7 +27,7 @@ class Houses {
             await this.roommates.setHouseOfOwner(uid, id);
             
             return id;
-        }
+        };
         
         this.deleteHouse = async function (houseId, uid) {
             if (!(await this.validateHouseId(houseId))) {
@@ -42,7 +42,7 @@ class Houses {
                 throw new BadRequestError("requester not found");
             }
         
-            if (roommate.house != houseId || roommate.permissions !== "owner") {
+            if (String(roommate.house) !== houseId || roommate.permissions !== "owner") {
                 throw new ForbiddenError("requester is not the house owner");
             }
 
@@ -100,7 +100,7 @@ class Houses {
                 .del();
                 
             return rowsDeleted;
-        }
+        };
         
         this.getHouse = async function (houseId, uid) {
             var roommate;
@@ -111,7 +111,7 @@ class Houses {
                 throw new BadRequestError("requester not found");
             }
         
-            if (roommate.house != houseId) {
+            if (String(roommate.house) !== houseId) {
                 throw new ForbiddenError("requester is not in the house");
             }
 
@@ -133,18 +133,18 @@ class Houses {
                 .where("roommate_house", houseId)
                 .select("roommate_id", "roommate_name");
         
-            house["roommates"] = roommates.map(r => r["roommate_id"]);
-            house["roommateNames"] = roommates.map(r => r["roommate_name"]);
+            house["roommates"] = roommates.map((r) => r["roommate_id"]);
+            house["roommateNames"] = roommates.map((r) => r["roommate_name"]);
             
             return house;
-        }
+        };
         
         this.validateHouseId = async function (houseId) {
             var response = await this.knex("houses")
                 .where({"house_id": houseId})
                 .select();
             return response.length > 0;
-        }
+        };
     }
 }
 

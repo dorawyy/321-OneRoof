@@ -65,7 +65,7 @@ router.post("/payment", async function (req, res) {
     "youoweme_amount": req.body.amount,
   };
   console.log(d);
-  await knex('youowemes')
+  await knex("youowemes")
     .insert(d);
   res.sendStatus(200);
 });
