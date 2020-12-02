@@ -1,9 +1,12 @@
 package ca.oneroof.oneroof.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -15,11 +18,15 @@ import ca.oneroof.oneroof.api.Debt;
 import ca.oneroof.oneroof.api.DebtSummary;
 import ca.oneroof.oneroof.api.House;
 import ca.oneroof.oneroof.api.IdResponse;
+import ca.oneroof.oneroof.api.LoginRequest;
+import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.NetworkLiveData;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.api.Payment;
 import ca.oneroof.oneroof.api.Purchase;
+import ca.oneroof.oneroof.ui.LoginFragmentDirections;
+import ca.oneroof.oneroof.ui.common.ClickCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -126,5 +133,37 @@ public class HouseViewModel extends ViewModel {
                 // Empty
             }
         });
+    }
+
+    public void doLogin(String token, ClickCallback onHasHouse, ClickCallback onNoHouse) {
+        api.postLogin(new LoginRequest(token))
+                .enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("OneRoof", "Roommate id: " + response.body().roommate_id);
+                            Log.d("OneRoof", "House id: " + response.body().house_id);
+                            roommateId.setValue(response.body().roommate_id);
+                            roommateName.setValue(response.body().name);
+                            if (response.body().house_id == null) {
+                                onNoHouse.click(null);
+                            } else {
+                                houseId.setValue(response.body().house_id);
+                                isHouseLeader.setValue(response.body().roommate_id == response.body().admin);
+                                onHasHouse.click(null);
+                            }
+                        } else {
+                            Log.d("OneRoof",
+                                    "Failure to receive roommate id: " + response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Log.d("OneRoof", "Failure to post FCM token: "
+                                + t.getLocalizedMessage());
+                        Log.d("OneRoof", "Failed to log in");
+                    }
+                });
     }
 }

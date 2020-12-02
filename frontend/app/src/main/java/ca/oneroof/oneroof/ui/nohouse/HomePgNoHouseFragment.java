@@ -2,12 +2,14 @@ package ca.oneroof.oneroof.ui.nohouse;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import ca.oneroof.oneroof.R;
 import ca.oneroof.oneroof.api.CreateHouseRequest;
@@ -77,10 +84,23 @@ public class HomePgNoHouseFragment extends Fragment {
                     @Override
                     public void onResponse(Call<IdResponse> call, Response<IdResponse> response) {
                         if (response.isSuccessful()) {
-                            viewmodel.houseId.setValue(response.body().id);
                             NavController nav = Navigation.findNavController(v);
-                            nav.popBackStack();
-                            nav.navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                return;
+                                            }
+                                            Log.d("OneRoof", "FCM token: " + task.getResult().getToken());
+                                            viewmodel.doLogin(task.getResult().getToken(), v -> {
+                                                nav.popBackStack();
+                                                Navigation.findNavController(getView())
+                                                        .navigate(LoginFragmentDirections.actionLoginFragmentToHomePgHasHouseFragment());
+                                            }, v -> {
+                                            });
+                                        }
+                                    });
                         }
                     }
 
