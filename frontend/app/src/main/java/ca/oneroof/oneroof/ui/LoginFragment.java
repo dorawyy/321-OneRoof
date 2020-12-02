@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,15 +32,10 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.api.LoginRequest;
-import ca.oneroof.oneroof.api.LoginResponse;
 import ca.oneroof.oneroof.api.OneRoofAPI;
 import ca.oneroof.oneroof.api.OneRoofAPIUtils;
 import ca.oneroof.oneroof.viewmodel.HouseViewModel;
 import ca.oneroof.oneroof.viewmodel.HouseViewModelFactory;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
