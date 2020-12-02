@@ -118,10 +118,10 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
             return {
                 "budget": limit,
                 "likelihood": 0,
-                "mean_purchase": 0,
-                "number_of_purchases": 0,
-                "most_expensive_purchase": 0,
-                "monthly_spending": 0
+                "meanPurchase": 0,
+                "numberOfPurchases": 0,
+                "mostExpensivePurchase": 0,
+                "monthlySpending": 0
               };
         }
         else{
@@ -137,10 +137,10 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
             return  {
                 "budget": limit,
                 "likelihood": probability,
-                "mean_purchase": purchases[0],
-                "number_of_purchases": purchases.length,
-                "most_expensive_purchase": purchases[0],
-                "monthly_spending": purchases[0]
+                "meanPurchase": purchases[0],
+                "numberOfPurchases": purchases.length,
+                "mostExpensivePurchase": purchases[0],
+                "monthlySpending": purchases[0]
               };
         }
     }
