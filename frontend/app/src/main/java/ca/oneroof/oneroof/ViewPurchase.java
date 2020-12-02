@@ -14,10 +14,6 @@ import androidx.fragment.app.Fragment;
  */
 public class ViewPurchase extends Fragment {
 
-    public ViewPurchase() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -26,7 +22,6 @@ public class ViewPurchase extends Fragment {
      */
     public static ViewPurchase newInstance() {
         ViewPurchase fragment = new ViewPurchase();
-        Bundle args = new Bundle();
         return fragment;
     }
 
