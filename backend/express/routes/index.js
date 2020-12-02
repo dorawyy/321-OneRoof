@@ -16,19 +16,19 @@ router.post("/login", async function(req, res) {
         .from("roommates")
         .where("roommate_uid", uid);
 
-  var roommateID;
+  var roommateId;
   var roommateName;
   var existingFCM;
   var roommateHouse;
 
   if (roommate.length === 0){
-    roommateID = await knex("roommates")
+    roommateId = await knex("roommates")
         .insert({"roommate_name": res.locals.user.name, "roommate_uid": uid, "roommate_house": null, "roommate_budget": 1000});
-    roommateID = roommateID[0];
+    roommateId = roommateId[0];
     roommateName = res.locals.user.name;
   }
   else {
-    roommateID = roommate[0]["roommate_id"];
+    roommateId = roommate[0]["roommate_id"];
     roommateName = roommate[0]["roommate_name"];
     roommateHouse = roommate[0]["roommate_house"];
   }
@@ -38,7 +38,7 @@ router.post("/login", async function(req, res) {
 
   if (existingFCM.length === 0) {
     await knex("tokens")
-        .insert({"token": fcm, "roommate_id": roommateID});
+        .insert({"token": fcm, "roommate_id": roommateId});
   }
   
   console.log("Name: " + roommateName);
@@ -50,7 +50,7 @@ router.post("/login", async function(req, res) {
 
   var admin = house.length > 0 ? house[0].house_admin : null;
 
-  var r = {roommateId, name: roommateName, inviteCode: roommateID, houseId: roommateHouse, admin: admin};
+  var r = {roommateId, name: roommateName, inviteCode: roommateId, houseId: roommateHouse, admin: admin};
   console.log(r)
   res.json(r);
 });

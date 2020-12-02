@@ -18,7 +18,7 @@ class Houses {
         
             try {
                 var response = await knex("houses")
-                    .insert({house_name: name, house_admin: roommateId}, ["id"]);
+                    .insert({"house_name": name, "house_admin": roommateId}, ["id"]);
                 id = response[0];
             } catch (error) {
                 throw new Error("Failed to insert house \n" + error);
@@ -133,15 +133,15 @@ class Houses {
                 .where("roommate_house", houseId)
                 .select("roommate_id", "roommate_name");
         
-            house["roommates"] = roommates.map(r => r.roommate_id);
-            house["roommateNames"] = roommates.map(r => r.roommate_name);
+            house["roommates"] = roommates.map(r => r["roommate_id"]);
+            house["roommateNames"] = roommates.map(r => r["roommate_name"]);
             
             return house;
         }
         
         this.validateHouseId = async function (houseId) {
             var response = await this.knex("houses")
-                .where({house_id: houseId})
+                .where({"house_id": houseId})
                 .select();
             return response.length > 0;
         }
