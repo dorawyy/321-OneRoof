@@ -8,6 +8,7 @@ import java.util.Random;
 
 import ca.oneroof.oneroof.R;
 
+import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
@@ -74,6 +75,7 @@ public class DebtTest {
                 .perform(replaceText("50"));
         onView(withText("Forgive"))
                 .perform(click());
+        sleep(1000);
 
         scenario.close();
 

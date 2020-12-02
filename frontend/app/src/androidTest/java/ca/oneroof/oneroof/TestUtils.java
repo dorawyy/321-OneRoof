@@ -27,6 +27,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
+import static android.os.SystemClock.sleep;
 
 public class TestUtils {
     public static String getText(ViewInteraction matcher) {
@@ -68,6 +69,7 @@ public class TestUtils {
                 .perform(replaceText(houseName));
         onView(withText("Create"))
                 .perform(click());
+        sleep(1000);
 
         // We should be in the house right now.  Check that we see a list of purchases.
         onView(withId(R.id.house_purchases))
@@ -95,7 +97,6 @@ public class TestUtils {
 
         onView(withId(R.id.action_profile))
                 .perform(click());
-
         onView(withId(R.id.house_settings_btn))
                 .perform(click());
 
@@ -105,6 +106,7 @@ public class TestUtils {
 
         onView(withId(R.id.add_roommate_btn))
                 .perform(click());
+        sleep(1000);
 
         // Check that we're back in the home page
         onView(withId(R.id.house_purchases))
@@ -126,6 +128,7 @@ public class TestUtils {
         // Click login button with the mock login setup.
         onView(withId(R.id.login_button))
                 .perform(click());
+        sleep(1000);
 
         return scenario;
     }
@@ -141,6 +144,7 @@ public class TestUtils {
         // Hit the add purchase button.
         onView(withId(R.id.add_purchase_button))
                 .perform(click());
+        sleep(1000);
 
         // Type "10" into the first division.
         onData(anything())
@@ -166,6 +170,7 @@ public class TestUtils {
                 .inAdapterView(withId(R.id.division_list)).atPosition(1)
                 .onChildView(allOf(withId(R.id.roommate_toggle), withText(user2)))
                 .perform(click());
+        sleep(1000);
 
         // Total should now read 30.
         onView(withId(R.id.purchase_total))
@@ -177,6 +182,7 @@ public class TestUtils {
         // Make the purchase.
         onView(withId(R.id.action_save_purchase))
                 .perform(click());
+        sleep(1000);
 
         scenario.close();
 
@@ -217,5 +223,6 @@ public class TestUtils {
                 .perform(replaceText(newBudget));
         onView(withId(R.id.update_budget_btn))
                 .perform(click());
+        sleep(1000);
     }
 }
