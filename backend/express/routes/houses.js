@@ -139,7 +139,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
 
     for (roommate of house.roommates) {
         if (roommate != roommateId) {
-            debts[roommate] = 0;
+            debts.set(roommate, 0);
         }
     }
 
@@ -158,7 +158,7 @@ router.get("/:houseId/statistics/:roommateId", async function(req, res) {
     var you_owe = 0;
     var you_are_owed = 0;
 
-    for (const [roommate, debt] of debts) {
+    for (const [_, debt] of debts) {
         if (debt > 0) {
             you_are_owed += debt;
         } else if (debt < 0) {
@@ -179,14 +179,13 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
 
     var debts = {};
 
-    for (roommate of house.roommates) {
+    for (var roommate of house.roommates) {
         if (roommate != roommateId) {
             debts[roommate] = 0;
         }
     }
 
-    for (debt of allDebts) {
-        console.log(debt);
+    for (var debt of allDebts) {
         var amount = debt["amount"];
 
         if (debt["payer"] == roommateId) {
@@ -198,7 +197,6 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
         }
     }
 
-    console.log(debts);
     res.json(debts);
 });
 
@@ -237,7 +235,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
             .where('roommate_id', id);
         name = name[0]['roommate_name'];
 
-        if (amount != 0) {
+        if (amount !== 0) {
             debtsSummary.push({ roommate: id, amount: amount, roommate_name: name});
         }
     }
@@ -254,9 +252,9 @@ router.get("/:houseId/debts/:userRoommateId/:otherRoommateId", async function(re
 
     var allDebts = await debtCalculator.getAllDebts(knex, houseId);
 
-    var debts = allDebts.filter(d => (d.payee == userRoommateId &&
-        d.payer == otherRoommateId) || (d.payee == otherRoommateId &&
-        d.payer == userRoommateId));
+    var debts = allDebts.filter(d => (String(d.payee) === userRoommateId &&
+        String(d.payer) === otherRoommateId) || (String(d.payee) === otherRoommateId &&
+        String(d.payer) === userRoommateId));
 
     var purchases = debts.filter(d => d.type === "purchase")
         .map(d => d.purchase);

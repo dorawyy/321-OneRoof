@@ -34,7 +34,7 @@ function noAuthMiddleware(req, res, next) {
     next();
 }
 
-const authMiddleware = AUTH_DISABLED == 1 ? noAuthMiddleware : firebaseAuthMiddleware;
+const authMiddleware = AUTH_DISABLED === "1" ? noAuthMiddleware : firebaseAuthMiddleware;
 
 module.exports = {
     AUTH_DISABLED, 
