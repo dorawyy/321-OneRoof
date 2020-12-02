@@ -46,16 +46,6 @@ public class HouseLeaderProfileFragment extends Fragment {
         roommate_list.setAdapter(adapter);
         roommate_list.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        // only allow house settings to be accessible if user is the house leader
-        if (viewmodel.isHouseLeader) {
-            Button houseSettingsBtn = view.findViewById(R.id.house_settings_btn);
-            houseSettingsBtn.setVisibility(View.VISIBLE);
-        }
-
-        // display type of roommate: either house leader or house member
-        TextView type = view.findViewById(R.id.house_member_type);
-        type.setText(viewmodel.isHouseLeader ? "House Leader" : "House Member");
-
         return view;
     }
 
@@ -67,5 +57,9 @@ public class HouseLeaderProfileFragment extends Fragment {
     public void clickSettings(View v) {
         Navigation.findNavController(v)
                 .navigate(HouseLeaderProfileFragmentDirections.actionHouseLeaderProfileFragmentToHouseSettingsFragment());
+    }
+
+    public String memberTypeString(boolean isLeader) {
+        return isLeader ? "House Leader" : "House Member";
     }
 }

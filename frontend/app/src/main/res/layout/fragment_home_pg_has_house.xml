@@ -121,14 +121,13 @@
                 android:id="@+id/debt_summary_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
                 android:backgroundTint="#875DD3"
                 android:onClick="@{fragment::clickDebts}"
                 android:text="See Debts"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/purchase_history_hdr"
-                app:layout_constraintStart_toEndOf="@+id/you_are_owed_hdr"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

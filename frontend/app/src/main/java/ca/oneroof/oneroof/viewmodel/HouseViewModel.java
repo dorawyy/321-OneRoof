@@ -1,5 +1,6 @@
 package ca.oneroof.oneroof.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
@@ -31,7 +32,7 @@ public class HouseViewModel extends ViewModel {
     public MutableLiveData<String> roommateName = new MutableLiveData<>();
     public NetworkLiveData<House> house;
     public NetworkLiveData<ArrayList<Purchase>> purchases;
-    public Boolean isHouseLeader;
+    public MutableLiveData<Boolean> isHouseLeader = new MutableLiveData<>();
     public NetworkLiveData<BudgetStats> budgetStats;
     public NetworkLiveData<DebtSummary> debtStats;
     public NetworkLiveData<Map<Integer, Integer>> debts;
