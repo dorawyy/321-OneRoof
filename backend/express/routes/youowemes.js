@@ -30,10 +30,10 @@ router.post("/", async function(req, res) {
         if (status === true){
             var id = await knex("youowemes")
                 .insert({youoweme_you: target,
-                    youoweme_me: 0,
-                    youoweme_amount: amount,
-                    youoweme_create_date: new Date(),
-                    youoweme_payed: true
+                    "youoweme_me": 0,
+                    "youoweme_amount": amount,
+                    "youoweme_create_date": new Date(),
+                    "youoweme_payed": true
                 });
         }
         else {

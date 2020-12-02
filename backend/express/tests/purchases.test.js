@@ -54,16 +54,16 @@ test("getPurchases", async () => {
     
     knex().select
         .mockResolvedValueOnce([{
-                purchase_id: 1,
-                purchase_roommate: 1,
-                roommate_name: "Maddie",
-                purchase_amount: 5000,
-                purchase_memo: "Earls",
+                "purchase_id": 1,
+                "purchase_roommate": 1,
+                "roommate_name": "Maddie",
+                "purchase_amount": 5000,
+                "purchase_memo": "Earls",
             }, {
-                purchase_id: 2,
-                purchase_roommate: 2,
-                roommate_name: "Alyssa",
-                purchase_amount: 2000
+                "purchase_id": 2,
+                "purchase_roommate": 2,
+                "roommate_name": "Alyssa",
+                "purchase_amount": 2000
             }
         ]);
     
@@ -105,34 +105,34 @@ test("getPurchase", async () => {
     knex().select
         .mockResolvedValueOnce([
             {
-                purchase_id: 1,
-                purchase_roommate: 1,
-                roommate_name: "Maddie",
-                purchase_amount: 5000,
-                purchase_memo: "Earls",
+                "purchase_id": 1,
+                "purchase_roommate": 1,
+                "roommate_name": "Maddie",
+                "purchase_amount": 5000,
+                "purchase_memo": "Earls",
             }
         ])
         .mockResolvedValueOnce([
             {
-                division_id: 1,
-                division_amount: 3000,
-                division_memo: "Wings",
-                division_roommate_join_roommate: 1,
-                roommate_name: "Maddie"
+                "division_id": 1,
+                "division_amount": 3000,
+                "division_memo": "Wings",
+                "division_roommate_join_roommate": 1,
+                "roommate_name": "Maddie"
             }, 
             {
-                division_id: 1,
-                division_amount: 3000,
-                division_memo: "Wings",
-                division_roommate_join_roommate: 2,
-                roommate_name: "Alyssa"
+                "division_id": 1,
+                "division_amount": 3000,
+                "division_memo": "Wings",
+                "division_roommate_join_roommate": 2,
+                "roommate_name": "Alyssa"
             }, 
             {
-                division_id: 2,
-                division_amount: 2000,
-                division_memo: "Spinach Dip",
-                division_roommate_join_roommate: 1,
-                roommate_name: "Maddie"
+                "division_id": 2,
+                "division_amount": 2000,
+                "division_memo": "Spinach Dip",
+                "division_roommate_join_roommate": 1,
+                "roommate_name": "Maddie"
             }
         ]);
     

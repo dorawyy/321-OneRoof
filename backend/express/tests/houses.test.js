@@ -92,15 +92,15 @@ test("deleteHouse with invalid house id", async () => {
 test("getHouse", async () => {
     knex().select
         .mockResolvedValueOnce([{
-            house_name: "House 1",
-            house_admin: 1
+            "house_name": "House 1",
+            "house_admin": 1
         }])
         .mockResolvedValueOnce([{
-                roommate_id: 1,
-                roommate_name: "Maddie"
+                "roommate_id": 1,
+                "roommate_name": "Maddie"
             }, {
-                roommate_id: 2,
-                roommate_name: "Alyssa"
+                "roommate_id": 2,
+                "roommate_name": "Alyssa"
             }
         ]);
     
