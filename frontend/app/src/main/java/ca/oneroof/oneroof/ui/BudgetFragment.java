@@ -36,6 +36,8 @@ public class BudgetFragment extends Fragment {
         binding.setFragment(this);
         binding.setLifecycleOwner(this);
 
+        viewmodel.budgetStats.refresh();
+
         View view = binding.getRoot();
         editBudget = view.findViewById(R.id.monthly_budget_text_input);
         

@@ -50,7 +50,7 @@ router.post("/login", async function(req, res) {
 
   var admin = house.length > 0 ? house[0].house_admin : null;
 
-  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin, "roommate_budget": 1000};
+  var r = {"roommate_id": roommateID, "name": roommateName, "invite_code": roommateID, "house_id": roommateHouse, "admin": admin};
   console.log(r)
   res.json(r);
 });
