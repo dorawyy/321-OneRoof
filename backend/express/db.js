@@ -3,7 +3,7 @@ var knex
 if (process.env.NODE_ENV === "test") {
     knex = require("knex")(knex_init_file.test);
   } else {
-    knex = require("knex")(knex_init_file.development);
+    knex = require("knex")(knex_init_file.production);
 }
 
 module.exports = knex;
