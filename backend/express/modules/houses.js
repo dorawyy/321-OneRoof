@@ -56,8 +56,6 @@ class Houses {
                         .select("roommate_id");
                 })
                 .del();
-            
-            console.log("rows deleted: ", rowsDeleted);
 
             rowsDeleted = await knex("divisions")
                 .whereIn("division_purchase", function() {
@@ -69,8 +67,6 @@ class Houses {
                 })
                 .del();
 
-            console.log("rows deleted: ", rowsDeleted);
-
             rowsDeleted = await knex("purchases")
                 .whereIn("purchase_roommate", function() {
                     return this.from("roommates")
@@ -80,7 +76,6 @@ class Houses {
                 })
                 .del();
 
-            console.log("rows deleted: ", rowsDeleted);
 
             rowsDeleted = await knex("youowemes")
                 .whereIn("youoweme_you", function() {
@@ -91,8 +86,6 @@ class Houses {
                 })
                 .del();
 
-            console.log("rows deleted: ", rowsDeleted);
-
             var rowsUpdated = await knex("roommates")
                 .whereIn("roommate_house", function() {
                     return this.from("houses")
@@ -101,13 +94,10 @@ class Houses {
                 })
                 .update("roommate_house", null);
 
-            console.log("rows updated: ", rowsUpdated);
         
             rowsDeleted = await knex("houses")
                 .where("house_id", houseId)
                 .del();
-
-            console.log("rows deleted: ", rowsDeleted);
                 
             return rowsDeleted;
         }

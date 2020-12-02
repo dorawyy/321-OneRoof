@@ -18,7 +18,6 @@ var purchases = new Purchases(knex, houses, roommates);
 router.use(auth.authMiddleware);
 
 router.post("/", async function(req, res) {
-    console.log("Uid: ", res.locals.user.uid);
     try {
         const id = await houses.addHouse(req.body.name, res.locals.user.uid);
         res.json({id: id});
