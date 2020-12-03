@@ -48,7 +48,7 @@ router.post("/", async function(req, res) {
         }
         admin.messaging().sendMulticast(message)
         .then((response) => {
-            console.log(response.successCount + " messages were sent successfully");
+            console.log(response.successCount + " messages were sent successfully"); // eslint-disable-line no-console
         });
         res.json({id: id[0]});
     } catch (error) {

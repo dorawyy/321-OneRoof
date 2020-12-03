@@ -37,7 +37,7 @@ function hypergeom(a, b, c, z){
     var sum = 0;
     for(n = 0; n < 60; n++){
         sum += (pochhammer(a, n) * pochhammer(b, n) / (pochhammer(c, n) * factorial(n)) )* (z ** n) ;
-        console.log(sum);
+        console.log(sum); // eslint-disable-line no-console
     }
     return sum;
 }
