@@ -13,7 +13,7 @@ router.post("/", async function(req, res) {
         var id = await roommates.addRoommate(req.body.name);
         res.json({id});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -22,7 +22,7 @@ router.get("/:roommateId", async function(req, res) {
     try {
         res.json(await roommates.getRoommateFromId(req.params["roommateId"]));
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -33,7 +33,7 @@ router.delete("/:roommateId", async function(req, res) {
             res.locals.user.uid);
         res.json({"rows deleted": rowsDeleted});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -45,7 +45,7 @@ router.patch("/sethouse", async function(req, res) {
         var rowUpdated = await roommates.setHouse(roommateId, res.locals.user.uid);
         res.json({"rows updated": rowUpdated});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -58,7 +58,7 @@ router.post("/:roommateId/budget", async function (req, res) {
         .update("roommate_budget", budget)
         .where("roommate_id", roommateId);
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 
@@ -73,7 +73,7 @@ router.patch("/:roommateId/budget", async function (req, res) {
         .update("roommate_budget", budget)
         .where("roommate_id", roommateId);
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 
@@ -83,7 +83,7 @@ router.patch("/:roommateId/budget", async function (req, res) {
 router.get("/:roommateId/budget", async function(req, res) {
     var roommateId = req.params["roommateId"];
     var result = await budgetCalculator.budgetPrediction(roommateId);
-    console.log(result);
+    console.log(result); // eslint-disable-line no-console
 
     res.json(result);
 });

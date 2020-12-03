@@ -22,7 +22,7 @@ router.post("/", async function(req, res) {
         const id = await houses.addHouse(req.body.name, res.locals.user.uid);
         res.json({id});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -33,7 +33,7 @@ router.delete("/:houseId", async function(req, res) {
             res.locals.user.uid);
         res.json({"rows deleted": rowsDeleted});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -43,7 +43,7 @@ router.get("/:houseId", async function(req, res) {
         res.json(await houses.getHouse(req.params["houseId"],
             res.locals.user.uid));
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -73,7 +73,7 @@ router.get("/:houseId/purchases", async function(req, res) {
         
         res.json(purchases);
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -91,7 +91,7 @@ router.post("/:houseId/purchases", async function(req, res) {
             houseId, uid);
         res.json({id});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -101,7 +101,7 @@ router.get("/:houseId/purchases/:purchaseId", async function(req, res) {
         res.json(await purchases.getPurchase(req.params["purchaseId"],
             req.params["houseId"], res.locals.user.uid));
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -115,7 +115,7 @@ router.delete("/:houseId/purchases/:purchaseId", async function(req, res) {
         var rowsDeleted = await purchases.deletePurchase(purchaseId, houseId, uid);
         res.json({"rows deleted": rowsDeleted});
     } catch (error) {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         res.status(error.status || 500).send(error.message);
     }
 });
@@ -232,7 +232,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
         }
     }
 
-    console.log(debtsSummary);
+    console.log(debtsSummary); // eslint-disable-line no-console
     res.json(debtsSummary);
 });
 

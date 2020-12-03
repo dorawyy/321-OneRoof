@@ -41,7 +41,7 @@ router.post("/login", async function(req, res) {
         .insert({"token": fcm, "roommate_id": roommateId});
   }
   
-  console.log("Name: " + roommateName);
+  console.log("Name: " + roommateName); // eslint-disable-line no-console
   
   var house = await knex("houses")
     //.where("house_id", roommateHouse)
@@ -51,7 +51,7 @@ router.post("/login", async function(req, res) {
   var admin = house.length > 0 ? house[0].house_admin : null;
 
   var r = {roommateId, name: roommateName, inviteCode: roommateId, houseId: roommateHouse, admin};
-  console.log(r);
+  console.log(r); // eslint-disable-line no-console
   res.json(r);
 });
 
@@ -64,7 +64,7 @@ router.post("/payment", async function (req, res) {
     "youoweme_payed": true,
     "youoweme_amount": req.body.amount,
   };
-  console.log(d);
+  console.log(d); // eslint-disable-line no-console
   await knex("youowemes")
     .insert(d);
   res.sendStatus(200);
