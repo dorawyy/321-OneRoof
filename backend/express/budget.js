@@ -93,7 +93,7 @@ budgetCalculator.tDistCDF = function tDistCDF(t, v){
 
     }
     return cp;    
-}
+};
 
 
 budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(purchases, limit){

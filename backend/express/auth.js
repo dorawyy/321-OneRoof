@@ -24,7 +24,7 @@ function firebaseAuthMiddleware(req, res, next) {
             console.log(`Unauthorized: ${err}`); // eslint-disable-line no-console
             res.sendStatus(401);
         });
-};
+}
 
 function noAuthMiddleware(req, res, next) {
     var uid = req.headers.authorization || "Bearer foo";
