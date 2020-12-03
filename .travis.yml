@@ -8,8 +8,7 @@ before_deploy:
 install:
   - cd backend/express && npm install && cd .. && cd ..
 env:
-  - AUTH_DISABLED=1
-  - NODE_ENV=test
+  - AUTH_DISABLED=1 NODE_ENV=test
 script:
   - cd backend/express
   - ln -s knexfile_travis.js knexfile.js
