@@ -50,23 +50,6 @@ router.patch("/sethouse", async function(req, res) {
     }
 });
 
-/*
-router.get("/:roommateId/budget", async function (req, res) {
-    res.json({
-        likelihood: 0.5,
-        mean_purchase: 100,
-        number_of_purchases: 10,
-        most_expensive_purchase: 1000,
-        month_spending: 1000,
-        budget: 20000,
-    });
-});
-*/
-
-router.get(":roommateId/avatar", async function(req, res) {
-    res.send("Get avatar for roommate " + req.params["roommateId"]);
-})
-
 router.post("/:roommateId/budget", async function (req, res) {
     const roommateId = req.params["roommateId"];
     const budget = req.body.limit;
@@ -96,27 +79,6 @@ router.patch("/:roommateId/budget", async function (req, res) {
 
     res.sendStatus(200);
 });
-
-// router.post("/:roommateId/budget", async function(req, res) {
-//     var roommateId = req.params["roommateId"];
-//     var budget = req.body.limit;
-
-//     await knex("roommates")
-//       .update("budget", budget)
-//       .where("roommate_id", roommate_id)
-
-//     res.json({id: roommate_id, budget: budget});
-// });
-
-// router.get("/:roommateId/budget", async function(req, res) {
-//     var roommateId = req.params["roommateId"];
-
-//     var budget = await knex.select("budget")
-//         .from("roommates")
-//         .where("roommate_id", roommateId);
-
-//     res.json({id: roommate_id, budget: budget});
-// });
 
 router.get("/:roommateId/budget", async function(req, res) {
     var roommateId = req.params["roommateId"];

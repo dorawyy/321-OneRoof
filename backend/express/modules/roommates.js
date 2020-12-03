@@ -20,7 +20,7 @@ class Roommates {
             var id = await this.knex("roommates")
                 .insert({roommate_name: name});
             return id[0];
-        }
+        };
         
         this.getRoommateId = async function (uid) {
             var response = await this.knex("roommates")
@@ -102,7 +102,7 @@ class Roommates {
             }
             
             var housesList = await this.knex("houses")
-                .where({house_id: roommate.roommate_house})
+                .where({"house_id": roommate.roommate_house})
                 .select("house_admin");
             
             var house = housesList[0];
@@ -135,7 +135,7 @@ class Roommates {
         
         this.checkIfUserIsInHouse = async function (uid, houseId) {
             var roommate = await this.getRoommateFromUid(uid);
-            return String(roommate.house) == houseId;
+            return String(roommate.house) === houseId;
         };
 
         this.isHouseOwnerOrSiteAdmin = async function (uid, houseId) {
