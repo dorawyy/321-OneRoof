@@ -10,7 +10,6 @@ import java.util.Random;
 
 import ca.oneroof.oneroof.R;
 
-import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -21,7 +20,6 @@ import static ca.oneroof.oneroof.TestUtils.loginAs;
 
 @RunWith(AndroidJUnit4.class)
 public class InviteTests {
-    private ActivityScenario<MainActivity> scenario;
 
     // To run this test, run the backend with AUTH_DISABLED=1.
     @Test
@@ -35,7 +33,7 @@ public class InviteTests {
         createHouseInviteOther("Test house", user1, user2);
 
         // Check that the invite worked.
-        scenario = loginAs(user2);
+        ActivityScenario<MainActivity> scenario = loginAs(user2);
 
         onView(withId(R.id.action_profile))
                 .perform(click());

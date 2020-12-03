@@ -1,7 +1,5 @@
 package ca.oneroof.oneroof.ui;
 
-import androidx.test.core.app.ActivityScenario;
-
 import org.junit.Test;
 
 import java.util.Random;

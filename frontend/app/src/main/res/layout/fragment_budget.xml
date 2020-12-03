@@ -7,7 +7,7 @@
     <data>
 
         <import type="ca.oneroof.oneroof.ui.BudgetFragment" />
-        <import type="ca.oneroof.oneroof.Utils" />
+        <import type="ca.oneroof.oneroof.DollarUtils" />
 
         <variable
             name="viewmodel"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{Utils.formatDollarsSign(viewmodel.budgetStats.data.data.monthlySpending)}"
+                android:text="@{DollarUtils.formatDollarsSign(viewmodel.budgetStats.data.data.monthlySpending)}"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{Utils.formatDollarsSign((int) viewmodel.budgetStats.data.data.meanPurchase)}"
+                android:text="@{DollarUtils.formatDollarsSign((int) viewmodel.budgetStats.data.data.meanPurchase)}"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{Utils.formatDollarsSign(viewmodel.budgetStats.data.data.mostExpensivePurchase)}"
+                android:text="@{DollarUtils.formatDollarsSign(viewmodel.budgetStats.data.data.mostExpensivePurchase)}"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{Utils.formatDollarsSign(viewmodel.budgetStats.data.data.budget)}"
+                android:text="@{DollarUtils.formatDollarsSign(viewmodel.budgetStats.data.data.budget)}"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"

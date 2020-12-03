@@ -163,7 +163,7 @@ public class TestUtils {
         onData(anything())
                 .inAdapterView(withId(R.id.division_list)).atPosition(1)
                 .onChildView(withId(R.id.division_amount))
-                .perform(replaceText(Utils.formatDollars(user2Cents)));
+                .perform(replaceText(DollarUtils.formatDollars(user2Cents)));
 
         // Make the second user owe us for the 20 dollars.
         onData(anything())
@@ -174,7 +174,7 @@ public class TestUtils {
 
         // Total should now read 30.
         onView(withId(R.id.purchase_total))
-                .check(matches(withText(Utils.formatDollars(1000 + user2Cents))));
+                .check(matches(withText(DollarUtils.formatDollars(1000 + user2Cents))));
 
         onView(withId(R.id.memo_text))
                 .perform(replaceText(memo));
@@ -195,7 +195,7 @@ public class TestUtils {
         onView(withId(R.id.house_purchases))
                 .perform(scrollToPosition(0))
                 .check(matches(hasDescendant(allOf(withId(R.id.purchase_amount),
-                        withText("$" + Utils.formatDollars(1000 + user2Cents))))));
+                        withText("$" + DollarUtils.formatDollars(1000 + user2Cents))))));
         onView(withId(R.id.house_purchases))
                 .perform(scrollToPosition(0))
                 .check(matches(hasDescendant(allOf(withId(R.id.purchase_memo), withText(memo)))));

@@ -19,8 +19,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import ca.oneroof.oneroof.DollarUtils;
 import ca.oneroof.oneroof.R;
-import ca.oneroof.oneroof.Utils;
 import ca.oneroof.oneroof.databinding.ItemDivisionEditBinding;
 
 // danger: superfund cleanup site
@@ -48,7 +48,7 @@ public class DivisionEditAdapter extends ArrayAdapter<DivisionEdit> {
 
         DivisionEdit divisionEdit = list.get(position);
         EditText amount = binding.getRoot().findViewById(R.id.division_amount);
-        amount.setText(divisionEdit.amount > 0 ? Utils.formatDollars(divisionEdit.amount) : "");
+        amount.setText(divisionEdit.amount > 0 ? DollarUtils.formatDollars(divisionEdit.amount) : "");
 
         amount.addTextChangedListener(new TextWatcher() {
             @Override
