@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@{ca.oneroof.oneroof.Utils.formatDollarsSign(Math.abs(debt.amount))}"
+                android:text="@{ca.oneroof.oneroof.DollarUtils.formatDollarsSign(Math.abs(debt.amount))}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -69,7 +69,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:text="@{ca.oneroof.oneroof.Utils.formatDollars(fragment.totalAmount)}"
+                android:text="@{ca.oneroof.oneroof.DollarUtils.formatDollars(fragment.totalAmount)}"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/purchase_total_header"

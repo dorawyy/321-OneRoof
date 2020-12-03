@@ -10,7 +10,6 @@ import java.util.Random;
 
 import ca.oneroof.oneroof.R;
 
-import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -22,7 +21,6 @@ import static ca.oneroof.oneroof.TestUtils.setBudget;
 
 @RunWith(AndroidJUnit4.class)
 public class BudgetTests {
-    private ActivityScenario<MainActivity> scenario;
 
     // To run this test, run the backend with AUTH_DISABLED=1.
     @Test
@@ -36,7 +34,7 @@ public class BudgetTests {
         createHouseInviteOther("Test house", user1, user2);
 
         // log in and navigate to budget page
-        scenario = loginAs(user1);
+        ActivityScenario<MainActivity> scenario = loginAs(user1);
 
         onView(withId(R.id.action_profile))
                 .perform(click());
