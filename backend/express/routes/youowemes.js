@@ -38,10 +38,10 @@ router.post("/", async function(req, res) {
         }
         else {
             var id = await knex("youowemes")
-                .insert({youoweme_you: target,
-                    youoweme_me: 0,
-                    youoweme_amount: amount,
-                    youoweme_create_date: new Date()
+                .insert({"youoweme_you": target,
+                    "youoweme_me": 0,
+                    "youoweme_amount": amount,
+                    "youoweme_create_date": new Date()
                 });
         }
         admin.messaging().sendMulticast(message)

@@ -95,8 +95,8 @@ class Purchases {
             }
 
             var purchaseId = await this.knex("purchases")
-                .insert({purchase_amount: amount, 
-                purchase_memo: memo, purchase_roommate: purchaser});
+                .insert({"purchase_amount": amount, 
+                "purchase_memo": memo, "purchase_roommate": purchaser});
         
             var allRoommates = new Set();
             for (var division of divisions) {
@@ -107,14 +107,14 @@ class Purchases {
                 roommates.forEach((r) => allRoommates.add(r));
         
                 var divisionId = await this.knex("divisions")
-                    .insert({division_purchase: purchaseId, 
-                        division_amount: divisionAmount,
-                        division_memo: divisionMemo});
+                    .insert({"division_purchase": purchaseId, 
+                        "division_amount": divisionAmount,
+                        "division_memo": divisionMemo});
         
                 for (var roommateId of roommates) {
                     await this.knex("division_roommate_join")
-                        .insert({division_roommate_join_division: divisionId[0],
-                        division_roommate_join_roommate: roommateId});
+                        .insert({"division_roommate_join_division": divisionId[0],
+                        "division_roommate_join_roommate": roommateId});
                 }
             }
         

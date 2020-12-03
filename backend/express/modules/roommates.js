@@ -8,7 +8,7 @@ class Roommates {
         
         this.validateRoommateId = async function (roommateId) {
             var response = await this.knex.select().table("roommates")
-                .where({roommate_id: roommateId});
+                .where({"roommate_id": roommateId});
             return response.length > 0;
         };
         
@@ -18,7 +18,7 @@ class Roommates {
             }
 
             var id = await this.knex("roommates")
-                .insert({roommate_name: name});
+                .insert({"roommate_name": name});
             return id[0];
         }
         
