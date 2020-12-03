@@ -41,7 +41,7 @@ jest.mock("../modules/houses", () => {
 
 var houses = new Houses(knex, roommates);
 
-var Purchases = require("../modules/purchases")
+var Purchases = require("../modules/purchases");
 var purchases = new Purchases(knex, houses, roommates);
 
 afterEach(() => {

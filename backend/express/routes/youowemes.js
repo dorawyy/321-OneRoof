@@ -24,12 +24,14 @@ router.post("/", async function(req, res) {
         },
         tokens: registrationTokens,
         topic
-    }
+    };
+
+    var id;
 
     try {
         if (status === true){
-            var id = await knex("youowemes")
-                .insert({youoweme_you: target,
+            id = await knex("youowemes")
+                .insert({"youoweme_you": target,
                     "youoweme_me": 0,
                     "youoweme_amount": amount,
                     "youoweme_create_date": new Date(),
@@ -46,7 +48,7 @@ router.post("/", async function(req, res) {
         }
         admin.messaging().sendMulticast(message)
         .then((response) => {
-            console.log(response.successCount + " messages were sent successfully")
+            console.log(response.successCount + " messages were sent successfully");
         });
         res.json({id: id[0]});
     } catch (error) {

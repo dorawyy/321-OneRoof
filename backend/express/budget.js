@@ -93,7 +93,7 @@ budgetCalculator.tDistCDF = function tDistCDF(t, v){
 
     }
     return cp;    
-}
+};
 
 
 budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(purchases, limit){
@@ -180,6 +180,10 @@ budgetCalculator.budgetPrediction = async function budgetPrediction(roommateId){
     var budget = await knex.select("roommate_budget")
         .from("roommates")
         .where("roommate_id", roommateId);
+
+    if (budget.length === 0) {
+        return null;
+    }
 
     var limit = budget[0]["roommate_budget"];
 

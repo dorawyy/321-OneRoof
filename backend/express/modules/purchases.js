@@ -68,9 +68,11 @@ class Purchases {
             var divisionsList = new Array();
             for (const [_, group] of Object.entries(groupedDivisions)) {
                 var roommates = new Array();
-                group.forEach((roommate) => {
+
+                for (var roommate of group) {
                     roommates.push(roommate["division_roommate_join_roommate"]);
-                });
+                }
+    
                 var roommateNames = group.map((d) => d.roommate_name);
                 divisionsList.push({amount: group[0]["division_amount"], 
                     memo: group[0]["division_memo"], roommates, roommateNames});

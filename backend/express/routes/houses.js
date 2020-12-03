@@ -180,10 +180,10 @@ router.get("/:houseId/debts/:roommateId", async function(req, res) {
     for (var debt of allDebts) {
         var amount = debt["amount"];
 
-        if (debt["payer"] == roommateId) {
+        if (String(debt["payer"]) === roommateId) {
             var roommate = debt["payee"].toString();
             debts[roommate] -= amount;
-        } else if (debt["payee"] == roommateId) {
+        } else if (String(debt["payee"]) == roommateId) {
             var roommate = debt["payer"].toString();
             debts[roommate] += amount;
         }
@@ -203,7 +203,7 @@ router.get("/:houseId/debts_detailed/:roommateId", async function (req, res) {
     var debts = new Map();
 
     for (var roommate of house.roommates) {
-        if (roommate != roommateId) {
+        if (String(roommate) !== roommateId) {
             debts[roommate] = 0;
         }
     }
