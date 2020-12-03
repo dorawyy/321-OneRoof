@@ -171,7 +171,7 @@ budgetCalculator.budgetPredictionFromList = function budgetPredictionFromList(pu
         "mostExpensivePurchase": max,
         "monthlySpending": sum
       };
-}
+};
 
 
 budgetCalculator.budgetPrediction = async function budgetPrediction(roommateId){

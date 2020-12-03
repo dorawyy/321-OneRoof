@@ -46,9 +46,9 @@ debtCalculator.getPurchaseInfoWithIds = async function (knex, purchase) {
 
     for (const [_, group] of Object.entries(groupedDivisions)) {
         var roommates = new Array();
-        group.forEach((roommate) => {
+        for (var roommate of group) {
             roommates.push(roommate["division_roommate_join_roommate"]);
-        });
+        }
         divisionsList.push({
             id: group[0]["division_name"],
             amount: group[0]["division_amount"], 
