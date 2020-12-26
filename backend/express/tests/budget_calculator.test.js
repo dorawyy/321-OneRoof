@@ -30,7 +30,7 @@ test("Far overrun v = 4", () => {
 
 test("Extremely long purchase list (10000)", () => {
     var purchases = [];
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 1000; i++) {
         purchases.push(500 + (i % 7) * 1000);
     }
 

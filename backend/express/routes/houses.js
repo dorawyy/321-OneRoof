@@ -40,6 +40,7 @@ router.delete("/:houseId", async function(req, res) {
 
 router.get("/:houseId", async function(req, res) {
     try {
+        console.log(res.locals.user.uid);
         res.json(await houses.getHouse(req.params["houseId"],
             res.locals.user.uid));
     } catch (error) {

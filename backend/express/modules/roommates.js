@@ -71,12 +71,12 @@ class Roommates {
                return {id: roommate.roommate_id, name: roommate.roommate_name};
              }
                 
-            var housesList = await this.knex("houses")
+            var houses_list = await this.knex("houses")
                 .where("house_id", roommate.roommate_house)
                 .select("house_admin");
-            
-            var house = housesList[0];
-            
+
+            var house = houses_list[0];
+
             return {
                 id: roommate.roommate_id,
                 name: roommate.roommate_name,
